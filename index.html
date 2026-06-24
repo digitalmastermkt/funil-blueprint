@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>document.documentElement.className+=' js';</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Funil da Agência no Bolso · blueprint da nossa máquina de vendas</title>
+<meta name="description" content="O blueprint do funil da Agência no Bolso / Maia: a escada de valor nível a nível, o que já temos no ar e o que falta construir, modelado no funil do método, com a nossa esteira.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:title" content="O Funil da Agência no Bolso · blueprint">
+<meta property="og:description" content="A nossa máquina de vendas, nível a nível: o que já existe e o que falta construir.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/base.css">
+<style>
+  /* ===== Blueprint do funil (especifico deste site) ===== */
+  .intro-lead{max-width:62ch;color:var(--ink-soft);font-size:18px;line-height:1.62;}
+
+  /* legenda de status */
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+  .lg{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.02em;color:var(--ink-soft);border:1px solid var(--line);background:var(--bone);border-radius:999px;padding:8px 14px;}
+  .lg .ico{width:16px;height:16px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;line-height:1;}
+  .lg .ico.done{background:var(--olive);color:#fff;}
+  .lg .ico.wip{background:transparent;border:1.5px dashed var(--ink-faint);color:var(--ink-faint);}
+  .lg .ico.dec{background:var(--mustard);color:var(--ink);}
+
+  /* base card (fundacao / sintese) */
+  .basecard{border:1px solid var(--ink);border-radius:22px;background:var(--ink);color:var(--paper);padding:clamp(30px,4vw,52px);position:relative;overflow:hidden;}
+  .basecard::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 100% -10%,rgba(237,111,92,.22),transparent 58%);pointer-events:none;}
+  .basecard .blabel{position:relative;font-family:var(--font-display);font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral-soft);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .basecard .blabel::before{content:"";width:18px;height:1px;background:var(--coral-soft);}
+  .basecard h2{position:relative;font-family:var(--font-display);font-weight:800;font-size:clamp(26px,3.4vw,42px);letter-spacing:-.03em;line-height:1.06;margin-bottom:16px;}
+  .basecard h2 em{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--coral-soft);}
+  .basecard p.bp{position:relative;color:var(--paper-dark);font-size:16.5px;line-height:1.62;max-width:66ch;margin-bottom:22px;}
+  .flowline{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:26px;}
+  .flowline .fstep{font-family:var(--font-display);font-weight:700;font-size:12.5px;letter-spacing:.01em;color:var(--paper);background:rgba(247,241,222,.08);border:1px solid rgba(247,241,222,.16);border-radius:999px;padding:8px 14px;}
+  .flowline .fstep b{color:var(--coral-soft);}
+  .flowline .far{color:var(--coral-soft);font-size:13px;font-weight:800;}
+  .levers{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
+  .lever{border:1px solid rgba(247,241,222,.16);border-radius:14px;padding:18px 20px;background:rgba(247,241,222,.04);}
+  .lever .lh{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.04em;color:var(--coral-soft);text-transform:uppercase;margin-bottom:7px;}
+  .lever p{color:var(--paper-dark);font-size:14px;line-height:1.5;margin:0;}
+  @media(max-width:680px){.levers{grid-template-columns:1fr;}}
+
+  /* timeline de niveis */
+  .timeline{position:relative;margin-top:8px;}
+  .timeline::before{content:"";position:absolute;left:23px;top:14px;bottom:14px;width:2px;background:linear-gradient(180deg,var(--coral),var(--line) 60%);border-radius:2px;}
+  .step{position:relative;padding-left:74px;margin-bottom:30px;}
+  .step:last-child{margin-bottom:0;}
+  .step .snum{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:var(--paper);border:2px solid var(--coral);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 10px 22px -12px rgba(237,111,92,.7);}
+  .phase-badge{display:none;}
+  @media(max-width:680px){
+    .timeline::before{display:none;}
+    .step .snum{display:none;}
+    .step{padding-left:0;}
+    .phase-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--coral);color:#fff;font-family:var(--font-display);font-weight:800;font-size:13px;line-height:1;flex-shrink:0;box-shadow:0 6px 14px -8px rgba(237,111,92,.8);}
+  }
+
+  .status{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:11.5px;letter-spacing:.04em;border-radius:999px;padding:8px 14px;white-space:nowrap;flex:0 0 auto;}
+  .status .dotico{width:15px;height:15px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;line-height:1;}
+  .status.done{background:rgba(110,116,72,.12);color:#4f5733;border:1px solid rgba(110,116,72,.4);}
+  .status.done .dotico{background:var(--olive);color:#fff;}
+  .status.wip{background:rgba(21,20,15,.04);color:var(--ink-mute);border:1px dashed var(--ink-faint);}
+  .status.wip .dotico{background:transparent;border:1.5px dashed var(--ink-faint);color:var(--ink-faint);}
+
+  /* aula densa */
+  .lesson{margin-top:4px;}
+  .lesson .lblock{margin-top:22px;}
+  .lesson .lblock:first-child{margin-top:0;}
+  .lesson .lh{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:10px;margin-bottom:11px;}
+  .lesson .lh::before{content:"";width:18px;height:2px;background:var(--coral);border-radius:2px;flex:0 0 auto;}
+  .lesson p{color:var(--ink-soft);font-size:15.5px;line-height:1.66;margin-bottom:12px;max-width:70ch;}
+  .lesson p:last-child{margin-bottom:0;}
+  .lesson p b{color:var(--ink);font-weight:700;}
+  .lesson ul.dense{list-style:none;padding:0;margin:6px 0 12px;display:grid;gap:9px;}
+  .lesson ul.dense li{position:relative;padding-left:18px;font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:70ch;overflow-wrap:anywhere;}
+  .lesson ul.dense li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--coral);}
+  .lesson ul.dense li b{color:var(--ink);font-weight:700;}
+
+  /* copy-ancora: o que o nivel diz pro lead */
+  .anchorq{margin-top:18px;border-left:3px solid var(--coral);padding:6px 0 6px 20px;}
+  .anchorq p{font-family:var(--font-serif);font-style:italic;font-weight:600;font-size:clamp(17px,2vw,22px);line-height:1.4;color:var(--ink);letter-spacing:-.005em;max-width:46ch;margin:0;}
+  .anchorq .hl{color:var(--coral);font-style:normal;}
+  .anchorq small{display:block;margin-top:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-style:normal;}
+
+  /* callout decisao do Salatiel */
+  .decide{margin-top:20px;border:1.5px dashed var(--mustard);border-radius:16px;background:rgba(233,185,74,.10);padding:20px 22px;position:relative;}
+  .decide .dk{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9a7615;margin-bottom:9px;}
+  .decide .dk .di{width:18px;height:18px;border-radius:5px;background:var(--mustard);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
+  .decide p{color:var(--ink-soft);font-size:14.5px;line-height:1.58;margin:0 0 6px;max-width:70ch;}
+  .decide p:last-child{margin-bottom:0;}
+  .decide p b{color:var(--ink);font-weight:700;}
+
+  /* principio / o que importa */
+  .principle{margin-top:24px;border:1px solid var(--coral);border-radius:16px;background:rgba(237,111,92,.07);padding:22px 24px 22px 26px;position:relative;overflow:hidden;}
+  .principle::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--coral);}
+  .principle .pk{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-bottom:10px;}
+  .principle .pk .di{font-family:var(--font-serif);font-style:italic;font-weight:600;font-size:17px;line-height:1;letter-spacing:0;text-transform:none;}
+  .principle p{color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin:0;max-width:72ch;}
+  .principle p b,.principle p strong{color:var(--ink);font-weight:800;}
+
+  /* links de paginas reais / referencia */
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .plink{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.005em;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:13px 16px;min-height:44px;transition:transform .16s ease,border-color .16s ease,background .16s ease,color .16s ease;}
+  .plink:hover{border-color:var(--coral);background:var(--coral);color:#fff;transform:translateY(-1px);}
+  .plink .pi{font-family:var(--font-mono);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;}
+  .plink:hover .pi{opacity:.85;}
+  .plink .ext{font-size:12px;}
+  @media(max-width:680px){
+    .links{flex-direction:column;gap:8px;}
+    .plink{width:100%;box-sizing:border-box;flex-direction:column;align-items:flex-start;gap:3px;padding:12px 16px;border-radius:14px;min-height:44px;}
+    .plink .pi{font-size:9px;letter-spacing:.14em;opacity:.6;}
+    .plink .ext{margin-left:auto;align-self:flex-end;margin-top:-18px;}
+  }
+
+  .stepcard .keep-rule{margin-top:24px;border-top:1px dashed var(--line);padding-top:18px;}
+  .stepcard .keep-rule .krh{font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;}
+
+  /* grade de modulos (nivel 2) */
+  .modgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+  @media(max-width:640px){.modgrid{grid-template-columns:1fr;}}
+  .modcard{border:1px solid var(--line);border-radius:14px;background:var(--paper);padding:18px 20px;transition:transform .16s ease,border-color .16s ease;}
+  .modcard:hover{transform:translateY(-2px);border-color:var(--coral);}
+  .modcard .mtop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;}
+  .modcard h5{font-family:var(--font-display);font-weight:800;font-size:16px;letter-spacing:-.01em;color:var(--ink);line-height:1.15;}
+  .modcard .mtag{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap;flex:0 0 auto;}
+  .modcard .mtag.have{background:rgba(110,116,72,.14);color:#4f5733;border:1px solid rgba(110,116,72,.4);}
+  .modcard .mtag.build{background:rgba(21,20,15,.04);color:var(--ink-mute);border:1px dashed var(--ink-faint);}
+  .modcard p{font-size:13.5px;line-height:1.5;color:var(--ink-mute);margin:0;}
+  .modcard p b{color:var(--ink-soft);font-weight:700;}
+
+  /* mecanismos transversais */
+  .mech{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+  @media(max-width:680px){.mech{grid-template-columns:1fr;}}
+  .mechcard{border:1px solid var(--line);border-radius:16px;background:var(--bone);padding:22px 24px;box-shadow:0 30px 60px -38px rgba(21,20,15,.2);}
+  .mechcard .mh{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .mechcard .mh h4{font-family:var(--font-display);font-weight:800;font-size:18px;letter-spacing:-.01em;color:var(--ink);}
+  .mechcard .mico{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--coral);font-size:22px;line-height:1;}
+  .mechcard p{font-size:14.5px;line-height:1.58;color:var(--ink-soft);margin:0 0 8px;}
+  .mechcard p:last-child{margin-bottom:0;}
+  .mechcard p b{color:var(--ink);font-weight:700;}
+
+  /* checklist de lacunas */
+  .gaps{display:grid;gap:11px;margin-top:8px;}
+  .gap{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;border:1px solid var(--line);border-radius:14px;background:var(--bone);padding:16px 20px;transition:transform .16s ease,border-color .16s ease;}
+  .gap:hover{transform:translateY(-2px);border-color:var(--coral);}
+  .gap .gbox{width:22px;height:22px;border-radius:6px;border:1.5px dashed var(--ink-faint);flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-faint);font-size:13px;}
+  .gap .gmain h5{font-family:var(--font-display);font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:var(--ink);line-height:1.2;margin-bottom:3px;}
+  .gap .gmain p{font-size:13px;line-height:1.5;color:var(--ink-mute);margin:0;}
+  .gap .gpri{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;white-space:nowrap;flex:0 0 auto;}
+  .gap .gpri.alta{background:rgba(237,111,92,.12);color:#b8442f;border:1px solid rgba(237,111,92,.4);}
+  .gap .gpri.media{background:rgba(233,185,74,.14);color:#9a7615;border:1px solid rgba(233,185,74,.5);}
+  .gap .gpri.baixa{background:rgba(21,20,15,.04);color:var(--ink-mute);border:1px solid var(--line);}
+  @media(max-width:560px){.gap{grid-template-columns:auto 1fr;}.gap .gpri{grid-column:2;justify-self:start;margin-top:4px;}}
+
+  /* recap final */
+  .recap{display:grid;gap:12px;margin-top:8px;}
+  .recap .rline{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline;border:1px solid var(--line);border-radius:14px;background:var(--bone);padding:18px 22px;transition:transform .16s ease,border-color .16s ease;}
+  .recap .rline:hover{transform:translateY(-2px);border-color:var(--coral);}
+  .recap .rline .rtag{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);white-space:nowrap;}
+  .recap .rline p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin:0;}
+  .recap .rline p b{color:var(--ink);font-weight:700;}
+  @media(max-width:560px){.recap .rline{grid-template-columns:1fr;gap:6px;}}
+
+  /* ===== ACCORDION ===== */
+  .acc{margin:0;}
+  .acc>.stepcard,.acc.accbase>.basecard{box-shadow:none;transition:none;}
+  .acc>summary{
+    list-style:none;cursor:pointer;display:block;position:relative;
+    background:var(--bone);border:1px solid var(--line);border-radius:18px;
+    padding:clamp(18px,2.4vw,26px) clamp(54px,7vw,64px) clamp(18px,2.4vw,26px) clamp(20px,2.6vw,30px);
+    box-shadow:0 30px 60px -34px rgba(21,20,15,.2);
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .acc>summary::-webkit-details-marker{display:none;}
+  .acc>summary::marker{content:"";}
+  .acc>summary:hover{transform:translateY(-2px);box-shadow:0 36px 70px -34px rgba(21,20,15,.28);border-color:var(--coral);}
+  .acc>summary:focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
+  .acc[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent;box-shadow:none;transform:none;}
+  .acc[open]>summary:hover{transform:none;box-shadow:none;}
+  .acc .achead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .acc .achead .stag{font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px;}
+  .acc .achead h3{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,2.3vw,27px);letter-spacing:-.02em;line-height:1.12;color:var(--ink);}
+  .acc.accbase>summary{background:var(--bone);}
+  .acc.accbase .achead .blabel{font-family:var(--font-display);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+  .acc.accbase .achead .blabel::before{content:"";width:18px;height:1px;background:var(--coral);}
+  .acc.accbase .achead h3{font-size:clamp(22px,3vw,33px);}
+  .acc.accbase .achead h3 em{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--coral);}
+  .acc .acteaser{margin-top:10px;color:var(--ink-mute);font-size:14.5px;line-height:1.55;max-width:72ch;}
+  .acc[open] .acteaser{display:none;}
+  .acc>summary .acchev{position:absolute;top:clamp(20px,2.6vw,28px);right:clamp(18px,2.4vw,26px);width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--coral);background:var(--paper);transition:transform .25s ease,border-color .18s ease,background .18s ease,color .18s ease;}
+  .acc>summary:hover .acchev{border-color:var(--coral);}
+  .acc[open]>summary .acchev{transform:rotate(180deg);background:var(--coral);border-color:var(--coral);color:#fff;}
+  .acc>summary .acchev svg{width:14px;height:14px;display:block;}
+  .acc .achead .status{margin-top:2px;}
+  .acc .acbody{border:1px solid var(--line);border-top:0;border-radius:0 0 18px 18px;background:var(--bone);padding:clamp(4px,1vw,10px) clamp(22px,2.6vw,32px) clamp(22px,2.6vw,32px);box-shadow:0 30px 60px -34px rgba(21,20,15,.2);}
+  .acc.accbase .acbody{background:var(--bone);}
+  html.js .acc[open]>.acbody{animation:accslide .28s ease;}
+  @keyframes accslide{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+  @media(prefers-reduced-motion:reduce){html.js .acc[open]>.acbody{animation:none;}.acc>summary .acchev,.acc[open]>summary .acchev{transition:none;}}
+  @media(max-width:680px){
+    .acc>summary{padding-right:52px;}
+    .acc>summary .acchev{width:26px;height:26px;right:14px;top:18px;}
+    .acc .achead .status{font-size:11px;padding:7px 12px;}
+  }
+  @media(max-width:560px){
+    .acc>summary{border-radius:16px;}
+    .acc[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;}
+    .acc .acbody{border-radius:0 0 16px 16px;}
+  }
+
+  /* reveal: visivel por padrao; anima so com JS */
+  .reveal{opacity:1;transform:none;}
+  html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  html.js .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+
+<!-- rails laterais -->
+<div class="rail left"><span>Agência no Bolso · MMXXVI</span></div>
+<div class="rail right"><span>Blueprint do Funil · Maia</span></div>
+
+<div class="wrap">
+
+  <!-- metastrip -->
+  <div class="metastrip">
+    <div class="container">
+      <span class="filed">DOC · <b>FUNIL MAIA</b></span>
+      <div class="mid">
+        <span>Perpétuo</span>
+        <span>4 níveis</span>
+        <span>Escada de valor</span>
+      </div>
+      <span class="live"><span class="pulse"></span>MODELO INTERNO</span>
+    </div>
+  </div>
+
+  <!-- topbar -->
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="#topo">Agência no Bolso<span class="o">.</span><small>Maia</small></a>
+      <div class="topbar-title">O Funil da Agência no Bolso · blueprint da máquina de vendas</div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="topo" class="tight">
+    <div class="container">
+      <div class="eyebrow">O blueprint · nível a nível</div>
+      <h1 class="display" style="margin:22px 0 20px;max-width:20ch;">O Funil da Agência no Bolso<span class="dot">.</span></h1>
+      <p class="intro-lead">A nossa máquina de vendas desenhada por inteiro, modelada no funil do método mas com a NOSSA esteira: a Maia e os agentes. Cada nível com o que é, o objetivo, a copy-âncora que a gente usa pra vender, e o status honesto: o que já está no ar e o que ainda falta construir. É o mapa que mostra pra onde a operação vai e o que falta pra fechar o corredor do meio.</p>
+
+      <div class="anchorq reveal">
+        <p>Um software de WhatsApp te dá o painel. <span class="hl">A gente te dá quem responde.</span></p>
+        <small>Big Idea · Agência no Bolso / Maia</small>
+      </div>
+
+      <div class="legend">
+        <span class="lg"><span class="ico done">✓</span>Já temos · no ar</span>
+        <span class="lg"><span class="ico wip"></span>Falta construir</span>
+        <span class="lg"><span class="ico dec">!</span>Decisão do Salatiel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNDACAO -->
+  <section class="tight" style="padding-top:10px;">
+    <div class="container">
+      <div class="sec-rule"><span class="rom">Fundação</span><span class="mid">O perpétuo e a escada de valor da Maia</span><span>00</span></div>
+
+      <details class="acc accbase reveal" open>
+        <summary aria-label="Abrir Fundação: o perpétuo e a escada de valor">
+          <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+          <div class="achead">
+            <div>
+              <div class="blabel">Fundação · O perpétuo e a escada de valor</div>
+              <h3>A fundação: uma máquina que <em>compra cliente com lucro</em>.</h3>
+            </div>
+          </div>
+          <p class="acteaser">VSL grátis no topo captura o lead, a Lis Atende abre a porta barata, os módulos sobem o ticket e o Enterprise ancora tudo lá no alto. A IA atende 10 ou 1.000 com o mesmo custo.</p>
+        </summary>
+        <div class="acbody">
+
+      <div class="basecard">
+        <div class="blabel">Fundação · O perpétuo e a escada de valor</div>
+        <h2>A fundação: uma máquina que <em>compra cliente com lucro</em>.</h2>
+        <p class="bp">Modelamos a lógica do método: tráfego diário leva pra uma VSL grátis, a VSL vende uma porta de entrada barata, e logo depois entram ofertas maiores em sequência. A diferença é que a nossa máquina entrega IA pronta operando, não um software pra você configurar. A escada começa barata (a Lis Atende) e sobe degrau a degrau até o Enterprise. Como a Lis é IA, ela atende 10 ou 1.000 clientes com o mesmo custo marginal quase zero, e é isso que viabiliza a entrada barata sem destruir a margem.</p>
+
+        <div class="flowline">
+          <span class="fstep"><b>Tráfego</b> diário</span><span class="far">→</span>
+          <span class="fstep">VSL grátis + optin</span><span class="far">→</span>
+          <span class="fstep">Lis Atende <b>barato</b></span><span class="far">→</span>
+          <span class="fstep">Módulos <b>à la carte</b></span><span class="far">→</span>
+          <span class="fstep">Enterprise</span>
+        </div>
+
+        <div class="levers">
+          <div class="lever">
+            <div class="lh">Abrir a porta barata</div>
+            <p>VSL grátis + Lis Atende derrubam a objeção de preço e capturam o pequeno/MEI por impulso, sem venda consultiva.</p>
+          </div>
+          <div class="lever">
+            <div class="lh">Subir o ticket</div>
+            <p>Módulos à la carte + cashback + nutrição levam o cliente da porta até o Enterprise, sem CAC novo a cada degrau.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson reveal">
+        <div class="lblock">
+          <div class="lh">O que é</div>
+          <p>É a nossa esteira inteira desenhada como uma escada: começa numa porta de entrada barata e fácil de aceitar, e sobe de degrau em degrau até o produto mais caro e completo. O lead frio entra de graça pela VSL, vira cliente pequeno na Lis Atende, e quem cresce sobe ligando módulos até o Enterprise. Não é lançamento: é um perpétuo que roda 365 dias e se paga sozinho.</p>
+        </div>
+        <div class="lblock">
+          <div class="lh">Como funciona</div>
+          <p>O caminho que o cliente percorre, na ordem, e os preços travados de cada degrau:</p>
+          <ul class="dense">
+            <li><b>Nível 0 · VSL / Diagnóstico grátis.</b> Captura Nome + E-mail + WhatsApp. Fricção zero. Pré-vende a Lis Atende.</li>
+            <li><b>Nível 1 · Lis Atende.</b> Porta de entrada self-service pro pequeno/MEI. ~R$ 297/mês <span style="color:var(--coral);">[A definir · Salatiel]</span>.</li>
+            <li><b>Nível 2 · Módulos à la carte.</b> Prospecção+BMAD, Omnichannel, CRM, Tráfego, Copy, Relatórios, Multi-conta. Preço no comercial <span style="color:var(--coral);">[A definir · Salatiel]</span>.</li>
+            <li><b>Nível 3 · Maia Enterprise.</b> Os agentes completos. A âncora premium <span style="color:var(--coral);">[A definir · Salatiel]</span>.</li>
+          </ul>
+          <p>Atravessando todos os degraus, dois mecanismos transversais: o <b>cashback</b> (o que o cliente paga num degrau vira crédito no próximo) e a <b>nutrição automática</b> por e-mail e WhatsApp, operada pela própria Lis.</p>
+        </div>
+        <div class="lblock">
+          <div class="lh">Por que existe</div>
+          <p><b>O nosso problema nunca foi o destino, foi o corredor.</b> A gente já tem as pontas: entrada barata (Imersão) e topo de alto ticket (Enterprise, Mentoria). O que falta é a engrenagem do meio que transporta o lead de uma ponta à outra sem perder LTV: VSL de topo, porta self-service barata, upsell modular, cashback e nutrição. O método é cirúrgico exatamente aí, e é isso que estamos modelando.</p>
+          <p><b>A entrada barata alimenta o alto ticket, não compete com ele.</b> O cliente pequeno que jamais pagaria R$ 8.900 de cara entra pela porta barata, prova o valor, cresce e sobe pelos módulos até o Enterprise. Sem o degrau barato, esse cliente simplesmente não entrava. Não há canibalização, há captação de um público que antes ficava de fora.</p>
+        </div>
+
+        <div class="principle">
+          <div class="pk"><span class="di">✦</span>Princípio pra modelar</div>
+          <p>Desenhe o caminho do dinheiro antes da copy. Uma porta barata e self-service pra trazer volume e pagar o tráfego, e pelo menos um degrau caro depois pra onde sobe quem quer mais. <strong>O barato traz volume; o caro traz lucro. A IA é o que viabiliza a porta barata sem quebrar a margem, porque atende 10 ou 1.000 com o mesmo custo. Software dá o painel; a gente entrega quem responde.</strong></p>
+        </div>
+      </div>
+
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- NIVEIS -->
+  <section style="padding-top:10px;">
+    <div class="container">
+      <div class="sec-rule"><span class="rom">A escada</span><span class="mid">Do topo grátis ao Enterprise</span><span>00—03</span></div>
+
+      <div class="timeline">
+
+        <!-- NIVEL 0 -->
+        <div class="step reveal">
+          <div class="snum">0</div>
+          <details class="acc">
+            <summary aria-label="Abrir Nível 0: VSL e diagnóstico grátis">
+              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <div class="achead">
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                  <span class="phase-badge" aria-hidden="true">0</span>
+                  <div>
+                    <div class="stag">Nível 0 · Topo do funil</div>
+                    <h3>VSL / Diagnóstico grátis + optin</h3>
+                  </div>
+                </div>
+                <span class="status wip"><span class="dotico"></span>Falta construir</span>
+              </div>
+              <p class="acteaser">A porta de fricção zero: um vídeo ou diagnóstico grátis que entrega valor e captura Nome + E-mail + WhatsApp, e termina ofertando a Lis Atende.</p>
+            </summary>
+            <div class="acbody">
+            <div class="lesson">
+              <div class="lblock">
+                <div class="lh">O que é</div>
+                <p>Um topo de funil <b>gratuito</b>: uma VSL de uns 8 a 10 minutos ou um diagnóstico rápido (estilo "descubra quantos leads sua DM perde por mês") que entrega valor de cara e captura <b>Nome + E-mail + WhatsApp</b>. É o nosso maior buraco estrutural hoje: só capturamos lead que já paga (Imersão) ou que agenda demo. Falta a porta de fricção zero que enche o topo de graça.</p>
+              </div>
+              <div class="lblock">
+                <div class="lh">Objetivo</div>
+                <p>Encher o topo com lead frio sem custo de entrada pro lead, criar a lista de e-mail e WhatsApp pra nutrir, e pré-vender o primeiro degrau pago. Custo pra nós: só o tráfego, que o front-end paga depois. A VSL termina ofertando a <b>Lis Atende</b> (Nível 1).</p>
+              </div>
+              <div class="lblock">
+                <div class="lh">A copy-âncora</div>
+                <div class="anchorq" style="margin-top:6px;">
+                  <p>Todo dia entra cliente na sua DM. <span class="hl">Quase todo dia ele compra com seu concorrente.</span></p>
+                  <small>gancho do topo · agita a dor → mecanismo (Maia) → prova → oferta da Lis Atende</small>
+                </div>
+                <p style="margin-top:12px;">Espinha da VSL, modelada no pitch do método: gancho (premissa "o problema nunca foi o tráfego, é que você compra clique e não tem máquina pra transformar clique em venda") → dor agitada → mecanismo único (a Maia, IA pronta operando) → prova (cases reais que já temos) → oferta da Lis Atende → garantia → escassez honesta → CTA único.</p>
+              </div>
+            </div>
+
+            <div class="stepcard keep-rule" style="border:0;padding:0;">
+              <div class="krh">Status hoje</div>
+              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">🔨 <b>Falta construir.</b> Não existe VSL de topo nem optin de baixa fricção. O que temos perto: a Imersão (paga, R$147) e a demo agendada do B2B, mas as duas exigem compromisso de cara. A página de captura grátis + VSL é nova.</p>
+              <div class="links">
+                <a class="plink" href="https://maquinadevendas.salatielbatista.com.br" target="_blank" rel="noopener"><span class="pi">Referência · existe</span> Imersão (front pago) <span class="ext">↗</span></a>
+              </div>
+            </div>
+
+            <div class="principle">
+              <div class="pk"><span class="di">✦</span>Por que importa</div>
+              <p>Vídeo transfere certeza melhor que texto, e lead grátis nutrido vira comprador quente. Sem esse topo, o tripwire da Lis Atende não tem de onde se abastecer. <strong>É o item nº 3 da ordem de ataque, mas é pré-requisito do funil inteiro: sem porta grátis, a máquina não enche.</strong></p>
+            </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- NIVEL 1 -->
+        <div class="step reveal">
+          <div class="snum">1</div>
+          <details class="acc">
+            <summary aria-label="Abrir Nível 1: Lis Atende">
+              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <div class="achead">
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                  <span class="phase-badge" aria-hidden="true">1</span>
+                  <div>
+                    <div class="stag">Nível 1 · Tripwire</div>
+                    <h3>Lis Atende · porta de entrada self-service</h3>
+                  </div>
+                </div>
+                <span class="status wip"><span class="dotico"></span>Falta construir</span>
+              </div>
+              <p class="acteaser">A Lis na versão mais enxuta e automatizada: assina pela página, conecta o WhatsApp por QR, responde um formulário curto que treina a IA sozinha. O produto barato pro pequeno/MEI.</p>
+            </summary>
+            <div class="acbody">
+            <div class="lesson">
+              <div class="lblock">
+                <div class="lh">O que é</div>
+                <p>A Lis na versão mais enxuta e automatizada possível: responde a DM e o WhatsApp do negócio 24/7, tira as dúvidas frequentes (preço, horário, endereço, "tem disponível?"), qualifica o interessado com poucas perguntas e avisa o dono no WhatsApp quando o lead está pronto pra comprar ou agendar. É a nossa porta barata pro pequeno e o MEI, o público que jamais paga R$ 8.900 de setup de cara.</p>
+              </div>
+              <div class="lblock">
+                <div class="lh">Objetivo</div>
+                <p>Ser o nosso <b>tripwire</b>: derrubar a objeção de preço, capturar o cliente pequeno por impulso e provar o valor. <b>Onboarding 100% automático</b> (assina pela página, conecta o WhatsApp por QR, responde um formulário guiado curto que treina a Lis sozinha, ZERO dossiê manual) é a condição de margem: o MEI só fecha conta no volume automatizado. 1 MEI manual é prejuízo; 500 MEIs self-service é MRR forte de margem alta.</p>
+              </div>
+              <div class="lblock">
+                <div class="lh">A copy-âncora</div>
+                <div class="anchorq" style="margin-top:6px;">
+                  <p>O software te dá o painel. <span class="hl">A Lis te dá quem responde, pronta, sem você configurar nada.</span></p>
+                  <small>posicionamento vs prateleira · IA pronta operando, não "campo de IA" pra você configurar e custear a chave</small>
+                </div>
+                <p style="margin-top:12px;">Compete na <b>sensação</b> de preço da concorrência de prateleira (tipo R$ 97/mês), entregando IA pronta operando, com método e voz do negócio, não um software que você ainda precisa operar. "Cancele quando quiser", preço público.</p>
+              </div>
+            </div>
+
+            <div class="stepcard keep-rule" style="border:0;padding:0;">
+              <div class="krh">Status hoje · preço</div>
+              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">🔨 <b>Falta construir</b> como produto self-service. A tecnologia da Lis já existe e opera (atende as DMs do Salatiel e da Digital Master), mas hoje ela é vendida como serviço done-for-you (setup R$ 8.900 + R$ 597/mês, com onboarding manual de 13 blocos). O degrau barato, padronizado e self-service é novo.</p>
+              <div class="links">
+                <a class="plink" href="https://agencianobolso.com.br/sdr" target="_blank" rel="noopener"><span class="pi">Referência · existe</span> Lis SDR (serviço atual) <span class="ext">↗</span></a>
+              </div>
+            </div>
+
+            <div class="decide">
+              <div class="dk"><span class="di">!</span>A definir · Salatiel</div>
+              <p><b>Preço de entrada da Lis Atende.</b> Estimativa de trabalho: ~R$ 297/mês público, "cancele quando quiser". Custo marginal estimado de rodar uma Lis self-service (infra + tokens) é R$ 40 a 80/mês por cliente, o que daria margem de ~75-80% nos R$ 297, desde que o suporte e o onboarding não tenham custo humano relevante. <b>Decisão do Salatiel:</b> o piso de preço que protege a margem.</p>
+            </div>
+
+            <div class="principle">
+              <div class="pk"><span class="di">✦</span>Por que importa</div>
+              <p>É o item que mais muda o jogo. Resolve a nossa maior fraqueza no SDR (entrada cara com fricção de venda consultiva) e abre a base da escada inteira. <strong>Mas só funciona se a execução self-service estiver blindada antes de abrir volume: onboarding automático + handoff 100% sólido + suporte automatizado. Sem esse alicerce, qualquer furo vira churn em massa.</strong></p>
+            </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- NIVEL 2 -->
+        <div class="step reveal">
+          <div class="snum">2</div>
+          <details class="acc">
+            <summary aria-label="Abrir Nível 2: módulos à la carte">
+              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <div class="achead">
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                  <span class="phase-badge" aria-hidden="true">2</span>
+                  <div>
+                    <div class="stag">Nível 2 · Land &amp; expand</div>
+                    <h3>Módulos à la carte</h3>
+                  </div>
+                </div>
+                <span class="status wip"><span class="dotico"></span>Falta construir</span>
+              </div>
+              <p class="acteaser">O cliente entra na Lis Atende e liga módulos conforme cresce, cada um uma venda nova sem CAC novo. Cada módulo é um diferencial que a prateleira não tem.</p>
+            </summary>
+            <div class="acbody">
+            <div class="lesson">
+              <div class="lblock">
+                <div class="lh">O que é</div>
+                <p>A escada modular que se paga. O cliente entra no Lis Atende e <b>liga módulos conforme cresce</b>, cada um uma venda nova sem CAC novo (land &amp; expand). Modelamos o "pague só pelo que usar" da prateleira, mas cada módulo nosso é um diferencial real que a concorrência não tem.</p>
+              </div>
+              <div class="lblock">
+                <div class="lh">Os módulos</div>
+                <div class="modgrid">
+                  <div class="modcard">
+                    <div class="mtop"><h5>Prospecção Ativa + BMAD</h5><span class="mtag build">Falta empacotar</span></div>
+                    <p>Sair caçando lead, não só atender. Dossiê BMAD automático antes da abordagem. <b>Módulo matador, ninguém de prateleira tem.</b></p>
+                  </div>
+                  <div class="modcard">
+                    <div class="mtop"><h5>Omnichannel</h5><span class="mtag build">Falta empacotar</span></div>
+                    <p>Somar Instagram + WhatsApp na mesma caixa, a Lis reconhece o mesmo lead venha por onde vier.</p>
+                  </div>
+                  <div class="modcard">
+                    <div class="mtop"><h5>CRM / Eva</h5><span class="mtag build">Falta empacotar</span></div>
+                    <p>Funil em etapas, tags, conversão por etapa. O lead organizado do primeiro contato ao fechamento.</p>
+                  </div>
+                  <div class="modcard">
+                    <div class="mtop"><h5>Tráfego / Josiel</h5><span class="mtag build">Falta empacotar</span></div>
+                    <p>O lead que o anúncio traz cai direto na Lis. Meta Ads integrado à esteira.</p>
+                  </div>
+                  <div class="modcard">
+                    <div class="mtop"><h5>Copy &amp; Conteúdo / Théo</h5><span class="mtag build">Falta empacotar</span></div>
+                    <p>Criativos e copy de DM que a Lis usa. A mensagem que faz o tráfego converter.</p>
+                  </div>
+                  <div class="modcard">
+                    <div class="mtop"><h5>Relatórios executivos</h5><span class="mtag build">Falta empacotar</span></div>
+                    <p>KPI por etapa, leads perdidos, tempo de resposta. A prova de valor que segura o cliente.</p>
+                  </div>
+                  <div class="modcard">
+                    <div class="mtop"><h5>Multi-conta / multi-número</h5><span class="mtag build">Falta empacotar</span></div>
+                    <p>Filial, campanha, equipe. Vários WhatsApp e várias frentes num painel só.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="lblock">
+                <div class="lh">A copy-âncora</div>
+                <div class="anchorq" style="margin-top:6px;">
+                  <p>Você não paga por um sistemão cheio de recurso que nunca usa. <span class="hl">Liga só o módulo que faz sentido pra sua operação.</span></p>
+                  <small>objeção de preço · "fale com o comercial" pra cada módulo = qualificação embutida + controle de margem</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="decide">
+              <div class="dk"><span class="di">!</span>A definir · Salatiel</div>
+              <p><b>Preço de cada módulo.</b> A estratégia modelada é "sob consulta / fale com o comercial" para cada módulo, exatamente como a concorrência faz: controle de margem + ancoragem dinâmica + qualificação embutida (e quem atende essa conversa pode ser a própria Lis). <b>Decisão do Salatiel:</b> os preços de cada módulo e se publica ou mantém no comercial.</p>
+            </div>
+
+            <div class="stepcard keep-rule" style="border:0;padding:0;margin-top:18px;">
+              <div class="krh">Status hoje</div>
+              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">🔨 <b>Falta construir</b> como módulos avulsos com checkout próprio. A capacidade de cada módulo já existe na esteira Maia (Prospecção/BMAD, Omnichannel, CRM/Eva, Tráfego/Josiel, Copy/Théo), mas hoje vem tudo junto no Enterprise ou no serviço completo. Falta destacar cada um como upgrade ligável.</p>
+            </div>
+
+            <div class="principle">
+              <div class="pk"><span class="di">✦</span>Por que importa</div>
+              <p>Cada módulo é uma nova venda sem novo CAC, e o cliente que liga 3-4 módulos fica preso (switching cost). O LTV sobe ao longo do tempo. <strong>É o que transforma a porta barata num cliente que vale cada vez mais, sem precisar prospectar de novo.</strong></p>
+            </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- NIVEL 3 -->
+        <div class="step reveal">
+          <div class="snum">3</div>
+          <details class="acc">
+            <summary aria-label="Abrir Nível 3: Maia Enterprise">
+              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <div class="achead">
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                  <span class="phase-badge" aria-hidden="true">3</span>
+                  <div>
+                    <div class="stag">Nível 3 · Âncora premium</div>
+                    <h3>Maia Enterprise</h3>
+                  </div>
+                </div>
+                <span class="status done"><span class="dotico">✓</span>Já temos</span>
+              </div>
+              <p class="acteaser">A esteira completa dos agentes, vendida por diagnóstico. É a âncora no topo que faz o Lis Atende e os módulos parecerem baratos.</p>
+            </summary>
+            <div class="acbody">
+            <div class="lesson">
+              <div class="lblock">
+                <div class="lh">O que é</div>
+                <p>A esteira completa dos agentes Maia (Lis SDR, Théo copy, Eva CRM, e os demais), vendida por diagnóstico, com venda consultiva. É o equivalente ao Núcleo de alto ticket do método.</p>
+              </div>
+              <div class="lblock">
+                <div class="lh">Objetivo</div>
+                <p>Ser a <b>âncora</b>. Faz a Lis Atende (R$ 297) e os módulos parecerem baratos por comparação, e carrega o faturamento com o ticket alto. O cliente que subiu a escada inteira chega aqui aquecido, com cashback acumulado abatendo o setup.</p>
+              </div>
+              <div class="lblock">
+                <div class="lh">A copy-âncora</div>
+                <div class="anchorq" style="margin-top:6px;">
+                  <p>Tudo nesta página foi feito por uma IA. <span class="hl">Não por uma agência tradicional.</span></p>
+                  <small>mecanismo único · a Maia orquestradora + os agentes com memória persistente, vendida por demonstração ao vivo</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="stepcard keep-rule" style="border:0;padding:0;">
+              <div class="krh">Status hoje · já no ar</div>
+              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">✅ <b>Já temos.</b> O Enterprise está no ar e é vendido por demonstração ao vivo. Páginas reais: a landing principal, a apresentação completa com calculadora de ROI, e a página de fechamento /demo.</p>
+              <div class="links">
+                <a class="plink" href="https://agencianobolso.com.br" target="_blank" rel="noopener"><span class="pi">No ar</span> agencianobolso.com.br <span class="ext">↗</span></a>
+                <a class="plink" href="https://lp.agencianobolso.com.br" target="_blank" rel="noopener"><span class="pi">No ar</span> lp (apresentação + ROI) <span class="ext">↗</span></a>
+                <a class="plink" href="https://lp.agencianobolso.com.br/demo" target="_blank" rel="noopener"><span class="pi">No ar</span> /demo (fechamento) <span class="ext">↗</span></a>
+              </div>
+            </div>
+
+            <div class="decide">
+              <div class="dk"><span class="di">!</span>A definir · Salatiel</div>
+              <p><b>Alinhar o preço do Enterprise.</b> Hoje há divergência entre fontes: a página /sdr e a landing mostram <b>setup R$ 19.997 + R$ 2.997/mês</b>; outra fonte (a /demo e backups) traz <b>setup R$ 25.000</b> (PIX -10% = R$ 22.500). <b>Decisão do Salatiel:</b> qual é o preço vigente, pra travar em todas as páginas e na escada.</p>
+            </div>
+
+            <div class="principle">
+              <div class="pk"><span class="di">✦</span>Por que importa</div>
+              <p>O nosso back-end e alto ticket já são melhores que os do método (recorrência mensal, 3 portas de alto ticket, prova mais rica). O Enterprise não precisa de conserto, precisa de <strong>conexão</strong>: estar no fim de uma esteira de aquisição real, não desconectado como hoje. Sem o funil que alimenta, é LTV deixado na mesa.</p>
+            </div>
+            </div>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MECANISMOS TRANSVERSAIS -->
+  <section class="tight" style="padding-top:10px;">
+    <div class="container">
+      <div class="sec-rule"><span class="rom">★</span><span class="mid">Mecanismos transversais · o que amarra os degraus</span><span>VOL. 02</span></div>
+
+      <div class="mech">
+        <div class="mechcard reveal">
+          <div class="mh"><span class="mico">✦</span><h4>Cashback entre degraus</h4></div>
+          <p>O que o cliente paga num degrau vira <b>crédito no próximo</b>. As mensalidades da Lis Atende viram crédito ao ligar o primeiro módulo; o acumulado em módulos vira crédito de setup no upgrade pro Enterprise.</p>
+          <p>Reduz a fricção de subir a escada e premia quem já está dentro. O desconto tem justificativa lógica, não parece promoção aleatória. <b>Esforço baixo (regra comercial + crédito na cobrança), impacto alto na conversão entre degraus.</b> 🔨 Falta implementar.</p>
+        </div>
+        <div class="mechcard reveal">
+          <div class="mh"><span class="mico">✦</span><h4>Nutrição automática pela Lis</h4></div>
+          <p>O lead capturado no Nível 0 entra numa régua automática de <b>e-mail + WhatsApp</b>: entrega valor, quebra objeção, empurra pro Lis Atende. Quem já é cliente recebe nutrição mostrando o resultado dos módulos.</p>
+          <p>Diferencial nosso: a nutrição não precisa de ferramenta de terceiro, é a <b>própria Lis</b> operando o relacionamento, com a voz do negócio. O produto operando a própria venda do upgrade. 🔨 Falta montar a régua.</p>
+        </div>
+      </div>
+
+      <div class="mech" style="margin-top:14px;">
+        <div class="mechcard reveal" style="grid-column:1 / -1;">
+          <div class="mh"><span class="mico">✦</span><h4>As 2 portas de entrada</h4></div>
+          <p><b>Porta A · "tenho um negócio e quero atender/vender melhor"</b> (dono de negócio, MEI, PME): entra pela Lis Atende e sobe a escada de módulos. É o público natural, faz total sentido. <span style="color:var(--olive);font-weight:700;">Validar primeiro.</span></p>
+          <p><b>Porta B · "quero montar/revender atendimento com IA"</b> (agência, freelancer, revendedor): um programa white-label onde o parceiro usa a nossa esteira pra atender clientes dele. Há rastro de white-label (+R$3k no Enterprise) que poderia virar essa porta, mas exige decisão estratégica (suporte a parceiro, controle de qualidade, risco de marca).</p>
+          <div class="decide" style="margin-top:14px;">
+            <div class="dk"><span class="di">!</span>A definir · Salatiel</div>
+            <p><b>Adota a Porta B (revenda/white-label)?</b> Recomendação da pesquisa: validar a Porta A primeiro; abrir a Porta B só depois que a esteira self-service estiver sólida. Não abrir as duas de uma vez. <b>Decisão do Salatiel:</b> se e quando adota a segunda porta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LACUNAS -->
+  <section style="padding-top:10px;">
+    <div class="container">
+      <div class="sec-rule"><span class="rom">★</span><span class="mid">Lacunas a implementar · o checklist do que falta</span><span>VOL. 03</span></div>
+      <p class="intro-lead" style="margin-bottom:26px;">O corredor do meio inteiro. Ordem de ataque sugerida: blindar a execução self-service → tripwire (Lis Atende) → VSL de topo → reembalagem + cashback + nutrição → Porta B só se/quando fizer sentido.</p>
+
+      <div class="gaps">
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Blindar a execução self-service (pré-requisito)</h5><p>Onboarding automático (QR + formulário que treina a Lis) + handoff 100% sólido + suporte automatizado. Sem isso, nada abaixo se sustenta.</p></div>
+          <span class="gpri alta">Alta</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Página da Lis Atende (tripwire self-service)</h5><p>O degrau barato que falta. Checkout próprio, onboarding por QR + formulário. O item que mais muda o jogo.</p></div>
+          <span class="gpri alta">Alta</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>VSL + optin de topo (grátis)</h5><p>Captura Nome + E-mail + WhatsApp. Enche o topo de graça e pré-vende a Lis Atende. Sem ela, o tripwire não tem de onde se abastecer.</p></div>
+          <span class="gpri alta">Alta</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Páginas dos módulos (Nível 2)</h5><p>Cada módulo destacado como upgrade ligável: Prospecção+BMAD, Omnichannel, CRM, Tráfego, Copy, Relatórios, Multi-conta.</p></div>
+          <span class="gpri media">Média</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Upsells 1-clique pós-compra</h5><p>Na tela de obrigado, oferta imediata no momento de maior temperatura do lead. O degrau mais lucrativo do funil.</p></div>
+          <span class="gpri media">Média</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Cashback entre degraus</h5><p>Regra comercial + crédito na cobrança. Esforço baixo, impacto alto na conversão Lis Atende → módulos → Enterprise.</p></div>
+          <span class="gpri media">Média</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Nutrição automática (e-mail + WhatsApp pela Lis)</h5><p>A régua que liga Nível 0 → Nível 1 → módulos. Conecta com o SDR que já temos.</p></div>
+          <span class="gpri media">Média</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Checkout por degrau</h5><p>Cobrança recorrente própria por nível, com cupom/crédito pra operacionalizar o cashback.</p></div>
+          <span class="gpri media">Média</span>
+        </div>
+        <div class="gap reveal">
+          <span class="gbox">☐</span>
+          <div class="gmain"><h5>Porta B (revenda / white-label)</h5><p>Só depois da Porta A sólida. Exige decisão sobre suporte a parceiro e risco de marca.</p></div>
+          <span class="gpri baixa">Baixa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECAP -->
+  <section class="tight" style="padding-top:10px;">
+    <div class="container">
+      <div class="sec-rule"><span class="rom">★</span><span class="mid">A escada numa frase cada</span><span>FIN.</span></div>
+      <div class="basecard reveal">
+        <div class="blabel">Resumo · a máquina inteira</div>
+        <div class="recap" style="margin-top:6px;">
+          <div class="rline"><span class="rtag">Nível 0</span><p><b>VSL / Diagnóstico grátis.</b> Captura Nome + E-mail + WhatsApp, fricção zero, pré-vende a Lis Atende. 🔨 Falta construir.</p></div>
+          <div class="rline"><span class="rtag">Nível 1</span><p><b>Lis Atende.</b> Porta barata self-service pro pequeno/MEI, ~R$297/mês [a definir]. 🔨 Falta construir.</p></div>
+          <div class="rline"><span class="rtag">Nível 2</span><p><b>Módulos à la carte.</b> Liga conforme cresce, preço no comercial [a definir]. 🔨 Falta empacotar.</p></div>
+          <div class="rline"><span class="rtag">Nível 3</span><p><b>Maia Enterprise.</b> Âncora premium, vendida por diagnóstico, R$19.997+ [alinhar preço]. ✅ Já temos.</p></div>
+          <div class="rline"><span class="rtag">Transversal</span><p><b>Cashback + Nutrição + 2 portas.</b> O que amarra os degraus e mantém o lead vivo entre etapas. 🔨 Falta implementar.</p></div>
+        </div>
+        <p class="bp" style="margin-top:24px;margin-bottom:0;">A concorrência de prateleira nos ensinou a abrir a porta barata; o método nos ensinou a construir a escada que sobe dessa porta até o nosso alto ticket, que já é melhor que o dele. <b style="color:var(--coral-soft);">O software te dá o painel. A gente te dá quem responde.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <div class="container">
+      <div class="megaword reveal">Maia<span class="dot">.</span></div>
+      <div class="footrow">
+        <span class="live"><span class="pulse"></span> Blueprint do Funil · Agência no Bolso</span>
+        <span>Vol. 01 / Issue Nº 26 · MMXXVI</span>
+        <span>Edited in pt-BR · Filed under Modelo Interno · FIN.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>
