@@ -1,746 +1,366 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>document.documentElement.className+=' js';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>O Funil da Agência no Bolso · blueprint da nossa máquina de vendas</title>
-<meta name="description" content="O blueprint do funil da Agência no Bolso / Maia: a esteira curso + comunidade nível a nível (Imersão → Instala Minha Maia R$600 → Comunidade R$997 → Mentoria R$15k), o que já temos no ar e o que falta construir, modelado na mentoria do Lucas.">
 <meta name="robots" content="noindex,nofollow">
-<meta property="og:title" content="O Funil da Agência no Bolso · blueprint da esteira curso + comunidade">
-<meta property="og:description" content="A nossa máquina de vendas, nível a nível: Imersão, o degrau de R$600 feito-pra-você, a Comunidade no webinário perpétuo e a Mentoria de alto ticket.">
-<meta property="og:type" content="website">
+<meta name="googlebot" content="noindex,nofollow">
+<title>Blueprint do Funil de Aquisição da MAIA · Agência no Bolso</title>
+<meta name="description" content="Documento interno de modelagem — o desenho ponta a ponta da máquina de aquisição da MAIA no eixo atual (agência de serviço, MAIA licenciada híbrida, porta de entrada Sessão Raio-X grátis).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/base.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ===== Blueprint do funil (especifico deste site) ===== */
-  .intro-lead{max-width:62ch;color:var(--ink-soft);font-size:18px;line-height:1.62;}
-
-  /* legenda de status */
-  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
-  .lg{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.02em;color:var(--ink-soft);border:1px solid var(--line);background:var(--bone);border-radius:999px;padding:8px 14px;}
-  .lg .ico{width:16px;height:16px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;line-height:1;}
-  .lg .ico.done{background:var(--olive);color:#fff;}
-  .lg .ico.wip{background:transparent;border:1.5px dashed var(--ink-faint);color:var(--ink-faint);}
-  .lg .ico.dec{background:var(--mustard);color:var(--ink);}
-
-  /* base card (fundacao / sintese) */
-  .basecard{border:1px solid var(--ink);border-radius:22px;background:var(--ink);color:var(--paper);padding:clamp(30px,4vw,52px);position:relative;overflow:hidden;}
-  .basecard::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 100% -10%,rgba(237,111,92,.22),transparent 58%);pointer-events:none;}
-  .basecard .blabel{position:relative;font-family:var(--font-display);font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral-soft);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-  .basecard .blabel::before{content:"";width:18px;height:1px;background:var(--coral-soft);}
-  .basecard h2{position:relative;font-family:var(--font-display);font-weight:800;font-size:clamp(26px,3.4vw,42px);letter-spacing:-.03em;line-height:1.06;margin-bottom:16px;}
-  .basecard h2 em{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--coral-soft);}
-  .basecard p.bp{position:relative;color:var(--paper-dark);font-size:16.5px;line-height:1.62;max-width:66ch;margin-bottom:22px;}
-  .flowline{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:26px;}
-  .flowline .fstep{font-family:var(--font-display);font-weight:700;font-size:12.5px;letter-spacing:.01em;color:var(--paper);background:rgba(247,241,222,.08);border:1px solid rgba(247,241,222,.16);border-radius:999px;padding:8px 14px;}
-  .flowline .fstep b{color:var(--coral-soft);}
-  .flowline .far{color:var(--coral-soft);font-size:13px;font-weight:800;}
-  .levers{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
-  .lever{border:1px solid rgba(247,241,222,.16);border-radius:14px;padding:18px 20px;background:rgba(247,241,222,.04);}
-  .lever .lh{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.04em;color:var(--coral-soft);text-transform:uppercase;margin-bottom:7px;}
-  .lever p{color:var(--paper-dark);font-size:14px;line-height:1.5;margin:0;}
-  @media(max-width:680px){.levers{grid-template-columns:1fr;}}
-
-  /* timeline de niveis */
-  .timeline{position:relative;margin-top:8px;}
-  .timeline::before{content:"";position:absolute;left:23px;top:14px;bottom:14px;width:2px;background:linear-gradient(180deg,var(--coral),var(--line) 60%);border-radius:2px;}
-  .step{position:relative;padding-left:74px;margin-bottom:30px;}
-  .step:last-child{margin-bottom:0;}
-  .step .snum{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:var(--paper);border:2px solid var(--coral);color:var(--ink);font-family:var(--font-display);font-weight:800;font-size:19px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 10px 22px -12px rgba(237,111,92,.7);}
-  .phase-badge{display:none;}
-  @media(max-width:680px){
-    .timeline::before{display:none;}
-    .step .snum{display:none;}
-    .step{padding-left:0;}
-    .phase-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--coral);color:#fff;font-family:var(--font-display);font-weight:800;font-size:13px;line-height:1;flex-shrink:0;box-shadow:0 6px 14px -8px rgba(237,111,92,.8);}
+  :root{
+    --bg:#f6f4ef;
+    --paper:#ffffff;
+    --ink:#1c1b19;
+    --ink-soft:#44423d;
+    --ink-faint:#7a776f;
+    --line:#e3e0d8;
+    --line-soft:#eeebe4;
+    --accent:#b4461f;
+    --accent-soft:#c9633b;
+    --mustard:#c99a2e;
+    --code-bg:#1c1b19;
+    --code-ink:#ece7dc;
+    --prop-bg:#fdf6e9;
+    --prop-line:#e6cf98;
+    --max:820px;
+    --font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --font-display:'Inter Tight',var(--font);
+    --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--font);font-size:17px;line-height:1.68;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   }
 
-  .status{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:11.5px;letter-spacing:.04em;border-radius:999px;padding:8px 14px;white-space:nowrap;flex:0 0 auto;}
-  .status .dotico{width:15px;height:15px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;line-height:1;}
-  .status.done{background:rgba(110,116,72,.12);color:#4f5733;border:1px solid rgba(110,116,72,.4);}
-  .status.done .dotico{background:var(--olive);color:#fff;}
-  .status.wip{background:rgba(21,20,15,.04);color:var(--ink-mute);border:1px dashed var(--ink-faint);}
-  .status.wip .dotico{background:transparent;border:1.5px dashed var(--ink-faint);color:var(--ink-faint);}
+  /* ===== layout ===== */
+  .shell{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start;}
+  @media(max-width:900px){.shell{display:block;}}
 
-  /* aula densa */
-  .lesson{margin-top:4px;}
-  .lesson .lblock{margin-top:22px;}
-  .lesson .lblock:first-child{margin-top:0;}
-  .lesson .lh{font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:10px;margin-bottom:11px;}
-  .lesson .lh::before{content:"";width:18px;height:2px;background:var(--coral);border-radius:2px;flex:0 0 auto;}
-  .lesson p{color:var(--ink-soft);font-size:15.5px;line-height:1.66;margin-bottom:12px;max-width:70ch;}
-  .lesson p:last-child{margin-bottom:0;}
-  .lesson p b{color:var(--ink);font-weight:700;}
-  .lesson ul.dense{list-style:none;padding:0;margin:6px 0 12px;display:grid;gap:9px;}
-  .lesson ul.dense li{position:relative;padding-left:18px;font-size:15px;line-height:1.55;color:var(--ink-soft);max-width:70ch;overflow-wrap:anywhere;}
-  .lesson ul.dense li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--coral);}
-  .lesson ul.dense li b{color:var(--ink);font-weight:700;}
+  /* ===== header ===== */
+  header.top{border-bottom:1px solid var(--line);background:var(--paper);}
+  .top-inner{max-width:1180px;margin:0 auto;padding:22px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .brand{font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:-.01em;color:var(--ink);}
+  .brand span{color:var(--accent);}
+  .doc-flag{font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:999px;padding:5px 12px;}
 
-  /* copy-ancora: o que o nivel diz pro lead */
-  .anchorq{margin-top:18px;border-left:3px solid var(--coral);padding:6px 0 6px 20px;}
-  .anchorq p{font-family:var(--font-serif);font-style:italic;font-weight:600;font-size:clamp(17px,2vw,22px);line-height:1.4;color:var(--ink);letter-spacing:-.005em;max-width:46ch;margin:0;}
-  .anchorq .hl{color:var(--coral);font-style:normal;}
-  .anchorq small{display:block;margin-top:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-style:normal;}
+  /* ===== sidebar / TOC ===== */
+  nav.toc{position:sticky;top:24px;padding:28px 0;}
+  @media(max-width:900px){nav.toc{position:static;padding:8px 0 0;}}
+  nav.toc .toc-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px;}
+  nav.toc ol{list-style:none;margin:0;padding:0;}
+  nav.toc li{margin:0;}
+  nav.toc a{display:block;padding:7px 12px 7px 14px;border-left:2px solid var(--line);color:var(--ink-soft);text-decoration:none;font-size:14.5px;line-height:1.4;transition:all .14s ease;}
+  nav.toc a:hover{border-left-color:var(--accent);color:var(--ink);background:var(--line-soft);}
 
-  /* callout decisao do Salatiel */
-  .decide{margin-top:20px;border:1.5px dashed var(--mustard);border-radius:16px;background:rgba(233,185,74,.10);padding:20px 22px;position:relative;}
-  .decide .dk{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9a7615;margin-bottom:9px;}
-  .decide .dk .di{width:18px;height:18px;border-radius:5px;background:var(--mustard);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;}
-  .decide p{color:var(--ink-soft);font-size:14.5px;line-height:1.58;margin:0 0 6px;max-width:70ch;}
-  .decide p:last-child{margin-bottom:0;}
-  .decide p b{color:var(--ink);font-weight:700;}
+  /* ===== article ===== */
+  main{max-width:var(--max);padding:40px 0 100px;min-width:0;}
+  .hero{margin-bottom:12px;}
+  h1{font-family:var(--font-display);font-weight:900;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.025em;margin:0 0 20px;color:var(--ink);}
 
-  /* principio / o que importa */
-  .principle{margin-top:24px;border:1px solid var(--coral);border-radius:16px;background:rgba(237,111,92,.07);padding:22px 24px 22px 26px;position:relative;overflow:hidden;}
-  .principle::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--coral);}
-  .principle .pk{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-bottom:10px;}
-  .principle .pk .di{font-family:var(--font-serif);font-style:italic;font-weight:600;font-size:17px;line-height:1;letter-spacing:0;text-transform:none;}
-  .principle p{color:var(--ink-soft);font-size:15.5px;line-height:1.6;margin:0;max-width:72ch;}
-  .principle p b,.principle p strong{color:var(--ink);font-weight:800;}
+  .meta-note{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:22px 26px;margin:0 0 40px;}
+  .meta-note p{margin:0 0 12px;font-size:15.5px;line-height:1.6;color:var(--ink-soft);}
+  .meta-note p:last-child{margin-bottom:0;}
+  .meta-note strong{color:var(--ink);}
 
-  /* links de paginas reais / referencia */
-  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
-  .plink{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.005em;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:13px 16px;min-height:44px;transition:transform .16s ease,border-color .16s ease,background .16s ease,color .16s ease;}
-  .plink:hover{border-color:var(--coral);background:var(--coral);color:#fff;transform:translateY(-1px);}
-  .plink .pi{font-family:var(--font-mono);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.7;}
-  .plink:hover .pi{opacity:.85;}
-  .plink .ext{font-size:12px;}
-  @media(max-width:680px){
-    .links{flex-direction:column;gap:8px;}
-    .plink{width:100%;box-sizing:border-box;flex-direction:column;align-items:flex-start;gap:3px;padding:12px 16px;border-radius:14px;min-height:44px;}
-    .plink .pi{font-size:9px;letter-spacing:.14em;opacity:.6;}
-    .plink .ext{margin-left:auto;align-self:flex-end;margin-top:-18px;}
-  }
+  h2{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,3.2vw,30px);letter-spacing:-.02em;line-height:1.16;margin:58px 0 20px;padding-top:14px;color:var(--ink);scroll-margin-top:24px;}
+  h2 .n{color:var(--accent);font-variant-numeric:tabular-nums;}
+  h3{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:36px 0 12px;color:var(--ink);}
+  h4{font-family:var(--font-display);font-weight:700;font-size:16.5px;margin:26px 0 8px;color:var(--ink);}
 
-  .stepcard .keep-rule{margin-top:24px;border-top:1px dashed var(--line);padding-top:18px;}
-  .stepcard .keep-rule .krh{font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px;}
+  p{margin:0 0 18px;}
+  strong{font-weight:700;color:var(--ink);}
+  a{color:var(--accent);}
 
-  /* grade de modulos (nivel 2) */
-  .modgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
-  @media(max-width:640px){.modgrid{grid-template-columns:1fr;}}
-  .modcard{border:1px solid var(--line);border-radius:14px;background:var(--paper);padding:18px 20px;transition:transform .16s ease,border-color .16s ease;}
-  .modcard:hover{transform:translateY(-2px);border-color:var(--coral);}
-  .modcard .mtop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;}
-  .modcard h5{font-family:var(--font-display);font-weight:800;font-size:16px;letter-spacing:-.01em;color:var(--ink);line-height:1.15;}
-  .modcard .mtag{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap;flex:0 0 auto;}
-  .modcard .mtag.have{background:rgba(110,116,72,.14);color:#4f5733;border:1px solid rgba(110,116,72,.4);}
-  .modcard .mtag.build{background:rgba(21,20,15,.04);color:var(--ink-mute);border:1px dashed var(--ink-faint);}
-  .modcard p{font-size:13.5px;line-height:1.5;color:var(--ink-mute);margin:0;}
-  .modcard p b{color:var(--ink-soft);font-weight:700;}
+  ul,ol{margin:0 0 18px;padding-left:24px;}
+  li{margin:0 0 9px;}
+  li::marker{color:var(--ink-faint);}
 
-  /* mecanismos transversais */
-  .mech{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
-  @media(max-width:680px){.mech{grid-template-columns:1fr;}}
-  .mechcard{border:1px solid var(--line);border-radius:16px;background:var(--bone);padding:22px 24px;box-shadow:0 30px 60px -38px rgba(21,20,15,.2);}
-  .mechcard .mh{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-  .mechcard .mh h4{font-family:var(--font-display);font-weight:800;font-size:18px;letter-spacing:-.01em;color:var(--ink);}
-  .mechcard .mico{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--coral);font-size:22px;line-height:1;}
-  .mechcard p{font-size:14.5px;line-height:1.58;color:var(--ink-soft);margin:0 0 8px;}
-  .mechcard p:last-child{margin-bottom:0;}
-  .mechcard p b{color:var(--ink);font-weight:700;}
+  hr.rule{border:0;border-top:1px solid var(--line);margin:46px 0;}
 
-  /* checklist de lacunas */
-  .gaps{display:grid;gap:11px;margin-top:8px;}
-  .gap{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;border:1px solid var(--line);border-radius:14px;background:var(--bone);padding:16px 20px;transition:transform .16s ease,border-color .16s ease;}
-  .gap:hover{transform:translateY(-2px);border-color:var(--coral);}
-  .gap .gbox{width:22px;height:22px;border-radius:6px;border:1.5px dashed var(--ink-faint);flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-faint);font-size:13px;}
-  .gap .gmain h5{font-family:var(--font-display);font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:var(--ink);line-height:1.2;margin-bottom:3px;}
-  .gap .gmain p{font-size:13px;line-height:1.5;color:var(--ink-mute);margin:0;}
-  .gap .gpri{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;white-space:nowrap;flex:0 0 auto;}
-  .gap .gpri.alta{background:rgba(237,111,92,.12);color:#b8442f;border:1px solid rgba(237,111,92,.4);}
-  .gap .gpri.media{background:rgba(233,185,74,.14);color:#9a7615;border:1px solid rgba(233,185,74,.5);}
-  .gap .gpri.baixa{background:rgba(21,20,15,.04);color:var(--ink-mute);border:1px solid var(--line);}
-  @media(max-width:560px){.gap{grid-template-columns:auto 1fr;}.gap .gpri{grid-column:2;justify-self:start;margin-top:4px;}}
+  /* blockquotes / scripts de copy */
+  blockquote{margin:0 0 18px;padding:16px 22px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--mustard);border-radius:10px;color:var(--ink-soft);font-size:15.5px;line-height:1.62;}
+  blockquote p{margin:0;}
 
-  /* recap final */
-  .recap{display:grid;gap:12px;margin-top:8px;}
-  .recap .rline{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline;border:1px solid var(--line);border-radius:14px;background:var(--bone);padding:18px 22px;transition:transform .16s ease,border-color .16s ease;}
-  .recap .rline:hover{transform:translateY(-2px);border-color:var(--coral);}
-  .recap .rline .rtag{font-family:var(--font-display);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--coral);white-space:nowrap;}
-  .recap .rline p{color:var(--ink-soft);font-size:15px;line-height:1.55;margin:0;}
-  .recap .rline p b{color:var(--ink);font-weight:700;}
-  @media(max-width:560px){.recap .rline{grid-template-columns:1fr;gap:6px;}}
+  /* proposta flag */
+  .prop{background:var(--prop-bg);border:1px solid var(--prop-line);border-radius:10px;padding:16px 20px;margin:0 0 16px;font-size:15.5px;}
+  .prop strong{color:#8a5a12;}
 
-  /* ===== ACCORDION ===== */
-  .acc{margin:0;}
-  .acc>.stepcard,.acc.accbase>.basecard{box-shadow:none;transition:none;}
-  .acc>summary{
-    list-style:none;cursor:pointer;display:block;position:relative;
-    background:var(--bone);border:1px solid var(--line);border-radius:18px;
-    padding:clamp(18px,2.4vw,26px) clamp(54px,7vw,64px) clamp(18px,2.4vw,26px) clamp(20px,2.6vw,30px);
-    box-shadow:0 30px 60px -34px rgba(21,20,15,.2);
-    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .acc>summary::-webkit-details-marker{display:none;}
-  .acc>summary::marker{content:"";}
-  .acc>summary:hover{transform:translateY(-2px);box-shadow:0 36px 70px -34px rgba(21,20,15,.28);border-color:var(--coral);}
-  .acc>summary:focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
-  .acc[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent;box-shadow:none;transform:none;}
-  .acc[open]>summary:hover{transform:none;box-shadow:none;}
-  .acc .achead{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-  .acc .achead .stag{font-family:var(--font-display);font-weight:600;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px;}
-  .acc .achead h3{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,2.3vw,27px);letter-spacing:-.02em;line-height:1.12;color:var(--ink);}
-  .acc.accbase>summary{background:var(--bone);}
-  .acc.accbase .achead .blabel{font-family:var(--font-display);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-bottom:8px;display:flex;align-items:center;gap:10px;}
-  .acc.accbase .achead .blabel::before{content:"";width:18px;height:1px;background:var(--coral);}
-  .acc.accbase .achead h3{font-size:clamp(22px,3vw,33px);}
-  .acc.accbase .achead h3 em{font-family:var(--font-serif);font-style:italic;font-weight:600;color:var(--coral);}
-  .acc .acteaser{margin-top:10px;color:var(--ink-mute);font-size:14.5px;line-height:1.55;max-width:72ch;}
-  .acc[open] .acteaser{display:none;}
-  .acc>summary .acchev{position:absolute;top:clamp(20px,2.6vw,28px);right:clamp(18px,2.4vw,26px);width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;color:var(--coral);background:var(--paper);transition:transform .25s ease,border-color .18s ease,background .18s ease,color .18s ease;}
-  .acc>summary:hover .acchev{border-color:var(--coral);}
-  .acc[open]>summary .acchev{transform:rotate(180deg);background:var(--coral);border-color:var(--coral);color:#fff;}
-  .acc>summary .acchev svg{width:14px;height:14px;display:block;}
-  .acc .achead .status{margin-top:2px;}
-  .acc .acbody{border:1px solid var(--line);border-top:0;border-radius:0 0 18px 18px;background:var(--bone);padding:clamp(4px,1vw,10px) clamp(22px,2.6vw,32px) clamp(22px,2.6vw,32px);box-shadow:0 30px 60px -34px rgba(21,20,15,.2);}
-  .acc.accbase .acbody{background:var(--bone);}
-  html.js .acc[open]>.acbody{animation:accslide .28s ease;}
-  @keyframes accslide{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
-  @media(prefers-reduced-motion:reduce){html.js .acc[open]>.acbody{animation:none;}.acc>summary .acchev,.acc[open]>summary .acchev{transition:none;}}
-  @media(max-width:680px){
-    .acc>summary{padding-right:52px;}
-    .acc>summary .acchev{width:26px;height:26px;right:14px;top:18px;}
-    .acc .achead .status{font-size:11px;padding:7px 12px;}
-  }
-  @media(max-width:560px){
-    .acc>summary{border-radius:16px;}
-    .acc[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;}
-    .acc .acbody{border-radius:0 0 16px 16px;}
-  }
+  /* code / diagrama ASCII */
+  pre{background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px;font-family:var(--font-mono);font-size:13px;line-height:1.55;}
+  code{font-family:var(--font-mono);font-size:.92em;}
+  :not(pre)>code{background:var(--line-soft);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--accent);}
 
-  /* reveal: visivel por padrao; anima so com JS */
-  .reveal{opacity:1;transform:none;}
-  html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
-  html.js .reveal.in{opacity:1;transform:none;}
-  @media(prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none;}}
+  /* tables */
+  .tw{overflow-x:auto;margin:0 0 26px;border:1px solid var(--line);border-radius:12px;}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--paper);}
+  thead th{background:var(--ink);color:var(--paper);font-family:var(--font-display);font-weight:700;text-align:left;padding:12px 15px;font-size:13.5px;letter-spacing:.01em;vertical-align:bottom;}
+  tbody td{padding:12px 15px;border-top:1px solid var(--line-soft);vertical-align:top;line-height:1.5;color:var(--ink-soft);}
+  tbody tr:nth-child(even){background:var(--line-soft);}
+  tbody td strong{color:var(--ink);}
+
+  footer.foot{margin-top:60px;padding-top:26px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-faint);}
+  footer.foot .src-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;color:var(--ink-faint);}
+  footer.foot ul{padding-left:20px;}
+  footer.foot code{font-size:.86em;}
+
+  ::selection{background:#f1d9a0;}
 </style>
 </head>
 <body>
-
-<!-- rails laterais -->
-<div class="rail left"><span>Agência no Bolso · MMXXVI</span></div>
-<div class="rail right"><span>Blueprint do Funil · Maia</span></div>
-
-<div class="wrap">
-
-  <!-- metastrip -->
-  <div class="metastrip">
-    <div class="container">
-      <span class="filed">DOC · <b>FUNIL MAIA</b></span>
-      <div class="mid">
-        <span>Curso + Comunidade</span>
-        <span>5 níveis</span>
-        <span>Esteira de ascensão</span>
-      </div>
-      <span class="live"><span class="pulse"></span>MODELO INTERNO</span>
-    </div>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">Agência no Bolso <span>· MAIA</span></div>
+    <div class="doc-flag">Documento interno · não indexado</div>
   </div>
+</header>
 
-  <!-- topbar -->
-  <header class="topbar">
-    <div class="container">
-      <a class="brand" href="#topo">Agência no Bolso<span class="o">.</span><small>Maia</small></a>
-      <div class="topbar-title">O Funil da Agência no Bolso · blueprint da máquina de vendas</div>
+<div class="shell">
+  <nav class="toc" aria-label="Índice">
+    <div class="toc-title">Neste documento</div>
+    <ol>
+      <li><a href="#s1">1. Visão do funil</a></li>
+      <li><a href="#s2">2. Topo — aquisição e tráfego</a></li>
+      <li><a href="#s3">3. Isca — Sessão Raio-X grátis</a></li>
+      <li><a href="#s4">4. Meio — a máquina que não existia</a></li>
+      <li><a href="#s5">5. Fundo — oferta e escada</a></li>
+      <li><a href="#s6">6. Scripts por etapa</a></li>
+      <li><a href="#s7">7. Métricas por etapa</a></li>
+      <li><a href="#s8">8. As 8 decisões em aberto</a></li>
+      <li><a href="#fontes">Fontes</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <h1>Blueprint do Funil de Aquisição da MAIA / Agência no Bolso</h1>
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section id="topo" class="tight">
-    <div class="container">
-      <div class="eyebrow">O blueprint · nível a nível</div>
-      <h1 class="display" style="margin:22px 0 20px;max-width:20ch;">O Funil da Agência no Bolso<span class="dot">.</span></h1>
-      <p class="intro-lead">A nossa máquina de vendas desenhada por inteiro, modelada na esteira do método que o Lucas ensinou ao Denderson: <b>curso barato na porta de entrada → produto intermediário feito-pra-você → comunidade no back-end → mentoria de alto ticket</b>. Cada nível com o que é, o objetivo, a copy-âncora que a gente usa pra vender, e o status honesto: o que já está no ar e o que ainda falta construir. É o mapa que mostra pra onde a operação vai e o que falta pra fechar o corredor do meio.</p>
-
-      <div class="anchorq reveal">
-        <p>Eles ensinam você a instalar a IA. <span class="hl">A gente instala junto, e te dá a comunidade onde ela nunca para de melhorar.</span></p>
-        <small>Big Idea · Agência no Bolso / Maia · a ponte que a massa precisa</small>
-      </div>
-
-      <div class="legend">
-        <span class="lg"><span class="ico done">✓</span>Já temos · no ar</span>
-        <span class="lg"><span class="ico wip"></span>Falta construir</span>
-        <span class="lg"><span class="ico dec">!</span>Decisão do Salatiel</span>
-      </div>
+    <div class="meta-note">
+      <p><strong>O que é:</strong> o desenho ponta a ponta da máquina de aquisição da MAIA no eixo estratégico ATUAL (agência de serviço · MAIA licenciada híbrida · porta de entrada Sessão Raio-X grátis). Documento de <strong>modelagem acionável</strong> — amarra as peças comerciais já prontas (01-OFERTA-CENTRAL, 02-APRESENTAÇÃO-PADRÃO, 03-SCRIPTS SDR/CLOSER, 05-FUNIS-DE-AQUISIÇÃO) num trilho único e preenche o que faltava (o meio do funil, que não existia).</p>
+      <p><strong>Data:</strong> 16/10/2026 · <strong>Autor:</strong> Jonathan (copy/pesquisa) · <strong>Status:</strong> blueprint pra aprovação de Salatiel + Raquel. Sujeito ao aval do Chefe antes de qualquer construção.</p>
+      <p><strong>O que este documento NÃO é:</strong> não é a página pública do funil, não é reescrita de oferta. O eixo antigo (Imersão-curso, Instala Minha Maia R$600, Comunidade R$997, Mentoria R$15k) está <strong>morto</strong> e não entra aqui.</p>
+      <p><strong>Regra anti-número:</strong> toda taxa é faixa de REFERÊNCIA de planejamento, não resultado medido (a gente ainda não mede). Tudo que depende do Chefe vem como <strong>[PROPOSTA — confirmar com o Salatiel]</strong> com minha recomendação. Nada de resultado inventado.</p>
     </div>
-  </section>
 
-  <!-- FUNDACAO -->
-  <section class="tight" style="padding-top:10px;">
-    <div class="container">
-      <div class="sec-rule"><span class="rom">Fundação</span><span class="mid">O perpétuo e a escada de valor da Maia</span><span>00</span></div>
+    <h2 id="s1"><span class="n">1.</span> Visão do funil (a lógica ponta a ponta em uma página)</h2>
+    <p><strong>A tese central:</strong> a MAIA não precisa de UM funil perfeito. Precisa de <strong>vários funis pequenos empilhados</strong> que entregam no MESMO corredor. Cada funil é uma porta de topo diferente; o fundo (SDR → Closer → cliente) é único e já está escrito. Isso é o que torna o sistema barato: a gente constrói o fundo uma vez e vai plugando portas conforme a capacidade.</p>
+    <p><strong>O caminho do estranho ao cliente Enterprise:</strong></p>
+    <pre>ESTRANHO
+   │  entra por 1 dos funis de topo (indicação · orgânico · depois tráfego/webinar)
+   ▼
+LEAD ──────────► capturado com ORIGEM marcada no CRM (tag obrigatória)
+   │
+   ▼
+MQL (qualificado) ──► SDR aplica ICP + roda SPIN S+P → agenda a SESSÃO RAIO-X grátis
+   │
+   ▼
+SESSÃO RAIO-X ──► Closer roda SPIN completo (S→P→I→N), faz a conta do prejuízo na frente do lead,
+   │              apresenta o mecanismo "Funcionário Digital Vitalício", ancora preço (salário × MAIA)
+   ▼
+FECHAMENTO ──► decisão binária datada → plano (Start / Pro / Enterprise) + R$597/mês
+   │
+   ▼
+CLIENTE MAIA ──► onboarding + painel + licença (nossa maior força)
+   │
+   ├─► CS / EXPANSÃO: sobe de plano, compra serviços de agência, renova → LTV
+   └─► INDICAÇÃO: cliente satisfeito alimenta o topo de novo (o loop)</pre>
+    <p><strong>A tese de ARPU (herdada do blueprint de junho, que sobrevive à mudança de modelo):</strong> o jogo não é vender a implantação uma vez; é <strong>manter o cliente na recorrência de R$597/mês e expandir o ticket por cliente ao longo do tempo</strong>. A implantação (R$1.497 a 12x R$2.410) é a "contratação"; o R$597/mês é o salário recorrente que vira equity de LTV. Desenha-se a ascensão (Start → Pro → Enterprise → serviços de agência → renovação) ANTES da copy, porque o que faz o negócio valer a pena é o valor no tempo de vida do cliente, não o CAC de um fechamento isolado.</p>
+    <p><strong>Por que o Enterprise fecha pelo mesmo cano do Start:</strong> não há funil separado por ticket. Todo lead entra pela Raio-X. É a Raio-X (diagnóstico com os números do cliente) que revela o porte e define qual degrau o Closer recomenda. Lead pequeno vira Start; operação grande vira Enterprise. O funil é um só; a escada é o que acontece DENTRO do fechamento e do pós-venda.</p>
+    <p><strong>O gargalo real não é o topo — é o meio.</strong> A gente sabe gerar lead (indicação + orgânico) e sabe entregar (onboarding/painel, da etapa 9 pra frente). O que vazava era a ponte: SDR sem rotina e CRM sem captura. Investir em mais topo (tráfego) antes de consertar o meio só aumenta o vazamento. Por isso a ordem: liga o barato, conserta o meio, mede, depois escala no pago.</p>
 
-      <details class="acc accbase reveal" open>
-        <summary aria-label="Abrir Fundação: o perpétuo e a escada de valor">
-          <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-          <div class="achead">
-            <div>
-              <div class="blabel">Fundação · O perpétuo e a escada de valor</div>
-              <h3>A fundação: uma máquina que <em>compra cliente com lucro</em>.</h3>
-            </div>
-          </div>
-          <p class="acteaser">VSL grátis no topo captura o lead, a Imersão de sábado abre a porta, o "Instala Minha Maia" (R$600) é a ponte que captura a massa, a Comunidade (R$997/ano) é o back-end vendido no webinário perpétuo, e a Mentoria (R$15k) ancora tudo lá no alto via formulário + comercial.</p>
-        </summary>
-        <div class="acbody">
+    <hr class="rule">
 
-      <div class="basecard">
-        <div class="blabel">Fundação · O perpétuo e a esteira de ascensão</div>
-        <h2>A fundação: uma máquina que <em>compra cliente com lucro</em> e sobe o ARPU.</h2>
-        <p class="bp">Modelamos a esteira que o Lucas ensinou ao Denderson na mentoria: tráfego diário leva pra uma VSL grátis, a VSL vende uma porta de entrada barata (a Imersão), e logo depois vem o degrau do meio que a maioria aceita. A diferença do modelo errado anterior é que aqui o produto é <b>curso + comunidade</b>, não um software modular. A lógica de fundo é uma só: <b>pare de brigar pra baixar o CAC, foque em aumentar o ARPU</b> (ticket médio por cliente) via upsell e ascensões. O front quase empata, o lucro mora na esteira acima.</p>
+    <h2 id="s2"><span class="n">2.</span> Topo — aquisição e tráfego (na ordem de ativação)</h2>
+    <p>Quatro portas de topo, empilhadas, cada uma pegando o lead num nível de consciência diferente. A ordem de ativação é deliberada: <strong>ligar primeiro o que tem custo zero e insumo pronto</strong>, deixar o que exige verba e produção pra 2ª onda — depois de medir.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Onda</th><th>Canal</th><th>Papel no funil</th><th>Nível de consciência do lead</th><th>Por que nessa ordem</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1ª (ligar já)</strong></td><td><strong>Indicação / Embaixador</strong></td><td>Converte cliente satisfeito e parceiro em canal recorrente. Maior taxa de fechamento, menor custo.</td><td>Mais alto — confia porque quem indicou confia</td><td>Nossos melhores fechamentos já vêm daí; split Asaas pronto; não depende de verba nem produção</td></tr>
+        <tr><td><strong>1ª (junto)</strong></td><td><strong>Conteúdo orgânico (IG @digitalmastermkt)</strong></td><td>Vira o IG em máquina de autoridade B2B; comentário/DM vira conversa</td><td>Inconsciente → consciente do problema</td><td>Canal e automação comentário→DM já existem; só falta recalibrar a linha editorial de curso pra serviço</td></tr>
+        <tr><td><strong>2ª onda</strong></td><td><strong>Tráfego pago (Meta)</strong></td><td>Compra demanda previsível e escalável</td><td>Consciente do problema, inconsciente da solução</td><td>Só liga depois de ter isca que converte e conversão medida — senão é queimar verba no escuro</td></tr>
+        <tr><td><strong>2ª/3ª onda</strong></td><td><strong>Evento / Webinar da MAIA</strong></td><td>Demo ao vivo pra muitos → oferta no fim. Maior potencial de escala</td><td>Consciente e curioso sobre IA</td><td>Melhor demo que temos, mas exige audiência e cadência que ainda não rodam</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Porta extra, oportunista:</strong> <strong>Reativação de base</strong> (leads antigos, orçamentos parados, lista de eventos). Custo zero, caixa rápido — mas depende de ter a base consolidada no CRM primeiro. Liga assim que o CRM estiver organizado.</p>
+    <p><strong>A regra de ouro do topo:</strong> cada porta nova é só mais uma entrada plugada no MESMO corredor (SDR → Closer). A gente não reinventa o fundo a cada funil. Lead de indicação chega quente (menos qualificação); lead de tráfego frio exige filtro de ICP mais rígido pra não entupir a agenda do Closer.</p>
 
-        <div class="flowline">
-          <span class="fstep"><b>Tráfego</b> diário</span><span class="far">→</span>
-          <span class="fstep">VSL grátis + optin</span><span class="far">→</span>
-          <span class="fstep">Imersão <b>(sáb 27/06)</b></span><span class="far">→</span>
-          <span class="fstep">Instala Minha Maia <b>R$600</b></span><span class="far">→</span>
-          <span class="fstep">Comunidade <b>R$997</b></span><span class="far">→</span>
-          <span class="fstep">Mentoria R$15k</span>
-        </div>
+    <hr class="rule">
 
-        <div class="levers">
-          <div class="lever">
-            <div class="lh">A regra de ouro do Lucas</div>
-            <p>O R$600 (feito-pra-você) é <b>inegociável ANTES</b> da comunidade. Pular do front direto pro R$15k deixa a massa (70-80% do público) sem ponte. O degrau do meio captura quem nunca daria o salto pro high-ticket.</p>
-          </div>
-          <div class="lever">
-            <div class="lh">Onde cada nível é vendido</div>
-            <p>Imersão e R$600 no <b>funil imediato</b> (pós-evento). Comunidade no <b>webinário perpétuo gravado</b> (canal dedicado, maior volume). Mentoria via <b>formulário de matrícula + ligação do comercial</b>.</p>
-          </div>
-        </div>
-      </div>
+    <h2 id="s3"><span class="n">3.</span> Isca / porta de entrada — a Sessão Raio-X grátis</h2>
+    <p><strong>TRAVADO pelo Chefe (11/10):</strong> não existe low ticket pago. A porta de entrada oficial e única antes do plano é a <strong>Sessão Raio-X gratuita</strong>.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Dimensão</th><th>Desenho</th></tr></thead>
+      <tbody>
+        <tr><td><strong>O que é</strong></td><td>Diagnóstico gratuito, 1-a-1, que mostra ao empresário <strong>onde o negócio dele perde venda hoje e quanto isso custa por mês</strong> — com os números dele, não no chute. É também a reunião de fechamento: o Closer roda o SPIN completo dentro dela.</td></tr>
+        <tr><td><strong>Promessa</strong></td><td>"Descubra, de graça, quanto seu atendimento perde de venda todo mês — e como parar de perder."</td></tr>
+        <tr><td><strong>Pra quem</strong></td><td>O ICP: dono de PME de serviço/comércio local (clínica, loja, drogaria, prestador) que JÁ recebe demanda no WhatsApp/DM mas perde venda por demorar, esquecer de retornar ou não atender fora de horário — e tem porte pra pagar implantação + mensalidade.</td></tr>
+        <tr><td><strong>Como se inscreve</strong></td><td>Por qualquer porta de topo: link de indicação branded, comentário→DM no orgânico, form da landing (tráfego), ou lista do evento. Todos caem no WhatsApp com a origem marcada → SDR assume e agenda.</td></tr>
+        <tr><td><strong>O que entrega</strong></td><td>A conta do prejuízo na frente do cliente (a dor quantificada) + a demonstração do mecanismo (Funcionário Digital Vitalício) + a proposta ajustada ao porte. O cliente sai sabendo o tamanho do problema e com um caminho pra resolver.</td></tr>
+        <tr><td><strong>Como vira conversa de venda</strong></td><td>É a própria reunião de venda. A Raio-X emenda direto no fechamento: diagnóstico (dor) → mecanismo (solução) → ancoragem (salário × MAIA) → decisão binária datada. Não há etapa paga entre a Raio-X e o plano.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Por que a Raio-X carrega sozinha o aquecimento:</strong> sem degrau pago intermediário, ela faz o trabalho que antes se pensou em cobrar (Setup Express, cortado). O diagnóstico com o número real do cliente é o que converte — material genérico não mostra "quanto VOCÊ perde". Já existe como ferramenta (raiox.salatielbatista.com.br / Sessão Estratégica), então custo de produção é zero. Falta só a <strong>rotina</strong> que leva o lead até ela.</p>
 
-      <div class="lesson reveal">
-        <div class="lblock">
-          <div class="lh">O que é</div>
-          <p>É a nossa esteira inteira desenhada como uma escada de ascensão: começa numa porta de entrada barata e fácil de aceitar (a Imersão de sábado), e sobe de degrau em degrau até a mentoria de alto ticket. O lead frio entra de graça pela VSL, compra a Imersão, dá o passo do meio comprando o <b>"Instala Minha Maia"</b> (R$600, a gente instala o 1º agente pra ele), depois é nutrido pro back-end da <b>Comunidade</b> no webinário perpétuo, e quem tem porte vira <b>Mentoria</b>. Não é lançamento: é um perpétuo que roda 365 dias e se paga sozinho.</p>
-        </div>
-        <div class="lblock">
-          <div class="lh">Como funciona</div>
-          <p>O caminho que o cliente percorre, na ordem, e os preços de cada degrau:</p>
-          <ul class="dense">
-            <li><b>Nível 0 · VSL / Diagnóstico grátis.</b> Captura Nome + E-mail + WhatsApp. Fricção zero. Pré-vende a Imersão.</li>
-            <li><b>Nível 1 · Imersão (sábado 27/06).</b> A porta de entrada barata. Front que compra o cliente quase no zero a zero.</li>
-            <li><b>Nível 2 · Instala Minha Maia.</b> Feito-pra-você: a gente instala o 1º agente do aluno + call de 1h. <b>R$ 600</b> <span style="color:var(--coral);">[A confirmar · Salatiel]</span>. O degrau que captura a massa.</li>
-            <li><b>Nível 3 · Comunidade Digital Master.</b> <b>R$ 997/ano</b>, recorrência/back-end. Vendida no webinário perpétuo, NÃO no upsell imediato.</li>
-            <li><b>Nível 4 · Mentoria.</b> <b>R$ 15.000</b>, high-ticket. Via formulário de matrícula + ligação do comercial.</li>
-          </ul>
-          <p>Atravessando os degraus, dois motores transversais: o <b>webinário perpétuo gravado</b> (onde a Comunidade é vendida de verdade) e a <b>nutrição automática</b> por e-mail e WhatsApp, operada pela própria Maia.</p>
-        </div>
-        <div class="lblock">
-          <div class="lh">Por que existe</div>
-          <p><b>O nosso problema nunca foi o destino, foi o corredor.</b> A gente já tem as pontas: entrada barata (Imersão) e topo de alto ticket (Mentoria R$15k). O que falta é a engrenagem do meio que transporta o lead de uma ponta à outra sem perder LTV: VSL de topo, o degrau R$600 feito-pra-você, a Comunidade no webinário perpétuo e a máquina de high-ticket. O Lucas é cirúrgico exatamente aí, e é isso que estamos modelando.</p>
-          <p><b>O degrau do meio é o que segura a massa.</b> A pesquisa do Lucas com ~30 mil alunos mostra que 70-80% do público fica na faixa baixa: só 10-20% sobe pro high-ticket. Se você pula do front (Imersão) direto pra Mentoria (R$15k), a maioria não tem pra onde ir: o passo é grande demais e o cliente fica defasado, preso no front. O R$600 é a ponte que captura valor de quem NÃO daria o salto.</p>
-        </div>
+    <hr class="rule">
 
-        <div class="principle">
-          <div class="pk"><span class="di">✦</span>Princípio pra modelar (a lógica do Lucas)</div>
-          <p>Desenhe a ascensão antes da copy. <strong>Foque em ARPU, não em CAC: o front quase empata, o lucro mora nos degraus acima.</strong> Não deixe a Comunidade ser o upsell direto do front: coloque o R$600 feito-pra-você ANTES. Não empilhe ofertas demais no mesmo degrau (testa UM). E venda o back-end (Comunidade) num canal dedicado, o webinário perpétuo gravado, porque é onde tem maior volume de vendas, não num popup de upsell.</p>
-        </div>
-      </div>
+    <h2 id="s4"><span class="n">4.</span> Meio do funil — a máquina que não existia</h2>
+    <p>Este é o gargalo que o blueprint de junho reconheceu ("o problema nunca foi o destino, foi o corredor") e que nunca foi construído. Sem isso, TODO funil de topo vaza. Quatro peças operacionais, em ordem de montagem.</p>
 
-        </div>
-      </details>
-    </div>
-  </section>
+    <h3>4.1 — CRM com tag de origem (a fundação)</h3>
+    <p>Sem isso, nada do resto se mede e o lead some no vão.</p>
+    <ol>
+      <li>Centralizar a captura: todo lead de qualquer porta cai num só lugar (sugestão: GoHighLevel, dona Amanda).</li>
+      <li><strong>Tag de ORIGEM obrigatória</strong> em cada lead (indicação / orgânico / tráfego / evento / reativação) — é o que permite medir por funil e descobrir qual canal carrega qual.</li>
+      <li>Campos mínimos de qualificação no lead: segmento, volume de contatos/mês, quem responde hoje, dor admitida.</li>
+      <li>Disparo automático pro SDR quando um lead entra.</li>
+    </ol>
 
-  <!-- NIVEIS -->
-  <section style="padding-top:10px;">
-    <div class="container">
-      <div class="sec-rule"><span class="rom">A esteira</span><span class="mid">Do topo grátis à Mentoria de alto ticket</span><span>00—04</span></div>
+    <h3>4.2 — Rotina de SDR (qualifica e agenda)</h3>
+    <ol>
+      <li>SDR recebe o lead → aplica o ICP (bate no perfil? demanda chegando + porte pra pagar?).</li>
+      <li>Roda <strong>SPIN S+P</strong> (script pronto, peça 03) — qualifica e desperta a dor, NÃO vende.</li>
+      <li>Agenda a Sessão Raio-X oferecendo 2 horários fechados (nunca "quando você pode?").</li>
+      <li>Registra no CRM: origem, dor admitida, horário.</li>
+      <li>Passa pro Closer um resumo de 3 linhas: volume de contatos, quem responde hoje, dor admitida.</li>
+      <li><strong>Anti-no-show:</strong> lembrete 1 dia antes + 1h antes.</li>
+    </ol>
 
-      <div class="timeline">
+    <h3>4.3 — Nutrição / follow-up (quem não agendou ou não compareceu)</h3>
+    <ol>
+      <li>Lead que não respondeu: máximo 2 follow-ups leves, depois marca pra reativação futura (regra de corte da peça 03).</li>
+      <li>Lead que não compareceu à Raio-X: 1 reagendamento ativo + lembrete reforçado.</li>
+      <li>Lead que fez a Raio-X e não fechou: entra em nutrição (conteúdo + reativação periódica), não é descartado.</li>
+      <li>Lead fora do ICP: descartado educadamente pra não entupir a agenda do Closer.</li>
+    </ol>
 
-        <!-- NIVEL 0 -->
-        <div class="step reveal">
-          <div class="snum">0</div>
-          <details class="acc">
-            <summary aria-label="Abrir Nível 0: VSL e diagnóstico grátis">
-              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-              <div class="achead">
-                <div style="display:flex;align-items:flex-start;gap:12px;">
-                  <span class="phase-badge" aria-hidden="true">0</span>
-                  <div>
-                    <div class="stag">Nível 0 · Topo do funil</div>
-                    <h3>VSL / Diagnóstico grátis + optin</h3>
-                  </div>
-                </div>
-                <span class="status wip"><span class="dotico"></span>Falta construir</span>
-              </div>
-              <p class="acteaser">A porta de fricção zero: um vídeo ou diagnóstico grátis que entrega valor e captura Nome + E-mail + WhatsApp, e termina ofertando a Imersão de sábado.</p>
-            </summary>
-            <div class="acbody">
-            <div class="lesson">
-              <div class="lblock">
-                <div class="lh">O que é</div>
-                <p>Um topo de funil <b>gratuito</b>: uma VSL de uns 8 a 10 minutos ou um diagnóstico rápido (estilo "descubra quantos leads sua DM perde por mês") que entrega valor de cara e captura <b>Nome + E-mail + WhatsApp</b>. É o nosso maior buraco estrutural hoje: só capturamos lead que já paga (Imersão) ou que agenda demo. Falta a porta de fricção zero que enche o topo de graça.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">Objetivo</div>
-                <p>Encher o topo com lead frio sem custo de entrada pro lead, criar a lista de e-mail e WhatsApp pra nutrir, e pré-vender o primeiro degrau pago. Custo pra nós: só o tráfego, que o front-end paga depois. A VSL termina ofertando a <b>Imersão</b> (Nível 1). Nota do Lucas: cadastro antes da VSL alimenta WhatsApp/webinário, mas vale testar A/B também o caminho clássico (criativo → VSL → venda direta) pra trackear o ROI do criativo.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">A copy-âncora</div>
-                <div class="anchorq" style="margin-top:6px;">
-                  <p>Todo dia entra cliente na sua DM. <span class="hl">Quase todo dia ele compra com seu concorrente.</span></p>
-                  <small>gancho do topo · agita a dor → mecanismo (Maia) → prova → oferta da Imersão</small>
-                </div>
-                <p style="margin-top:12px;">Espinha da VSL, modelada no pitch do método: gancho (premissa "o problema nunca foi o tráfego, é que você compra clique e não tem máquina pra transformar clique em venda") → dor agitada → mecanismo único (a Maia, IA pronta operando) → prova (cases reais que já temos) → oferta da Imersão → garantia → escassez honesta → CTA único.</p>
-              </div>
-            </div>
+    <h3>4.4 — Página de isca (só depois de decidir a isca)</h3>
+    <ol>
+      <li>Landing com UMA promessa só: "descubra quanto seu atendimento perde por mês, de graça".</li>
+      <li>Form de qualificação curto (nome, segmento, volume de contatos/mês, quem responde hoje) → CRM com origem marcada.</li>
+      <li>Construída com skill-pagina-vendas, APÓS a decisão de isca (Raio-X direto vs. material intermediário — ver seção 8).</li>
+    </ol>
+    <p><strong>A sequência de montagem do meio:</strong> CRM com origem (4.1) → rotina de SDR (4.2) → follow-up (4.3) → página de isca (4.4). O CRM é pré-requisito de tudo; a página só depois de decidir a isca.</p>
 
-            <div class="stepcard keep-rule" style="border:0;padding:0;">
-              <div class="krh">Status hoje</div>
-              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">🔨 <b>Falta construir.</b> Não existe VSL de topo nem optin de baixa fricção. O que temos perto: a Imersão (paga) e a demo agendada do B2B, mas as duas exigem compromisso de cara. A página de captura grátis + VSL é nova.</p>
-            </div>
+    <hr class="rule">
 
-            <div class="principle">
-              <div class="pk"><span class="di">✦</span>Por que importa</div>
-              <p>Vídeo transfere certeza melhor que texto, e lead grátis nutrido vira comprador quente. Sem esse topo, a Imersão não tem de onde se abastecer com lead frio. <strong>É pré-requisito do funil inteiro: sem porta grátis, a máquina não enche.</strong></p>
-            </div>
-            </div>
-          </details>
-        </div>
+    <h2 id="s5"><span class="n">5.</span> Fundo — oferta e escada</h2>
+    <p>A Raio-X emenda direto no fechamento. A escada é o que o Closer recomenda DENTRO da reunião, pelo porte revelado no diagnóstico.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Degrau</th><th>Oferta</th><th>Quando oferecer</th><th>Preço (âncora)</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Porta</strong></td><td><strong>Sessão Raio-X</strong></td><td>A todo lead qualificado, antes de qualquer plano</td><td><strong>Grátis</strong></td><td>Ferramenta existe, falta rotina</td></tr>
+        <tr><td><strong>Entrada</strong></td><td><strong>MAIA Start</strong></td><td>Lead de porte menor / primeiro "sim" que já fatura</td><td><strong>R$1.497</strong> implantação + <strong>R$597/mês</strong></td><td>Confirmado (travado 11/10)</td></tr>
+        <tr><td><strong>Core (carro-chefe)</strong></td><td><strong>MAIA Pro</strong></td><td>Ticket principal a empurrar — PME com demanda consistente</td><td><strong>12x R$583,35</strong> + <strong>R$597/mês</strong></td><td>Confirmado</td></tr>
+        <tr><td><strong>High end</strong></td><td><strong>MAIA Enterprise</strong></td><td>Operação completa, skills exclusivas, porte maior</td><td><strong>12x R$2.410</strong> + <strong>R$597/mês</strong></td><td>Confirmado</td></tr>
+        <tr><td><strong>Expansão (upsell)</strong></td><td><strong>Serviços de agência</strong></td><td>SÓ pra cliente MAIA já implantado e com resultado</td><td>Faixas a validar do catálogo (social, tráfego, SDR terceirizado, página)</td><td>Rascunho</td></tr>
+        <tr><td><strong>LTV / recorrência</strong></td><td><strong>Renovação + CS + skills</strong></td><td>Continuamente, via CS proativo</td><td><strong>R$597/mês</strong> + skills avulsas</td><td>Ativo (ferramenta), sem rotina comercial</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Ancoragem de preço (o argumento):</strong> a implantação é a "contratação" do Funcionário Digital Vitalício; o R$597/mês é o "salário" de um funcionário que trabalha 24/7, não falta, não esquece e nunca pede demissão — contra um atendente CLT que custa mais, rende 8h e um dia vai embora. O preço vira óbvio quando ancorado em salário, não em "software".</p>
+    <p><strong>Upsell:</strong> serviços de agência só entram DEPOIS que o cliente MAIA está implantado e satisfeito — nunca na porta. Assim a gente não compete de igual com agência comum; o diferencial (a MAIA) entra primeiro, o serviço vem em cima.</p>
+    <p><strong>Downsell:</strong> se o lead travar no plano no fechamento, o caminho de recuo NÃO é desconto nem produto mais barato (não existe low ticket pago). É <strong>a própria Raio-X completa</strong> — deixar o cliente decidir com o número todo na mesa, mantendo a decisão viva e datada, nunca o "vou pensar".</p>
 
-        <!-- NIVEL 1 -->
-        <div class="step reveal">
-          <div class="snum">1</div>
-          <details class="acc">
-            <summary aria-label="Abrir Nível 1: Imersão">
-              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-              <div class="achead">
-                <div style="display:flex;align-items:flex-start;gap:12px;">
-                  <span class="phase-badge" aria-hidden="true">1</span>
-                  <div>
-                    <div class="stag">Nível 1 · Front · porta de entrada</div>
-                    <h3>Imersão · o evento de sábado (27/06)</h3>
-                  </div>
-                </div>
-                <span class="status done"><span class="dotico">✓</span>Já temos</span>
-              </div>
-              <p class="acteaser">O front barato que compra o cliente quase no zero a zero. Dia de imersão ao vivo = máximo tempo de tela, e o pitch do degrau do meio acontece aqui dentro. O evento de sábado.</p>
-            </summary>
-            <div class="acbody">
-            <div class="lesson">
-              <div class="lblock">
-                <div class="lh">O que é</div>
-                <p>A <b>porta de entrada barata</b> da esteira: a Imersão, o nosso evento ao vivo de <b>sábado, 27/06</b>. É o front que compra o cliente quase no zero a zero: o ROI mora na esteira acima, não aqui. No modelo do Lucas, a imersão é o topo da escada de tempo de tela: um dia inteiro ao vivo, "o cara só não compra se não tiver dinheiro". Captura-se o lead ANTES do checkout do ingresso (alimenta nutrição e webinário), e os pitches dos degraus seguintes acontecem dentro do evento.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">Objetivo</div>
-                <p>Ser o <b>front de aquisição</b>: trazer o lead pra dentro por um preço baixo, entregar valor real ao vivo e, no meio do evento, fazer o pitch do degrau do meio (<b>"Instala Minha Maia", R$600</b>). Quem não compra na hora cai na nutrição e no webinário perpétuo (back-end). O Lucas usa downsell ~7 dias depois pra quem se cadastrou e não comprou.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">A copy-âncora</div>
-                <div class="anchorq" style="margin-top:6px;">
-                  <p>Em um dia, você sai com a sua primeira IA entendida na prática. <span class="hl">E com o caminho exato pra ela trabalhar por você.</span></p>
-                  <small>oferta de front · valor ao vivo + pitch interno do degrau do meio (R$600)</small>
-                </div>
-              </div>
-            </div>
+    <hr class="rule">
 
-            <div class="stepcard keep-rule" style="border:0;padding:0;">
-              <div class="krh">Status hoje · já no ar</div>
-              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">✅ <b>Já temos.</b> A Imersão é o nosso front pago vivo, com data marcada (sábado 27/06). É a ponta de baixo da esteira que já existe. O que falta é conectar ela ao corredor do meio (R$600) e ao back-end (Comunidade).</p>
-              <div class="links">
-                <a class="plink" href="https://maquinadevendas.salatielbatista.com.br" target="_blank" rel="noopener"><span class="pi">No ar · front</span> Página da Imersão <span class="ext">↗</span></a>
-              </div>
-            </div>
+    <h2 id="s6"><span class="n">6.</span> Scripts por etapa</h2>
+    <p>A maior parte já está escrita e amarrada nas peças 02 e 03. Abaixo, o que cada etapa usa e os scripts NOVOS que faltavam.</p>
 
-            <div class="principle">
-              <div class="pk"><span class="di">✦</span>Por que importa</div>
-              <p>A imersão dá o maior tempo de tela de todo o funil, e é onde o cliente entra aquecido pro degrau do meio. <strong>Mas o front sozinho deixa LTV na mesa: sem o R$600 logo depois e a Comunidade no back-end, a massa entra pela Imersão e não tem pra onde subir. O valor real está em conectar a Imersão à esteira de ascensão.</strong></p>
-            </div>
-            </div>
-          </details>
-        </div>
+    <h3>Já prontos (plugar, não reescrever)</h3>
+    <ul>
+      <li><strong>SDR — abertura inbound/fria, SPIN S+P, agendamento, contorno de objeção:</strong> peça 03, Script 1 (seções 1.1 a 1.5).</li>
+      <li><strong>Closer — SPIN completo S→P→I→N, mecanismo, ancoragem de preço, 5 objeções, fechamento binário, garantia:</strong> peça 03, Script 2 (seções 2.1 a 2.9).</li>
+      <li><strong>Deck visual de apoio do Closer:</strong> peça 02 (Apresentação-Padrão).</li>
+    </ul>
 
-        <!-- NIVEL 2 -->
-        <div class="step reveal">
-          <div class="snum">2</div>
-          <details class="acc">
-            <summary aria-label="Abrir Nível 2: Instala Minha Maia">
-              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-              <div class="achead">
-                <div style="display:flex;align-items:flex-start;gap:12px;">
-                  <span class="phase-badge" aria-hidden="true">2</span>
-                  <div>
-                    <div class="stag">Nível 2 · O degrau do meio (inegociável)</div>
-                    <h3>Instala Minha Maia · feito-pra-você (R$ 600)</h3>
-                  </div>
-                </div>
-                <span class="status wip"><span class="dotico"></span>Falta construir</span>
-              </div>
-              <p class="acteaser">O degrau que captura a massa (70-80% do público). A gente instala o 1º agente do aluno e faz uma call de 1h pra deixar tudo rodando. É a ponte inegociável ANTES da comunidade.</p>
-            </summary>
-            <div class="acbody">
-            <div class="lesson">
-              <div class="lblock">
-                <div class="lh">O que é</div>
-                <p>O <b>produto intermediário feito-pra-você (DFY)</b>, o degrau mais importante da esteira segundo o Lucas. A gente <b>instala o 1º agente do aluno</b> e faz uma <b>call de 1h ao vivo</b> pra conectar, treinar e deixar a Maia rodando ("você sai da call com o agente no ar"). É o equivalente direto ao upsell de R$600 do Avalanche ("call de 1h com o time pra instalar o agente pronto"). É o degrau imediato pós-front.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">Objetivo</div>
-                <p>Capturar a <b>massa</b>. A pesquisa do Lucas (~30 mil alunos) mostra que 70-80% do público fica na faixa baixa e nunca daria o salto direto pro high-ticket. O R$600 é a ponte que captura valor dessa maioria, e é <b>inegociável ANTES da Comunidade</b>. Se a Comunidade vira o upsell direto do front, perde-se o produto do meio e o cliente fica defasado. Regra do Lucas: <b>não empilhar ofertas demais no mesmo degrau</b>: testar UM (aqui, a instalação DFY).</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">A copy-âncora</div>
-                <div class="anchorq" style="margin-top:6px;">
-                  <p>Você não precisa virar técnico pra ter a sua IA no ar. <span class="hl">A gente instala junto com você, em uma hora, e você sai com ela trabalhando.</span></p>
-                  <small>oferta DFY · framework "armadilha VIP" (Velocidade · Incerteza · Prejuízo) + garantia "sai com o agente rodando ou não paga"</small>
-                </div>
-                <p style="margin-top:12px;">Estrutura da página de upsell (modelada no Avalanche): acolhimento ("parabéns, você adquiriu X") → mecanismo do problema = <b>armadilha VIP</b> (você vai querer ir rápido demais, vai ter incerteza, pode ter prejuízo ("é normal, mas tem um jeito de pular isso") → solução = a instalação feita pelo time → oferta R$600 → garantia forte de reversão de risco.</p>
-              </div>
-            </div>
+    <h3>Scripts novos (escritos agora, faltavam)</h3>
 
-            <div class="decide">
-              <div class="dk"><span class="di">!</span>A definir · Salatiel</div>
-              <p><b>Confirmar o preço de R$ 600</b> e <b>o produto exato do intermediário.</b> A referência do Lucas/Avalanche é R$600 (instalação DFY do 1º agente + call de 1h). Pontos a fechar: (a) é R$600 mesmo ou outro valor; (b) o que exatamente entra na call de 1h (quais canais conecta, qual agente instala primeiro, ex. Lis SDR); (c) se entra manual de uso e qual a garantia de reversão de risco. <b>Decisão do Salatiel.</b></p>
-            </div>
+    <h4>6.1 — Abordagem de indicação (o cliente/parceiro indica sem esforço)</h4>
+    <p>Mensagem pronta pro cliente satisfeito encaminhar:</p>
+    <blockquote><p>"Oi [nome]! Eu uso a MAIA aqui no [meu negócio] — é tipo um funcionário que atende meu WhatsApp 24h, responde na hora e não deixa cliente sem resposta. Mudou meu atendimento. Se você vive perdendo venda por demora pra responder, fala com eles que vale a pena. Manda um oi nesse link: [link branded de indicação]."</p></blockquote>
+    <p>Gatilho de quando pedir (dito pelo CS, no momento certo — pós-resultado):</p>
+    <blockquote><p>"[Nome], que bom que a MAIA tá segurando seu atendimento. Posso te pedir uma coisa? Se você conhece algum dono de negócio que também perde venda por não dar conta do WhatsApp, me indica? Eu cuido da pessoa igual cuido de você. Te mando um textinho pronto pra você só encaminhar."</p></blockquote>
 
-            <div class="stepcard keep-rule" style="border:0;padding:0;margin-top:18px;">
-              <div class="krh">Status hoje</div>
-              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">🔨 <b>Falta construir.</b> Não existe a página de upsell nem o produto empacotado "Instala Minha Maia". A capacidade técnica (instalar e treinar um agente) já existe na esteira Maia, mas o produto de R$600 padronizado, com página de oferta e operação de call, é novo. É o degrau mais urgente do corredor do meio.</p>
-            </div>
+    <h4>6.2 — Convite pro Raio-X (orgânico / DM, quando o lead demonstra interesse)</h4>
+    <blockquote><p>"Que bom que isso fez sentido pra você! 😊 Olha, pra eu te mostrar de verdade onde você tá perdendo venda hoje, a gente faz uma <strong>Sessão Raio-X</strong>: são [X minutos], de graça, e eu chego com os números do seu segmento prontos. Não é papo de vendedor — é você vendo quanto seu atendimento deixa escapar por mês. Topa? Tenho [terça 15h] ou [quarta 10h]."</p></blockquote>
 
-            <div class="principle">
-              <div class="pk"><span class="di">✦</span>Por que importa</div>
-              <p>É o coração da correção do Lucas. <strong>Sem o degrau do meio, a massa entra pela Imersão e fica defasada, presa no front, porque o salto pro R$15k é grande demais.</strong> O R$600 é o que segura 70-80% do público e o que mais sobe o ARPU. Pular dele direto pra Comunidade ou pra Mentoria é deixar a maioria do dinheiro na mesa.</p>
-            </div>
-            </div>
-          </details>
-        </div>
+    <h4>6.3 — Condução da Sessão Raio-X (o Closer)</h4>
+    <p>É a peça 03, Script 2, integral — a Raio-X É a reunião de fechamento. Fluxo: abertura e contrato ("sim ou não claro no fim") → S (cenário) → P (admitir a dor) → <strong>I (a conta do prejuízo na frente dele + fecha a saída 'contratar mais gente')</strong> → N (ele verbaliza o valor) → mecanismo Funcionário Digital Vitalício + demo → ancoragem salário × MAIA → silêncio → objeção real → fechamento binário datado.</p>
 
-        <!-- NIVEL 3 -->
-        <div class="step reveal">
-          <div class="snum">3</div>
-          <details class="acc">
-            <summary aria-label="Abrir Nível 3: Comunidade Digital Master">
-              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-              <div class="achead">
-                <div style="display:flex;align-items:flex-start;gap:12px;">
-                  <span class="phase-badge" aria-hidden="true">3</span>
-                  <div>
-                    <div class="stag">Nível 3 · Back-end · recorrência</div>
-                    <h3>Comunidade Digital Master (R$ 997/ano)</h3>
-                  </div>
-                </div>
-                <span class="status wip"><span class="dotico"></span>Falta construir</span>
-              </div>
-              <p class="acteaser">A recorrência do negócio, vendida no webinário perpétuo gravado, NÃO no upsell imediato. É o degrau de maior volume de vendas, por isso merece um canal dedicado.</p>
-            </summary>
-            <div class="acbody">
-            <div class="lesson">
-              <div class="lblock">
-                <div class="lh">O que é</div>
-                <p>O <b>back-end recorrente</b>: a Comunidade Digital Master, <b>R$ 997/ano</b>. A sala onde a IA do aluno nunca para de melhorar: encontros ao vivo "mão na massa", evolução contínua (modelo, técnica, automação nova chega na hora), network e suporte. O Lucas é categórico: a Comunidade é vendida no <b>webinário perpétuo</b>, NÃO num popup de upsell do funil imediato. É o degrau com maior volume de vendas, então merece um canal dedicado.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">Objetivo</div>
-                <p>Carregar a <b>recorrência</b> e o LTV. No modelo do Lucas, o webinário sozinho adiciona ~R$100 ao ticket médio: ~50% dos compradores do front participam ao vivo → converte ~20% do pico → ≈10% dos alunos compram o back-end. É o motor que fecha o ARPU do mês. Aqui o preço já está definido: <b>R$ 997/ano</b>.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">A copy-âncora</div>
-                <div class="anchorq" style="margin-top:6px;">
-                  <p>Instalar a IA é o começo. <span class="hl">A comunidade é onde ela nunca para de evoluir, toda semana, com você.</span></p>
-                  <small>back-end · vendida no webinário perpétuo gravado, não no upsell · atmosfera de "mão na massa" ao vivo</small>
-                </div>
-              </div>
-            </div>
+    <h4>6.4 — Fechamento (decisão binária)</h4>
+    <p>Peça 03, seção 2.8:</p>
+    <blockquote><p>"A gente combinou que no fim você me daria um sim ou um não claro. Resolver isso é prioridade [nota] e você mesmo disse que a MAIA resolve. Então: a gente começa? Se <strong>sim</strong>, já marco seu onboarding pra [data]. Se ainda tá com um pé atrás, a gente faz a Raio-X completa primeiro e você decide com o número todo na mesa. O que não vale é 'vou pensar' — enquanto você pensa, o buraco continua aberto. <strong>Começamos pela implantação ou pela Raio-X?</strong>"</p></blockquote>
 
-            <div class="stepcard keep-rule" style="border:0;padding:0;">
-              <div class="krh">Status hoje · preço definido</div>
-              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">🔨 <b>Falta construir</b> o mecanismo de venda (o webinário perpétuo gravado). ✅ O <b>preço está definido em R$ 997/ano</b>. A Comunidade como produto já é a esteira/visão do Digital Master; o que falta é o motor: webinário gravado com múltiplos temas + comentários expandidos por IA + chat 1:1 + automação de convite (quem compra o front cai no próximo webinário).</p>
-            </div>
+    <h4>6.5 — Follow-up / reativação (novo)</h4>
+    <p>Pós-reunião sem fechamento:</p>
+    <blockquote><p>"[Nome], pensei no que a gente conversou. Aquele buraco de [R$X/mês] que a gente mediu continua aberto enquanto isso. Separei [uma condição / um horário] pra você decidir sem pressa. Quer que eu te mostre de novo como resolver?"</p></blockquote>
+    <p>Reativação de base fria (lead antigo):</p>
+    <blockquote><p>"Oi [nome], tudo bem? A gente conversou há um tempo sobre o atendimento do seu [negócio]. De lá pra cá a MAIA evoluiu bastante — [novidade/caso]. Faz sentido a gente retomar com uma Raio-X rápida pra ver se hoje encaixa pro seu momento?"</p></blockquote>
+    <p><strong>Regra inegociável de todos os scripts:</strong> nenhum número de caso/prova entra sem dado medido e autorizado. Enquanto não houver, usar a versão sem número. LGPD e garantia ficam como <strong>[VALIDAR COM LUCAS]</strong>.</p>
 
-            <div class="principle">
-              <div class="pk"><span class="di">✦</span>Por que importa</div>
-              <p>É a recorrência que sustenta o negócio no longo prazo. <strong>Mas a sacada do Lucas é onde ela é vendida: não no upsell imediato (que queima o degrau de maior volume num popup), e sim no webinário perpétuo gravado, que converte mais que o ao vivo, com a pessoa participando de 2 a 3 temas diferentes.</strong> Esse é o motor de ascensão que falta montar.</p>
-            </div>
-            </div>
-          </details>
-        </div>
+    <hr class="rule">
 
-        <!-- NIVEL 4 -->
-        <div class="step reveal">
-          <div class="snum">4</div>
-          <details class="acc">
-            <summary aria-label="Abrir Nível 4: Mentoria">
-              <span class="acchev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-              <div class="achead">
-                <div style="display:flex;align-items:flex-start;gap:12px;">
-                  <span class="phase-badge" aria-hidden="true">4</span>
-                  <div>
-                    <div class="stag">Nível 4 · Âncora · high-ticket</div>
-                    <h3>Mentoria (R$ 15.000)</h3>
-                  </div>
-                </div>
-                <span class="status wip"><span class="dotico"></span>Falta construir</span>
-              </div>
-              <p class="acteaser">O alto ticket que ancora a esteira inteira. Vendida por formulário de matrícula + ligação do comercial, não por checkout de clique. O comercial liga usando tudo que a pessoa preencheu.</p>
-            </summary>
-            <div class="acbody">
-            <div class="lesson">
-              <div class="lblock">
-                <div class="lh">O que é</div>
-                <p>O <b>high-ticket</b>: a Mentoria, <b>R$ 15.000</b>. O topo da esteira, vendida com venda consultiva, não por clique. O mecanismo do Lucas: um <b>formulário de matrícula</b> no 1º módulo da área de membros ("preencha pra que o suporte saiba quem você é") que pergunta faixa de renda/porte, objetivo e medos. O <b>time comercial</b> pega quem declarou porte alto e liga usando TUDO que a pessoa preencheu: "vi que seu objetivo é X, que você tem +10 pessoas no time, marca uma reunião pra te ajudar individualizado". "Todo mundo topa a reunião" → ali vende a mentoria.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">Objetivo</div>
-                <p>Ser a <b>âncora</b> que faz Imersão, R$600 e Comunidade parecerem baratos por comparação, e carregar o faturamento com o ticket alto. Critério de qualificação análogo ao do Lucas: empresa com <b>time de +10 pessoas</b> = público de mentoria ("mostro que a IA economiza ~R$30k de folha"). Vai direto na renda/porte de quem pode pagar.</p>
-              </div>
-              <div class="lblock">
-                <div class="lh">A copy-âncora</div>
-                <div class="anchorq" style="margin-top:6px;">
-                  <p>Tudo nesta página foi feito por uma IA. <span class="hl">Não por uma agência tradicional.</span></p>
-                  <small>mecanismo único · a Maia orquestradora + os agentes com memória persistente, vendida por reunião com o comercial</small>
-                </div>
-              </div>
-            </div>
+    <h2 id="s7"><span class="n">7.</span> Métricas — o que medir por etapa</h2>
+    <p><strong>Aviso honesto:</strong> a gente NÃO mede nada disso hoje. As faixas abaixo são referência de planejamento B2B consultivo pra montar a conta, NÃO resultado nosso. O primeiro trabalho da máquina é passar a medir e substituir cada faixa pelo número real — <strong>por ORIGEM</strong> (a tag do CRM), porque a média geral esconde que a indicação carrega o tráfego frio.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Etapa</th><th>Métrica</th><th>O que é "sucesso" nessa etapa</th><th>Faixa de referência</th></tr></thead>
+      <tbody>
+        <tr><td>Topo</td><td>Leads gerados/mês por origem</td><td>Fluxo previsível entrando em cada porta</td><td>— (medir primeiro)</td></tr>
+        <tr><td>Lead → MQL</td><td>% que bate no ICP</td><td>Agenda do Closer só com lead de porte</td><td>~30–50% (indicação puxa pra cima)</td></tr>
+        <tr><td>MQL → Raio-X agendada</td><td>taxa de agendamento (SDR)</td><td>SDR converte interesse em data no calendário</td><td>~30–50%</td></tr>
+        <tr><td>Agendada → compareceu</td><td>1 − no-show</td><td>Lembrete anti-no-show funcionando</td><td>~60–80%</td></tr>
+        <tr><td>Raio-X → proposta</td><td>avança pra oferta</td><td>Diagnóstico qualifica e aquece</td><td>~50–70%</td></tr>
+        <tr><td>Proposta → fechado</td><td>conversão do Closer</td><td>Decisão binária datada, sem "vou pensar"</td><td>~20–40%</td></tr>
+        <tr><td>Cliente → recorrência</td><td>retenção R$597/mês</td><td>O LTV — o jogo real</td><td>medir no Master CRM (já dá)</td></tr>
+        <tr><td>—</td><td>CAC por origem</td><td>Quanto custa fechar por canal</td><td>— (destrava decisão de verba)</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>O meta-cálculo que a previsibilidade destrava:</strong> com as taxas medidas, a conta roda de trás pra frente — "pra fechar N clientes/mês, com conversão c%, preciso de X propostas; com p%, Y Raio-X; … logo M leads no topo". Hoje essa conta é impossível porque nada é medido; é o destravamento central. Sequência correta: liga os funis baratos → mede cada taxa por origem → aí sim projeta meta e decide verba de tráfego com base no valor real de um lead.</p>
 
-            <div class="stepcard keep-rule" style="border:0;padding:0;">
-              <div class="krh">Status hoje</div>
-              <p class="what" style="color:var(--ink-soft);font-size:15px;line-height:1.6;">🔨 <b>Montar o mecanismo.</b> O preço (R$15k) e a capacidade de entrega já são a visão; o que falta é a <b>máquina de high-ticket</b>: o formulário de matrícula que qualifica + o processo do comercial que liga usando os dados preenchidos. Sem o formulário + ligação, o high-ticket fica refém de venda avulsa em vez de virar processo previsível.</p>
-              <div class="links">
-                <a class="plink" href="https://agencianobolso.com.br" target="_blank" rel="noopener"><span class="pi">Referência</span> agencianobolso.com.br <span class="ext">↗</span></a>
-                <a class="plink" href="https://lp.agencianobolso.com.br/demo" target="_blank" rel="noopener"><span class="pi">Referência</span> /demo (fechamento consultivo) <span class="ext">↗</span></a>
-              </div>
-            </div>
+    <hr class="rule">
 
-            <div class="decide">
-              <div class="dk"><span class="di">!</span>A definir · Salatiel</div>
-              <p><b>Travar o produto e a entrega da Mentoria.</b> O preço de R$15k já é a referência. A definir: (a) o que exatamente entrega a mentoria (formato, duração, quantas vagas); (b) o critério de qualificação do formulário (porte/time/faturamento); (c) quem faz a ligação do comercial. <b>Decisão do Salatiel.</b></p>
-            </div>
+    <h2 id="s8"><span class="n">8.</span> As 8 decisões em aberto — com minha recomendação</h2>
+    <p>Cada uma vem com o default que eu proponho. Não deixei nada em aberto; o Chefe confirma ou ajusta.</p>
 
-            <div class="principle">
-              <div class="pk"><span class="di">✦</span>Por que importa</div>
-              <p>É onde mora o lucro concentrado. <strong>Mas só ~5-14% do público tem porte pra isso, por isso o high-ticket precisa do degrau do meio (R$600) e da Comunidade alimentando por baixo, senão a base não chega aqui.</strong> O formulário + ligação é o que transforma o R$15k de venda avulsa em processo previsível, indo direto na renda de quem pode pagar.</p>
-            </div>
-            </div>
-          </details>
-        </div>
+    <h4>1. A página <code>funil.agencianobolso.com.br</code> sai do ar público agora?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM, tirar do ar ou pôr atrás de senha imediatamente.</strong> É doc interno com preços em discussão e decisões marcadas expostos na web aberta — risco sem contrapartida, e ainda documenta o modelo morto.</div>
 
-      </div>
-    </div>
-  </section>
+    <h4>2. Confirma o eixo curso+comunidade (R$600 / Comunidade R$997 / Imersão) MORTO e substituído pela escada MAIA?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM, confirmado morto.</strong> Este blueprint inteiro assume isso; o posicionamento de agência (Raquel 15/09) e o corte do low ticket (11/10) já enterraram essa direção pro B2B. Curso fica no B2C (Master Point), fora deste escopo.</div>
 
-  <!-- MECANISMOS TRANSVERSAIS -->
-  <section class="tight" style="padding-top:10px;">
-    <div class="container">
-      <div class="sec-rule"><span class="rom">★</span><span class="mid">Mecanismos transversais · o que amarra os degraus</span><span>VOL. 02</span></div>
+    <h4>3. Isca de entrada do topo: Raio-X direto, ou material intermediário antes?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: Raio-X DIRETO na indicação e na reativação (lead quente, não precisa de aquecimento); material intermediário leve (mini-diagnóstico/checklist) só no orgânico e tráfego frio.</strong> O lead quente não precisa de degrau extra; o lead frio converte melhor com um passo de baixo atrito antes de pedir 1h de reunião.</div>
 
-      <div class="mech">
-        <div class="mechcard reveal">
-          <div class="mh"><span class="mico">✦</span><h4>Webinário perpétuo gravado</h4></div>
-          <p>O motor de ascensão do back-end. Faz ao vivo 1x, grava e roda replay (o gravado converte mais que o ao vivo). Estrutura: ~1h de conteúdo "mão na massa" → ~20min de pitch → ~1h de chat 1:1. Dois canais de convite: automação (quem compra a Imersão cai no próximo webinário) + disparo pra base.</p>
-          <p>É onde a <b>Comunidade (R$997)</b> é vendida de verdade, não num popup de upsell. Múltiplos temas pra mesma pessoa participar de 2-3 webinários (média ~2,5 por pessoa = muito tempo de tela). Comentários do replay expandidos por IA pra criar atmosfera. 🔨 Falta montar.</p>
-        </div>
-        <div class="mechcard reveal">
-          <div class="mh"><span class="mico">✦</span><h4>Nutrição automática pela Maia</h4></div>
-          <p>O lead capturado no Nível 0 entra numa régua automática de <b>e-mail + WhatsApp</b>: entrega valor, quebra objeção, empurra pra Imersão. Quem comprou recebe nutrição que leva ao R$600, ao webinário da Comunidade e ao formulário da Mentoria.</p>
-          <p>Diferencial nosso: a nutrição não precisa de ferramenta de terceiro, é a <b>própria Maia</b> operando o relacionamento, com a voz do negócio. O produto operando a própria venda do upgrade. 🔨 Falta montar a régua.</p>
-        </div>
-      </div>
+    <h4>4. Ordem de ativação: Indicação + Orgânico primeiro, tráfego/webinar na 2ª onda?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM.</strong> Custo zero, insumo pronto, destrava caixa sem verba enquanto a gente monta o meio e mede. Tráfego antes de medir é queimar dinheiro no escuro.</div>
 
-      <div class="mech" style="margin-top:14px;">
-        <div class="mechcard reveal" style="grid-column:1 / -1;">
-          <div class="mh"><span class="mico">✦</span><h4>A lógica de fundo · foco em ARPU, não em CAC</h4></div>
-          <p><b>Pare de brigar pra baixar o CAC.</b> Lucas: todo mundo foca em reduzir CAC (criativo, VSL, tráfego); quem ganha hoje foca em <b>aumentar o ticket médio / ARPU</b> via upsell e ascensões. O front quase empata (compra o cliente quase no zero a zero), e o lucro mora na esteira acima: Imersão → R$600 → Comunidade → Mentoria.</p>
-          <p><b>O R$600 é inegociável ANTES da Comunidade.</b> Pular do front direto pro R$15k deixa a massa (70-80% do público) sem ponte. <b>A Comunidade é vendida no webinário perpétuo</b>, não no upsell imediato. <b>O high-ticket vai por formulário + comercial</b>, não por checkout de clique. Cada degrau no seu canal.</p>
-          <div class="decide" style="margin-top:14px;">
-            <div class="dk"><span class="di">!</span>A definir · Salatiel</div>
-            <p><b>ARPU-alvo da esteira.</b> O Lucas fecha o mês em ~R$350 de ARPU (só o webinário adiciona ~R$100). Pra nós, com a Imersão na base e Mentoria de R$15k no topo, o ARPU-alvo é outro patamar. <b>Decisão do Salatiel:</b> qual o ARPU-alvo que a esteira persegue, pra calibrar quanto gastar de CAC no front.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <h4>5. Fazer webinar/aula ao vivo da MAIA como funil? Sim/não e recorrência?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM, mas só na 2ª onda, quando o orgânico tiver tração — começar com 1 evento mensal.</strong> É o funil que melhor mostra a MAIA (demo ao vivo vale mais que mil argumentos), mas exige audiência e cadência que ainda não temos; forçar agora sem público é desgaste.</div>
 
-  <!-- LACUNAS -->
-  <section style="padding-top:10px;">
-    <div class="container">
-      <div class="sec-rule"><span class="rom">★</span><span class="mid">Lacunas a implementar · o checklist do que falta</span><span>VOL. 03</span></div>
-      <p class="intro-lead" style="margin-bottom:26px;">O corredor do meio inteiro. Ordem de ataque sugerida: VSL + optin de topo → página do "Instala Minha Maia" (R$600) → webinário perpétuo da Comunidade → máquina de high-ticket (form + comercial) → nutrição + checkout por degrau.</p>
+    <h4>6. Programa de indicação: recompensa e pra quem?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: split Asaas de comissão sobre a implantação + desconto na recorrência de quem indica; vale pra cliente E pra parceiro externo (ex: Emerson/GCD).</strong> O split já é capacidade pronta; a dupla recompensa (caixa pro parceiro, desconto pro cliente) cobre os dois perfis sem criar produto novo. % exato o Chefe fecha.</div>
 
-      <div class="gaps">
-        <div class="gap reveal">
-          <span class="gbox">☐</span>
-          <div class="gmain"><h5>VSL + optin de topo (grátis)</h5><p>Captura Nome + E-mail + WhatsApp. Enche o topo de graça e pré-vende a Imersão. Sem ela, o front não tem de onde se abastecer com lead frio. Testar A/B com o caminho clássico (sem gate).</p></div>
-          <span class="gpri alta">Alta</span>
-        </div>
-        <div class="gap reveal">
-          <span class="gbox">☐</span>
-          <div class="gmain"><h5>Página "Instala Minha Maia" · R$600 (degrau do meio)</h5><p>O upsell feito-pra-você: instala o 1º agente + call de 1h. Página de oferta (armadilha VIP + garantia) + checkout. O degrau inegociável que captura a massa. O mais urgente.</p></div>
-          <span class="gpri alta">Alta</span>
-        </div>
-        <div class="gap reveal">
-          <span class="gbox">☐</span>
-          <div class="gmain"><h5>Conectar a página da Imersão à esteira</h5><p>A Imersão já existe (sáb 27/06). Falta encadear: captura do lead antes do checkout + pitch interno do R$600 + downsell ~7 dias depois pra quem não comprou.</p></div>
-          <span class="gpri alta">Alta</span>
-        </div>
-        <div class="gap reveal">
-          <span class="gbox">☐</span>
-          <div class="gmain"><h5>Webinário perpétuo da Comunidade (R$997)</h5><p>O motor do back-end: webinário gravado com múltiplos temas + comentários expandidos por IA + chat 1:1 + automação de convite (quem compra a Imersão cai no próximo). Onde a Comunidade é vendida de verdade.</p></div>
-          <span class="gpri media">Média</span>
-        </div>
-        <div class="gap reveal">
-          <span class="gbox">☐</span>
-          <div class="gmain"><h5>Máquina de high-ticket (form + comercial) · Mentoria R$15k</h5><p>Formulário de matrícula que qualifica (porte/time/objetivo/medos) + processo do comercial que liga usando os dados. Transforma o R$15k de venda avulsa em processo previsível.</p></div>
-          <span class="gpri media">Média</span>
-        </div>
-        <div class="gap reveal">
-          <span class="gbox">☐</span>
-          <div class="gmain"><h5>Nutrição automática (e-mail + WhatsApp pela Maia)</h5><p>A régua que liga Nível 0 → Imersão → R$600 → webinário da Comunidade → form da Mentoria. Operada pela própria Maia, com a voz do negócio.</p></div>
-          <span class="gpri media">Média</span>
-        </div>
-        <div class="gap reveal">
-          <span class="gbox">☐</span>
-          <div class="gmain"><h5>Checkout por degrau</h5><p>Cobrança própria por nível (front, R$600, recorrência anual da Comunidade) + página de obrigado com o pitch do degrau seguinte.</p></div>
-          <span class="gpri media">Média</span>
-        </div>
-      </div>
-    </div>
-  </section>
+    <h4>7. SDR: humano, MAIA/IA, ou híbrido?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: híbrido — SDR de IA (já existe) faz a abertura e qualificação inicial 24/7, e escala pro humano o lead quente pra agendar e conduzir.</strong> Usa a capacidade que já temos pra cobrir volume sem folha, e reserva o toque humano pro momento que converte. O Closer (Raio-X) permanece humano.</div>
 
-  <!-- RECAP -->
-  <section class="tight" style="padding-top:10px;">
-    <div class="container">
-      <div class="sec-rule"><span class="rom">★</span><span class="mid">A escada numa frase cada</span><span>FIN.</span></div>
-      <div class="basecard reveal">
-        <div class="blabel">Resumo · a esteira inteira</div>
-        <div class="recap" style="margin-top:6px;">
-          <div class="rline"><span class="rtag">Nível 0</span><p><b>VSL / Diagnóstico grátis.</b> Captura Nome + E-mail + WhatsApp, fricção zero, pré-vende a Imersão. 🔨 Falta construir.</p></div>
-          <div class="rline"><span class="rtag">Nível 1</span><p><b>Imersão (sáb 27/06).</b> O front que compra o cliente quase no zero a zero; pitch do R$600 acontece dentro. ✅ Já temos.</p></div>
-          <div class="rline"><span class="rtag">Nível 2</span><p><b>Instala Minha Maia · R$600.</b> Feito-pra-você (instala 1º agente + call 1h). O degrau inegociável que captura a massa [confirmar R$600]. 🔨 Falta construir.</p></div>
-          <div class="rline"><span class="rtag">Nível 3</span><p><b>Comunidade Digital Master · R$997/ano.</b> Recorrência/back-end, vendida no webinário perpétuo (não no upsell). ✅ Preço definido · 🔨 motor a montar.</p></div>
-          <div class="rline"><span class="rtag">Nível 4</span><p><b>Mentoria · R$15k.</b> Âncora high-ticket, via formulário de matrícula + ligação do comercial. 🔨 Montar o mecanismo.</p></div>
-          <div class="rline"><span class="rtag">Transversal</span><p><b>Webinário perpétuo + Nutrição + ARPU-alvo.</b> O que amarra os degraus e sobe o ticket médio. Foco em ARPU, não em CAC. 🔨 Falta implementar.</p></div>
-        </div>
-        <p class="bp" style="margin-top:24px;margin-bottom:0;">O método do Lucas nos ensinou a esteira: front barato que quase empata, degrau do meio feito-pra-você que captura a massa, comunidade no webinário perpétuo e high-ticket por form + comercial. <b style="color:var(--coral-soft);">Eles ensinam você a instalar a IA. A gente instala junto, e te dá a comunidade onde ela nunca para de melhorar.</b></p>
-      </div>
-    </div>
-  </section>
+    <h4>8. Verba de tráfego pago: quanto e a partir de quando?</h4>
+    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: definir SÓ depois de medir a conversão Raio-X→venda no orgânico/indicação.</strong> Sem saber quanto vale um lead, não dá pra definir CPL-teto nem verba — qualquer número agora é chute. Quando houver conversão medida, Josiel (metodologia Denderson) dimensiona com base no valor real do lead.</div>
 
-  <!-- footer -->
-  <footer>
-    <div class="container">
-      <div class="megaword reveal">Maia<span class="dot">.</span></div>
-      <div class="footrow">
-        <span class="live"><span class="pulse"></span> Blueprint do Funil · Agência no Bolso</span>
-        <span>Vol. 01 / Issue Nº 26 · MMXXVI</span>
-        <span>Edited in pt-BR · Filed under Modelo Interno · FIN.</span>
-      </div>
-    </div>
-  </footer>
+    <footer class="foot" id="fontes">
+      <div class="src-title">Fontes</div>
+      <ul>
+        <li><code>workspace/analise-funil-anb-2026-10-16/analise-funil-anb.md</code> (diagnóstico + proposta P0-P5 + as 8 perguntas de direção)</li>
+        <li><code>workspace/estrutura-comercial-maia-2026-10-11/</code> (peças 01-OFERTA-CENTRAL, 02-APRESENTAÇÃO-PADRÃO, 03-SCRIPTS-SDR-CLOSER-SPIN, 05-FUNIS-DE-AQUISIÇÃO, BLUEPRINT)</li>
+        <li><code>workspace/funil-blueprint-2026-06-24/site/index.html</code> (formato nível-a-nível e tese de ARPU reaproveitados; oferta antiga descartada)</li>
+      </ul>
+    </footer>
+  </main>
 </div>
-
-<script>
-(function(){
-  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-})();
-</script>
 </body>
 </html>
