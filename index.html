@@ -9,24 +9,29 @@
 <meta name="description" content="Documento interno de modelagem — o desenho ponta a ponta da máquina de aquisição da MAIA no eixo atual (agência de serviço, MAIA licenciada híbrida, porta de entrada Sessão Raio-X grátis).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#f6f4ef;
     --paper:#ffffff;
     --ink:#1c1b19;
     --ink-soft:#44423d;
-    --ink-faint:#7a776f;
+    --ink-faint:#6e6b63;
     --line:#e3e0d8;
     --line-soft:#eeebe4;
     --accent:#b4461f;
     --accent-soft:#c9633b;
-    --mustard:#c99a2e;
+    --accent-wash:#f9ece4;
+    --mustard:#b8860b;
+    --mustard-wash:#fbf3dd;
+    --green:#4a6b3a;
+    --green-wash:#eef2e8;
     --code-bg:#1c1b19;
     --code-ink:#ece7dc;
     --prop-bg:#fdf6e9;
     --prop-line:#e6cf98;
-    --max:820px;
+    --prop-ink:#7a5a12;
+    --max:860px;
     --font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     --font-display:'Inter Tight',var(--font);
     --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
@@ -40,84 +45,126 @@
   }
 
   /* ===== layout ===== */
-  .shell{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start;}
+  .shell{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start;}
   @media(max-width:900px){.shell{display:block;}}
 
   /* ===== header ===== */
-  header.top{border-bottom:1px solid var(--line);background:var(--paper);}
-  .top-inner{max-width:1180px;margin:0 auto;padding:22px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
-  .brand{font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:-.01em;color:var(--ink);}
+  header.top{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:40;}
+  .top-inner{max-width:1200px;margin:0 auto;padding:18px clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:-.01em;color:var(--ink);}
+  .brand .mark{width:28px;height:28px;flex:none;}
   .brand span{color:var(--accent);}
   .doc-flag{font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:999px;padding:5px 12px;}
 
   /* ===== sidebar / TOC ===== */
-  nav.toc{position:sticky;top:24px;padding:28px 0;}
+  nav.toc{position:sticky;top:90px;padding:28px 0;}
   @media(max-width:900px){nav.toc{position:static;padding:8px 0 0;}}
   nav.toc .toc-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px;}
   nav.toc ol{list-style:none;margin:0;padding:0;}
   nav.toc li{margin:0;}
-  nav.toc a{display:block;padding:7px 12px 7px 14px;border-left:2px solid var(--line);color:var(--ink-soft);text-decoration:none;font-size:14.5px;line-height:1.4;transition:all .14s ease;}
+  nav.toc a{display:flex;align-items:center;gap:9px;padding:7px 12px 7px 14px;border-left:2px solid var(--line);color:var(--ink-soft);text-decoration:none;font-size:14px;line-height:1.35;transition:all .14s ease;}
+  nav.toc a .n{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);flex:none;}
   nav.toc a:hover{border-left-color:var(--accent);color:var(--ink);background:var(--line-soft);}
 
   /* ===== article ===== */
   main{max-width:var(--max);padding:40px 0 100px;min-width:0;}
   .hero{margin-bottom:12px;}
-  h1{font-family:var(--font-display);font-weight:900;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.025em;margin:0 0 20px;color:var(--ink);}
+  .kicker{display:inline-block;font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--accent-wash);border-radius:999px;padding:6px 14px;margin-bottom:20px;}
+  h1{font-family:var(--font-display);font-weight:900;font-size:clamp(31px,5vw,48px);line-height:1.07;letter-spacing:-.028em;margin:0 0 20px;color:var(--ink);}
 
-  .meta-note{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:22px 26px;margin:0 0 40px;}
-  .meta-note p{margin:0 0 12px;font-size:15.5px;line-height:1.6;color:var(--ink-soft);}
+  .meta-note{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 26px;margin:0 0 44px;}
+  .meta-note .mn-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .meta-note .mn-tag svg{width:15px;height:15px;}
+  .meta-note p{margin:0 0 12px;font-size:15.5px;line-height:1.62;color:var(--ink-soft);}
   .meta-note p:last-child{margin-bottom:0;}
   .meta-note strong{color:var(--ink);}
 
-  h2{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,3.2vw,30px);letter-spacing:-.02em;line-height:1.16;margin:58px 0 20px;padding-top:14px;color:var(--ink);scroll-margin-top:24px;}
-  h2 .n{color:var(--accent);font-variant-numeric:tabular-nums;}
-  h3{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:36px 0 12px;color:var(--ink);}
-  h4{font-family:var(--font-display);font-weight:700;font-size:16.5px;margin:26px 0 8px;color:var(--ink);}
+  section{scroll-margin-top:96px;padding:18px 0;border-top:1px solid var(--line);margin-top:30px;}
+  section:first-of-type{border-top:none;margin-top:0;}
+
+  .sec-head{display:flex;align-items:center;gap:16px;margin:4px 0 22px;}
+  .sec-ico{width:46px;height:46px;flex:none;border-radius:13px;background:var(--accent-wash);display:flex;align-items:center;justify-content:center;border:1px solid #efddd1;}
+  .sec-ico svg{width:26px;height:26px;}
+  .sec-num{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;display:block;margin-bottom:3px;}
+  h2{font-family:var(--font-display);font-weight:800;font-size:clamp(23px,3.4vw,30px);line-height:1.14;letter-spacing:-.02em;margin:0;color:var(--ink);}
+  h3{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:34px 0 12px;color:var(--ink);}
 
   p{margin:0 0 18px;}
+  main a{color:var(--accent);text-decoration:none;border-bottom:1px solid #e7c8ba;}
+  main a:hover{border-bottom-color:var(--accent);}
   strong{font-weight:700;color:var(--ink);}
-  a{color:var(--accent);}
-
-  ul,ol{margin:0 0 18px;padding-left:24px;}
+  ul,ol{margin:0 0 18px;padding-left:22px;}
   li{margin:0 0 9px;}
-  li::marker{color:var(--ink-faint);}
+  code{font-family:var(--font-mono);font-size:.86em;background:var(--line-soft);padding:2px 6px;border-radius:5px;color:var(--accent);}
 
-  hr.rule{border:0;border-top:1px solid var(--line);margin:46px 0;}
+  .lead{font-size:19px;line-height:1.6;color:var(--ink-soft);}
+  .lead strong{color:var(--ink);}
 
-  /* blockquotes / scripts de copy */
-  blockquote{margin:0 0 18px;padding:16px 22px;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--mustard);border-radius:10px;color:var(--ink-soft);font-size:15.5px;line-height:1.62;}
-  blockquote p{margin:0;}
-
-  /* proposta flag */
-  .prop{background:var(--prop-bg);border:1px solid var(--prop-line);border-radius:10px;padding:16px 20px;margin:0 0 16px;font-size:15.5px;}
-  .prop strong{color:#8a5a12;}
-
-  /* code / diagrama ASCII */
-  pre{background:var(--code-bg);color:var(--code-ink);border-radius:14px;padding:22px 24px;overflow-x:auto;margin:0 0 24px;font-family:var(--font-mono);font-size:13px;line-height:1.55;}
-  code{font-family:var(--font-mono);font-size:.92em;}
-  :not(pre)>code{background:var(--line-soft);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--accent);}
+  /* callouts */
+  .callout{border-radius:12px;padding:18px 22px;margin:22px 0;border:1px solid var(--line);background:var(--paper);}
+  .callout.key{border-color:#e6cf98;background:var(--mustard-wash);}
+  .callout.warn{border-color:#efd3c7;background:var(--accent-wash);}
+  .callout .ctag svg{width:14px;height:14px;vertical-align:-2px;margin-right:5px;}
+  .callout .ctag{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin-bottom:8px;display:block;}
+  .callout.key .ctag{color:var(--mustard);}
+  .callout.warn .ctag{color:var(--accent);}
+  .callout p:last-child{margin-bottom:0;}
 
   /* tables */
-  .tw{overflow-x:auto;margin:0 0 26px;border:1px solid var(--line);border-radius:12px;}
-  table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--paper);}
-  thead th{background:var(--ink);color:var(--paper);font-family:var(--font-display);font-weight:700;text-align:left;padding:12px 15px;font-size:13.5px;letter-spacing:.01em;vertical-align:bottom;}
-  tbody td{padding:12px 15px;border-top:1px solid var(--line-soft);vertical-align:top;line-height:1.5;color:var(--ink-soft);}
-  tbody tr:nth-child(even){background:var(--line-soft);}
-  tbody td strong{color:var(--ink);}
+  .tbl-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:12px;background:var(--paper);}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px;}
+  th{text-align:left;font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);background:var(--line-soft);padding:13px 16px;border-bottom:1px solid var(--line);}
+  td{padding:14px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.5;color:var(--ink-soft);}
+  tr:last-child td{border-bottom:none;}
+  td strong{color:var(--ink);}
 
-  footer.foot{margin-top:60px;padding-top:26px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-faint);}
-  footer.foot .src-title{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;color:var(--ink-faint);}
-  footer.foot ul{padding-left:20px;}
-  footer.foot code{font-size:.86em;}
+  /* pills / status */
+  .pill{display:inline-block;font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.03em;padding:3px 9px;border-radius:999px;white-space:nowrap;}
+  .pill.ok{background:var(--green-wash);color:var(--green);border:1px solid #cdd9c2;}
+  .pill.prop{background:var(--prop-bg);color:var(--prop-ink);border:1px solid var(--prop-line);}
+  .pill.draft{background:var(--line-soft);color:var(--ink-faint);border:1px solid var(--line);}
+  .pill.wait{background:var(--accent-wash);color:var(--accent);border:1px solid #efd3c7;}
 
-  ::selection{background:#f1d9a0;}
+  /* figure / diagram shell */
+  figure{margin:30px 0;}
+  .diagram{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3.5vw,34px);overflow:hidden;}
+  figcaption{font-family:var(--font-mono);font-size:12px;color:var(--ink-faint);margin-top:12px;text-align:center;letter-spacing:.02em;}
+  .diagram svg{display:block;width:100%;height:auto;}
+
+  /* script quotes */
+  .quote{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 20px 16px 22px;margin:14px 0;font-size:15.5px;line-height:1.6;color:var(--ink-soft);position:relative;}
+  .quote::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:3px;background:var(--accent-soft);}
+  .quote .qlab{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:7px;font-weight:600;}
+
+  /* stat cards grid */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:24px 0;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 20px;}
+  .card .ch{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+  .card .ch svg{width:22px;height:22px;flex:none;}
+  .card .ct{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--ink);}
+  .card p{margin:0;font-size:14px;line-height:1.5;color:var(--ink-soft);}
+
+  .footer-src{border-top:1px solid var(--line);margin-top:48px;padding-top:26px;}
+  .footer-src h2{font-size:20px;margin-bottom:14px;}
+  .footer-src ul{font-size:13.5px;font-family:var(--font-mono);color:var(--ink-faint);line-height:1.7;}
+  .footer-src code{background:none;color:var(--ink-soft);padding:0;}
+
+  .pagefoot{border-top:1px solid var(--line);background:var(--paper);}
+  .pagefoot-inner{max-width:1200px;margin:0 auto;padding:26px clamp(16px,4vw,40px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.02em;}
 </style>
 </head>
 <body>
+
 <header class="top">
   <div class="top-inner">
-    <div class="brand">Agência no Bolso <span>· MAIA</span></div>
-    <div class="doc-flag">Documento interno · não indexado</div>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 4 L33 32 H27 L20 15 L13 32 H7 Z" fill="#1c1b19"/>
+        <path d="M14.5 26 H25.5" stroke="#b4461f" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      Agência no Bolso <span>· Blueprint</span>
+    </div>
+    <div class="doc-flag">Documento interno · Confidencial</div>
   </div>
 </header>
 
@@ -125,242 +172,539 @@
   <nav class="toc" aria-label="Índice">
     <div class="toc-title">Neste documento</div>
     <ol>
-      <li><a href="#s1">1. Visão do funil</a></li>
-      <li><a href="#s2">2. Topo — aquisição e tráfego</a></li>
-      <li><a href="#s3">3. Isca — Sessão Raio-X grátis</a></li>
-      <li><a href="#s4">4. Meio — a máquina que não existia</a></li>
-      <li><a href="#s5">5. Fundo — oferta e escada</a></li>
-      <li><a href="#s6">6. Scripts por etapa</a></li>
-      <li><a href="#s7">7. Métricas por etapa</a></li>
-      <li><a href="#s8">8. As 8 decisões em aberto</a></li>
-      <li><a href="#fontes">Fontes</a></li>
+      <li><a href="#s1"><span class="n">01</span> Visão do funil</a></li>
+      <li><a href="#s2"><span class="n">02</span> Topo — aquisição</a></li>
+      <li><a href="#s3"><span class="n">03</span> Isca — Sessão Raio-X</a></li>
+      <li><a href="#s4"><span class="n">04</span> Meio do funil</a></li>
+      <li><a href="#s5"><span class="n">05</span> Fundo — escada de ofertas</a></li>
+      <li><a href="#s6"><span class="n">06</span> Scripts por etapa</a></li>
+      <li><a href="#s7"><span class="n">07</span> Métricas por etapa</a></li>
+      <li><a href="#s8"><span class="n">08</span> As 8 decisões</a></li>
+      <li><a href="#src"><span class="n">—</span> Fontes</a></li>
     </ol>
   </nav>
 
   <main>
     <div class="hero">
-      <h1>Blueprint do Funil de Aquisição da MAIA / Agência no Bolso</h1>
+      <span class="kicker">Modelagem acionável · v2</span>
+      <h1>Blueprint do Funil de Aquisição da MAIA</h1>
     </div>
 
     <div class="meta-note">
-      <p><strong>O que é:</strong> o desenho ponta a ponta da máquina de aquisição da MAIA no eixo estratégico ATUAL (agência de serviço · MAIA licenciada híbrida · porta de entrada Sessão Raio-X grátis). Documento de <strong>modelagem acionável</strong> — amarra as peças comerciais já prontas (01-OFERTA-CENTRAL, 02-APRESENTAÇÃO-PADRÃO, 03-SCRIPTS SDR/CLOSER, 05-FUNIS-DE-AQUISIÇÃO) num trilho único e preenche o que faltava (o meio do funil, que não existia).</p>
+      <div class="mn-tag"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> Ficha do documento</div>
+      <p><strong>O que é:</strong> o desenho ponta a ponta da máquina de aquisição da MAIA no eixo estratégico <strong>atual</strong> — agência de serviço · MAIA licenciada híbrida · porta de entrada Sessão Raio-X grátis. Amarra as peças comerciais já prontas (01-OFERTA-CENTRAL, 02-APRESENTAÇÃO-PADRÃO, 03-SCRIPTS SDR/CLOSER, 05-FUNIS-DE-AQUISIÇÃO) num trilho único e preenche o que faltava: o meio do funil, que não existia.</p>
       <p><strong>Data:</strong> 16/10/2026 · <strong>Autor:</strong> Jonathan (copy/pesquisa) · <strong>Status:</strong> blueprint pra aprovação de Salatiel + Raquel. Sujeito ao aval do Chefe antes de qualquer construção.</p>
       <p><strong>O que este documento NÃO é:</strong> não é a página pública do funil, não é reescrita de oferta. O eixo antigo (Imersão-curso, Instala Minha Maia R$600, Comunidade R$997, Mentoria R$15k) está <strong>morto</strong> e não entra aqui.</p>
-      <p><strong>Regra anti-número:</strong> toda taxa é faixa de REFERÊNCIA de planejamento, não resultado medido (a gente ainda não mede). Tudo que depende do Chefe vem como <strong>[PROPOSTA — confirmar com o Salatiel]</strong> com minha recomendação. Nada de resultado inventado.</p>
+      <p><strong>Regra anti-número:</strong> toda taxa é faixa de REFERÊNCIA de planejamento, não resultado medido. Tudo que depende do Chefe vem como <span class="pill prop">PROPOSTA — confirmar</span> com minha recomendação. Nada de resultado inventado.</p>
     </div>
 
-    <h2 id="s1"><span class="n">1.</span> Visão do funil (a lógica ponta a ponta em uma página)</h2>
-    <p><strong>A tese central:</strong> a MAIA não precisa de UM funil perfeito. Precisa de <strong>vários funis pequenos empilhados</strong> que entregam no MESMO corredor. Cada funil é uma porta de topo diferente; o fundo (SDR → Closer → cliente) é único e já está escrito. Isso é o que torna o sistema barato: a gente constrói o fundo uma vez e vai plugando portas conforme a capacidade.</p>
-    <p><strong>O caminho do estranho ao cliente Enterprise:</strong></p>
-    <pre>ESTRANHO
-   │  entra por 1 dos funis de topo (indicação · orgânico · depois tráfego/webinar)
-   ▼
-LEAD ──────────► capturado com ORIGEM marcada no CRM (tag obrigatória)
-   │
-   ▼
-MQL (qualificado) ──► SDR aplica ICP + roda SPIN S+P → agenda a SESSÃO RAIO-X grátis
-   │
-   ▼
-SESSÃO RAIO-X ──► Closer roda SPIN completo (S→P→I→N), faz a conta do prejuízo na frente do lead,
-   │              apresenta o mecanismo "Funcionário Digital Vitalício", ancora preço (salário × MAIA)
-   ▼
-FECHAMENTO ──► decisão binária datada → plano (Start / Pro / Enterprise) + R$597/mês
-   │
-   ▼
-CLIENTE MAIA ──► onboarding + painel + licença (nossa maior força)
-   │
-   ├─► CS / EXPANSÃO: sobe de plano, compra serviços de agência, renova → LTV
-   └─► INDICAÇÃO: cliente satisfeito alimenta o topo de novo (o loop)</pre>
-    <p><strong>A tese de ARPU (herdada do blueprint de junho, que sobrevive à mudança de modelo):</strong> o jogo não é vender a implantação uma vez; é <strong>manter o cliente na recorrência de R$597/mês e expandir o ticket por cliente ao longo do tempo</strong>. A implantação (R$1.497 a 12x R$2.410) é a "contratação"; o R$597/mês é o salário recorrente que vira equity de LTV. Desenha-se a ascensão (Start → Pro → Enterprise → serviços de agência → renovação) ANTES da copy, porque o que faz o negócio valer a pena é o valor no tempo de vida do cliente, não o CAC de um fechamento isolado.</p>
-    <p><strong>Por que o Enterprise fecha pelo mesmo cano do Start:</strong> não há funil separado por ticket. Todo lead entra pela Raio-X. É a Raio-X (diagnóstico com os números do cliente) que revela o porte e define qual degrau o Closer recomenda. Lead pequeno vira Start; operação grande vira Enterprise. O funil é um só; a escada é o que acontece DENTRO do fechamento e do pós-venda.</p>
-    <p><strong>O gargalo real não é o topo — é o meio.</strong> A gente sabe gerar lead (indicação + orgânico) e sabe entregar (onboarding/painel, da etapa 9 pra frente). O que vazava era a ponte: SDR sem rotina e CRM sem captura. Investir em mais topo (tráfego) antes de consertar o meio só aumenta o vazamento. Por isso a ordem: liga o barato, conserta o meio, mede, depois escala no pago.</p>
+    <!-- ========= SECTION 1 ========= -->
+    <section id="s1">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18l-7 8v7l-4 2v-9z"/></svg></div>
+        <div><span class="sec-num">Seção 01</span><h2>Visão do funil — a lógica em uma página</h2></div>
+      </div>
 
-    <hr class="rule">
+      <p class="lead"><strong>A tese central:</strong> a MAIA não precisa de UM funil perfeito. Precisa de <strong>vários funis pequenos empilhados</strong> que entregam no MESMO corredor. Cada funil é uma porta de topo diferente; o fundo (SDR → Closer → cliente) é único e já está escrito. Isso é o que torna o sistema barato: a gente constrói o fundo uma vez e vai plugando portas conforme a capacidade.</p>
 
-    <h2 id="s2"><span class="n">2.</span> Topo — aquisição e tráfego (na ordem de ativação)</h2>
-    <p>Quatro portas de topo, empilhadas, cada uma pegando o lead num nível de consciência diferente. A ordem de ativação é deliberada: <strong>ligar primeiro o que tem custo zero e insumo pronto</strong>, deixar o que exige verba e produção pra 2ª onda — depois de medir.</p>
-    <div class="tw"><table>
-      <thead><tr><th>Onda</th><th>Canal</th><th>Papel no funil</th><th>Nível de consciência do lead</th><th>Por que nessa ordem</th></tr></thead>
-      <tbody>
-        <tr><td><strong>1ª (ligar já)</strong></td><td><strong>Indicação / Embaixador</strong></td><td>Converte cliente satisfeito e parceiro em canal recorrente. Maior taxa de fechamento, menor custo.</td><td>Mais alto — confia porque quem indicou confia</td><td>Nossos melhores fechamentos já vêm daí; split Asaas pronto; não depende de verba nem produção</td></tr>
-        <tr><td><strong>1ª (junto)</strong></td><td><strong>Conteúdo orgânico (IG @digitalmastermkt)</strong></td><td>Vira o IG em máquina de autoridade B2B; comentário/DM vira conversa</td><td>Inconsciente → consciente do problema</td><td>Canal e automação comentário→DM já existem; só falta recalibrar a linha editorial de curso pra serviço</td></tr>
-        <tr><td><strong>2ª onda</strong></td><td><strong>Tráfego pago (Meta)</strong></td><td>Compra demanda previsível e escalável</td><td>Consciente do problema, inconsciente da solução</td><td>Só liga depois de ter isca que converte e conversão medida — senão é queimar verba no escuro</td></tr>
-        <tr><td><strong>2ª/3ª onda</strong></td><td><strong>Evento / Webinar da MAIA</strong></td><td>Demo ao vivo pra muitos → oferta no fim. Maior potencial de escala</td><td>Consciente e curioso sobre IA</td><td>Melhor demo que temos, mas exige audiência e cadência que ainda não rodam</td></tr>
-      </tbody>
-    </table></div>
-    <p><strong>Porta extra, oportunista:</strong> <strong>Reativação de base</strong> (leads antigos, orçamentos parados, lista de eventos). Custo zero, caixa rápido — mas depende de ter a base consolidada no CRM primeiro. Liga assim que o CRM estiver organizado.</p>
-    <p><strong>A regra de ouro do topo:</strong> cada porta nova é só mais uma entrada plugada no MESMO corredor (SDR → Closer). A gente não reinventa o fundo a cada funil. Lead de indicação chega quente (menos qualificação); lead de tráfego frio exige filtro de ICP mais rígido pra não entupir a agenda do Closer.</p>
+      <figure>
+        <div class="diagram">
+          <svg viewBox="0 0 760 540" role="img" aria-label="Funil de aquisição: do estranho ao cliente Enterprise, com o loop de indicação">
+            <defs>
+              <linearGradient id="funGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f3d9cc"/>
+                <stop offset="1" stop-color="#b4461f"/>
+              </linearGradient>
+            </defs>
+            <!-- funnel stages: trapezoids narrowing -->
+            <!-- Stage 1 ESTRANHO -->
+            <path d="M80 30 H680 L612 100 H148 Z" fill="#f9ece4" stroke="#e7c8ba"/>
+            <text x="380" y="60" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="19" fill="#1c1b19">ESTRANHO</text>
+            <text x="380" y="82" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11.5" fill="#6e6b63">entra por 1 dos funis de topo · indicação · orgânico · tráfego/webinar</text>
 
-    <hr class="rule">
+            <!-- Stage 2 LEAD -->
+            <path d="M148 108 H612 L560 170 H200 Z" fill="#f6ded0" stroke="#e7c8ba"/>
+            <text x="380" y="135" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="18" fill="#1c1b19">LEAD</text>
+            <text x="380" y="156" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" fill="#6e6b63">capturado com ORIGEM marcada no CRM (tag obrigatória)</text>
 
-    <h2 id="s3"><span class="n">3.</span> Isca / porta de entrada — a Sessão Raio-X grátis</h2>
-    <p><strong>TRAVADO pelo Chefe (11/10):</strong> não existe low ticket pago. A porta de entrada oficial e única antes do plano é a <strong>Sessão Raio-X gratuita</strong>.</p>
-    <div class="tw"><table>
-      <thead><tr><th>Dimensão</th><th>Desenho</th></tr></thead>
-      <tbody>
-        <tr><td><strong>O que é</strong></td><td>Diagnóstico gratuito, 1-a-1, que mostra ao empresário <strong>onde o negócio dele perde venda hoje e quanto isso custa por mês</strong> — com os números dele, não no chute. É também a reunião de fechamento: o Closer roda o SPIN completo dentro dela.</td></tr>
-        <tr><td><strong>Promessa</strong></td><td>"Descubra, de graça, quanto seu atendimento perde de venda todo mês — e como parar de perder."</td></tr>
-        <tr><td><strong>Pra quem</strong></td><td>O ICP: dono de PME de serviço/comércio local (clínica, loja, drogaria, prestador) que JÁ recebe demanda no WhatsApp/DM mas perde venda por demorar, esquecer de retornar ou não atender fora de horário — e tem porte pra pagar implantação + mensalidade.</td></tr>
-        <tr><td><strong>Como se inscreve</strong></td><td>Por qualquer porta de topo: link de indicação branded, comentário→DM no orgânico, form da landing (tráfego), ou lista do evento. Todos caem no WhatsApp com a origem marcada → SDR assume e agenda.</td></tr>
-        <tr><td><strong>O que entrega</strong></td><td>A conta do prejuízo na frente do cliente (a dor quantificada) + a demonstração do mecanismo (Funcionário Digital Vitalício) + a proposta ajustada ao porte. O cliente sai sabendo o tamanho do problema e com um caminho pra resolver.</td></tr>
-        <tr><td><strong>Como vira conversa de venda</strong></td><td>É a própria reunião de venda. A Raio-X emenda direto no fechamento: diagnóstico (dor) → mecanismo (solução) → ancoragem (salário × MAIA) → decisão binária datada. Não há etapa paga entre a Raio-X e o plano.</td></tr>
-      </tbody>
-    </table></div>
-    <p><strong>Por que a Raio-X carrega sozinha o aquecimento:</strong> sem degrau pago intermediário, ela faz o trabalho que antes se pensou em cobrar (Setup Express, cortado). O diagnóstico com o número real do cliente é o que converte — material genérico não mostra "quanto VOCÊ perde". Já existe como ferramenta (raiox.salatielbatista.com.br / Sessão Estratégica), então custo de produção é zero. Falta só a <strong>rotina</strong> que leva o lead até ela.</p>
+            <!-- Stage 3 MQL -->
+            <path d="M200 178 H560 L512 240 H248 Z" fill="#f0cdb9" stroke="#e0b49f"/>
+            <text x="380" y="205" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="18" fill="#1c1b19">MQL · qualificado</text>
+            <text x="380" y="226" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" fill="#5a4034">SDR aplica ICP + SPIN S+P → agenda a Raio-X</text>
 
-    <hr class="rule">
+            <!-- Stage 4 RAIO-X -->
+            <path d="M248 248 H512 L470 310 H290 Z" fill="#d98a5f" stroke="#c9633b"/>
+            <text x="380" y="278" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="18" fill="#fff">SESSÃO RAIO-X</text>
+            <text x="380" y="298" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#fff">Closer · SPIN · conta do prejuízo</text>
 
-    <h2 id="s4"><span class="n">4.</span> Meio do funil — a máquina que não existia</h2>
-    <p>Este é o gargalo que o blueprint de junho reconheceu ("o problema nunca foi o destino, foi o corredor") e que nunca foi construído. Sem isso, TODO funil de topo vaza. Quatro peças operacionais, em ordem de montagem.</p>
+            <!-- Stage 5 FECHAMENTO -->
+            <path d="M290 318 H470 L440 378 H320 Z" fill="#c05a2d" stroke="#a84e26"/>
+            <text x="380" y="347" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="17" fill="#fff">FECHAMENTO</text>
+            <text x="380" y="367" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#fff">decisão binária datada</text>
 
-    <h3>4.1 — CRM com tag de origem (a fundação)</h3>
-    <p>Sem isso, nada do resto se mede e o lead some no vão.</p>
-    <ol>
-      <li>Centralizar a captura: todo lead de qualquer porta cai num só lugar (sugestão: GoHighLevel, dona Amanda).</li>
-      <li><strong>Tag de ORIGEM obrigatória</strong> em cada lead (indicação / orgânico / tráfego / evento / reativação) — é o que permite medir por funil e descobrir qual canal carrega qual.</li>
-      <li>Campos mínimos de qualificação no lead: segmento, volume de contatos/mês, quem responde hoje, dor admitida.</li>
-      <li>Disparo automático pro SDR quando um lead entra.</li>
-    </ol>
+            <!-- Stage 6 CLIENTE -->
+            <rect x="300" y="388" width="160" height="58" rx="10" fill="#b4461f"/>
+            <text x="380" y="413" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="900" font-size="17" fill="#fff">CLIENTE</text>
+            <text x="380" y="432" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#fff">onboarding + painel + licença</text>
 
-    <h3>4.2 — Rotina de SDR (qualifica e agenda)</h3>
-    <ol>
-      <li>SDR recebe o lead → aplica o ICP (bate no perfil? demanda chegando + porte pra pagar?).</li>
-      <li>Roda <strong>SPIN S+P</strong> (script pronto, peça 03) — qualifica e desperta a dor, NÃO vende.</li>
-      <li>Agenda a Sessão Raio-X oferecendo 2 horários fechados (nunca "quando você pode?").</li>
-      <li>Registra no CRM: origem, dor admitida, horário.</li>
-      <li>Passa pro Closer um resumo de 3 linhas: volume de contatos, quem responde hoje, dor admitida.</li>
-      <li><strong>Anti-no-show:</strong> lembrete 1 dia antes + 1h antes.</li>
-    </ol>
+            <!-- branches -->
+            <text x="470" y="470" text-anchor="start" font-family="'JetBrains Mono',monospace" font-size="11" fill="#4a6b3a" font-weight="600">↳ CS / EXPANSÃO → LTV</text>
+            <!-- loop arrow back to top -->
+            <path d="M300 417 C 155 417 72 300 72 180 C 72 95 108 58 150 52" fill="none" stroke="#b8860b" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrLoop)"/>
+            <defs><marker id="arrLoop" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#b8860b"/></marker></defs>
+            <text x="34" y="300" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" fill="#9a6f09" font-weight="600" transform="rotate(-90 34 300)">INDICAÇÃO · realimenta o topo</text>
+          </svg>
+        </div>
+        <figcaption>Fig. 1 — O caminho do estranho ao cliente. Um só corredor no fundo; o loop de indicação fecha o ciclo.</figcaption>
+      </figure>
 
-    <h3>4.3 — Nutrição / follow-up (quem não agendou ou não compareceu)</h3>
-    <ol>
-      <li>Lead que não respondeu: máximo 2 follow-ups leves, depois marca pra reativação futura (regra de corte da peça 03).</li>
-      <li>Lead que não compareceu à Raio-X: 1 reagendamento ativo + lembrete reforçado.</li>
-      <li>Lead que fez a Raio-X e não fechou: entra em nutrição (conteúdo + reativação periódica), não é descartado.</li>
-      <li>Lead fora do ICP: descartado educadamente pra não entupir a agenda do Closer.</li>
-    </ol>
+      <div class="callout key">
+        <span class="ctag">A tese de ARPU (sobrevive à mudança de modelo)</span>
+        <p>O jogo não é vender a implantação uma vez; é <strong>manter o cliente na recorrência de R$597/mês e expandir o ticket por cliente ao longo do tempo</strong>. A implantação (R$1.497 a 12x R$2.410) é a "contratação"; o R$597/mês é o salário recorrente que vira equity de LTV. Desenha-se a ascensão (Start → Pro → Enterprise → serviços → renovação) ANTES da copy, porque o que faz o negócio valer a pena é o valor no tempo de vida do cliente, não o CAC de um fechamento isolado.</p>
+      </div>
 
-    <h3>4.4 — Página de isca (só depois de decidir a isca)</h3>
-    <ol>
-      <li>Landing com UMA promessa só: "descubra quanto seu atendimento perde por mês, de graça".</li>
-      <li>Form de qualificação curto (nome, segmento, volume de contatos/mês, quem responde hoje) → CRM com origem marcada.</li>
-      <li>Construída com skill-pagina-vendas, APÓS a decisão de isca (Raio-X direto vs. material intermediário — ver seção 8).</li>
-    </ol>
-    <p><strong>A sequência de montagem do meio:</strong> CRM com origem (4.1) → rotina de SDR (4.2) → follow-up (4.3) → página de isca (4.4). O CRM é pré-requisito de tudo; a página só depois de decidir a isca.</p>
+      <p><strong>Por que o Enterprise fecha pelo mesmo cano do Start:</strong> não há funil separado por ticket. Todo lead entra pela Raio-X. É a Raio-X (diagnóstico com os números do cliente) que revela o porte e define qual degrau o Closer recomenda. Lead pequeno vira Start; operação grande vira Enterprise. O funil é um só; a escada é o que acontece DENTRO do fechamento e do pós-venda.</p>
 
-    <hr class="rule">
+      <div class="callout warn">
+        <span class="ctag">O gargalo real não é o topo — é o meio</span>
+        <p>A gente sabe gerar lead (indicação + orgânico) e sabe entregar (onboarding/painel). O que vazava era a ponte: SDR sem rotina e CRM sem captura. Investir em mais topo (tráfego) antes de consertar o meio só aumenta o vazamento. Por isso a ordem: <strong>liga o barato, conserta o meio, mede, depois escala no pago</strong>.</p>
+      </div>
+    </section>
 
-    <h2 id="s5"><span class="n">5.</span> Fundo — oferta e escada</h2>
-    <p>A Raio-X emenda direto no fechamento. A escada é o que o Closer recomenda DENTRO da reunião, pelo porte revelado no diagnóstico.</p>
-    <div class="tw"><table>
-      <thead><tr><th>Degrau</th><th>Oferta</th><th>Quando oferecer</th><th>Preço (âncora)</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Porta</strong></td><td><strong>Sessão Raio-X</strong></td><td>A todo lead qualificado, antes de qualquer plano</td><td><strong>Grátis</strong></td><td>Ferramenta existe, falta rotina</td></tr>
-        <tr><td><strong>Entrada</strong></td><td><strong>MAIA Start</strong></td><td>Lead de porte menor / primeiro "sim" que já fatura</td><td><strong>R$1.497</strong> implantação + <strong>R$597/mês</strong></td><td>Confirmado (travado 11/10)</td></tr>
-        <tr><td><strong>Core (carro-chefe)</strong></td><td><strong>MAIA Pro</strong></td><td>Ticket principal a empurrar — PME com demanda consistente</td><td><strong>12x R$583,35</strong> + <strong>R$597/mês</strong></td><td>Confirmado</td></tr>
-        <tr><td><strong>High end</strong></td><td><strong>MAIA Enterprise</strong></td><td>Operação completa, skills exclusivas, porte maior</td><td><strong>12x R$2.410</strong> + <strong>R$597/mês</strong></td><td>Confirmado</td></tr>
-        <tr><td><strong>Expansão (upsell)</strong></td><td><strong>Serviços de agência</strong></td><td>SÓ pra cliente MAIA já implantado e com resultado</td><td>Faixas a validar do catálogo (social, tráfego, SDR terceirizado, página)</td><td>Rascunho</td></tr>
-        <tr><td><strong>LTV / recorrência</strong></td><td><strong>Renovação + CS + skills</strong></td><td>Continuamente, via CS proativo</td><td><strong>R$597/mês</strong> + skills avulsas</td><td>Ativo (ferramenta), sem rotina comercial</td></tr>
-      </tbody>
-    </table></div>
-    <p><strong>Ancoragem de preço (o argumento):</strong> a implantação é a "contratação" do Funcionário Digital Vitalício; o R$597/mês é o "salário" de um funcionário que trabalha 24/7, não falta, não esquece e nunca pede demissão — contra um atendente CLT que custa mais, rende 8h e um dia vai embora. O preço vira óbvio quando ancorado em salário, não em "software".</p>
-    <p><strong>Upsell:</strong> serviços de agência só entram DEPOIS que o cliente MAIA está implantado e satisfeito — nunca na porta. Assim a gente não compete de igual com agência comum; o diferencial (a MAIA) entra primeiro, o serviço vem em cima.</p>
-    <p><strong>Downsell:</strong> se o lead travar no plano no fechamento, o caminho de recuo NÃO é desconto nem produto mais barato (não existe low ticket pago). É <strong>a própria Raio-X completa</strong> — deixar o cliente decidir com o número todo na mesa, mantendo a decisão viva e datada, nunca o "vou pensar".</p>
+    <!-- ========= SECTION 2 ========= -->
+    <section id="s2">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div>
+        <div><span class="sec-num">Seção 02</span><h2>Topo — aquisição e tráfego (na ordem de ativação)</h2></div>
+      </div>
 
-    <hr class="rule">
+      <p>Quatro portas de topo, empilhadas, cada uma pegando o lead num nível de consciência diferente. A ordem de ativação é deliberada: <strong>ligar primeiro o que tem custo zero e insumo pronto</strong>, deixar o que exige verba e produção pra 2ª onda — depois de medir.</p>
 
-    <h2 id="s6"><span class="n">6.</span> Scripts por etapa</h2>
-    <p>A maior parte já está escrita e amarrada nas peças 02 e 03. Abaixo, o que cada etapa usa e os scripts NOVOS que faltavam.</p>
+      <figure>
+        <div class="diagram">
+          <svg viewBox="0 0 760 270" role="img" aria-label="Timeline das ondas de ativação do topo">
+            <!-- baseline -->
+            <line x1="40" y1="135" x2="720" y2="135" stroke="#e3e0d8" stroke-width="2"/>
+            <!-- wave 1 marker -->
+            <circle cx="180" cy="135" r="8" fill="#b4461f"/>
+            <text x="180" y="52" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="600" fill="#b4461f">1ª ONDA · ligar já</text>
+            <rect x="70" y="62" width="220" height="56" rx="10" fill="#f9ece4" stroke="#e7c8ba"/>
+            <text x="180" y="85" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="14" fill="#1c1b19">Indicação / Embaixador</text>
+            <text x="180" y="105" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">custo zero · maior fechamento</text>
+            <rect x="70" y="152" width="220" height="56" rx="10" fill="#f9ece4" stroke="#e7c8ba"/>
+            <text x="180" y="175" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="14" fill="#1c1b19">Conteúdo orgânico (IG)</text>
+            <text x="180" y="195" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">comentário → DM já existe</text>
 
-    <h3>Já prontos (plugar, não reescrever)</h3>
-    <ul>
-      <li><strong>SDR — abertura inbound/fria, SPIN S+P, agendamento, contorno de objeção:</strong> peça 03, Script 1 (seções 1.1 a 1.5).</li>
-      <li><strong>Closer — SPIN completo S→P→I→N, mecanismo, ancoragem de preço, 5 objeções, fechamento binário, garantia:</strong> peça 03, Script 2 (seções 2.1 a 2.9).</li>
-      <li><strong>Deck visual de apoio do Closer:</strong> peça 02 (Apresentação-Padrão).</li>
-    </ul>
+            <!-- wave 2 marker -->
+            <circle cx="520" cy="135" r="8" fill="#b8860b"/>
+            <text x="520" y="52" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="600" fill="#b8860b">2ª ONDA · depois de medir</text>
+            <rect x="410" y="62" width="220" height="56" rx="10" fill="#fbf3dd" stroke="#e6cf98"/>
+            <text x="520" y="85" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="14" fill="#1c1b19">Tráfego pago (Meta)</text>
+            <text x="520" y="105" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">demanda previsível e escalável</text>
+            <rect x="410" y="152" width="220" height="56" rx="10" fill="#fbf3dd" stroke="#e6cf98"/>
+            <text x="520" y="175" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="14" fill="#1c1b19">Evento / Webinar MAIA</text>
+            <text x="520" y="195" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">demo ao vivo → maior escala</text>
 
-    <h3>Scripts novos (escritos agora, faltavam)</h3>
+            <!-- arrow between waves -->
+            <path d="M300 135 H408" stroke="#9c9890" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrW)"/>
+            <defs><marker id="arrW" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#9c9890"/></marker></defs>
+            <text x="354" y="128" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#9c9890">medir primeiro</text>
+          </svg>
+        </div>
+        <figcaption>Fig. 2 — As duas ondas de ativação. O custo zero liga antes; verba só depois da conversão medida.</figcaption>
+      </figure>
 
-    <h4>6.1 — Abordagem de indicação (o cliente/parceiro indica sem esforço)</h4>
-    <p>Mensagem pronta pro cliente satisfeito encaminhar:</p>
-    <blockquote><p>"Oi [nome]! Eu uso a MAIA aqui no [meu negócio] — é tipo um funcionário que atende meu WhatsApp 24h, responde na hora e não deixa cliente sem resposta. Mudou meu atendimento. Se você vive perdendo venda por demora pra responder, fala com eles que vale a pena. Manda um oi nesse link: [link branded de indicação]."</p></blockquote>
-    <p>Gatilho de quando pedir (dito pelo CS, no momento certo — pós-resultado):</p>
-    <blockquote><p>"[Nome], que bom que a MAIA tá segurando seu atendimento. Posso te pedir uma coisa? Se você conhece algum dono de negócio que também perde venda por não dar conta do WhatsApp, me indica? Eu cuido da pessoa igual cuido de você. Te mando um textinho pronto pra você só encaminhar."</p></blockquote>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Onda</th><th>Canal</th><th>Papel no funil</th><th>Nível de consciência</th><th>Por que nessa ordem</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1ª · ligar já</strong></td><td><strong>Indicação / Embaixador</strong></td><td>Converte cliente satisfeito e parceiro em canal recorrente. Maior taxa de fechamento, menor custo.</td><td>Mais alto — confia porque quem indicou confia</td><td>Nossos melhores fechamentos já vêm daí; split Asaas pronto; não depende de verba</td></tr>
+            <tr><td><strong>1ª · junto</strong></td><td><strong>Conteúdo orgânico (IG @digitalmastermkt)</strong></td><td>Vira o IG em máquina de autoridade B2B; comentário/DM vira conversa.</td><td>Inconsciente → consciente do problema</td><td>Canal e automação comentário→DM já existem; falta recalibrar a linha editorial de curso pra serviço</td></tr>
+            <tr><td><strong>2ª onda</strong></td><td><strong>Tráfego pago (Meta)</strong></td><td>Compra demanda previsível e escalável.</td><td>Consciente do problema, inconsciente da solução</td><td>Só liga depois de ter isca que converte e conversão medida — senão é queimar verba no escuro</td></tr>
+            <tr><td><strong>2ª/3ª onda</strong></td><td><strong>Evento / Webinar da MAIA</strong></td><td>Demo ao vivo pra muitos → oferta no fim. Maior potencial de escala.</td><td>Consciente e curioso sobre IA</td><td>Melhor demo que temos, mas exige audiência e cadência que ainda não rodam</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-    <h4>6.2 — Convite pro Raio-X (orgânico / DM, quando o lead demonstra interesse)</h4>
-    <blockquote><p>"Que bom que isso fez sentido pra você! 😊 Olha, pra eu te mostrar de verdade onde você tá perdendo venda hoje, a gente faz uma <strong>Sessão Raio-X</strong>: são [X minutos], de graça, e eu chego com os números do seu segmento prontos. Não é papo de vendedor — é você vendo quanto seu atendimento deixa escapar por mês. Topa? Tenho [terça 15h] ou [quarta 10h]."</p></blockquote>
+      <p><strong>Porta extra, oportunista:</strong> <strong>Reativação de base</strong> (leads antigos, orçamentos parados, lista de eventos). Custo zero, caixa rápido — mas depende de ter a base consolidada no CRM primeiro. Liga assim que o CRM estiver organizado.</p>
 
-    <h4>6.3 — Condução da Sessão Raio-X (o Closer)</h4>
-    <p>É a peça 03, Script 2, integral — a Raio-X É a reunião de fechamento. Fluxo: abertura e contrato ("sim ou não claro no fim") → S (cenário) → P (admitir a dor) → <strong>I (a conta do prejuízo na frente dele + fecha a saída 'contratar mais gente')</strong> → N (ele verbaliza o valor) → mecanismo Funcionário Digital Vitalício + demo → ancoragem salário × MAIA → silêncio → objeção real → fechamento binário datado.</p>
+      <div class="callout key">
+        <span class="ctag">A regra de ouro do topo</span>
+        <p>Cada porta nova é só mais uma entrada plugada no MESMO corredor (SDR → Closer). A gente não reinventa o fundo a cada funil. Lead de indicação chega quente (menos qualificação); lead de tráfego frio exige filtro de ICP mais rígido pra não entupir a agenda do Closer.</p>
+      </div>
+    </section>
 
-    <h4>6.4 — Fechamento (decisão binária)</h4>
-    <p>Peça 03, seção 2.8:</p>
-    <blockquote><p>"A gente combinou que no fim você me daria um sim ou um não claro. Resolver isso é prioridade [nota] e você mesmo disse que a MAIA resolve. Então: a gente começa? Se <strong>sim</strong>, já marco seu onboarding pra [data]. Se ainda tá com um pé atrás, a gente faz a Raio-X completa primeiro e você decide com o número todo na mesa. O que não vale é 'vou pensar' — enquanto você pensa, o buraco continua aberto. <strong>Começamos pela implantação ou pela Raio-X?</strong>"</p></blockquote>
+    <!-- ========= SECTION 3 ========= -->
+    <section id="s3">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></div>
+        <div><span class="sec-num">Seção 03</span><h2>Isca — a Sessão Raio-X grátis</h2></div>
+      </div>
 
-    <h4>6.5 — Follow-up / reativação (novo)</h4>
-    <p>Pós-reunião sem fechamento:</p>
-    <blockquote><p>"[Nome], pensei no que a gente conversou. Aquele buraco de [R$X/mês] que a gente mediu continua aberto enquanto isso. Separei [uma condição / um horário] pra você decidir sem pressa. Quer que eu te mostre de novo como resolver?"</p></blockquote>
-    <p>Reativação de base fria (lead antigo):</p>
-    <blockquote><p>"Oi [nome], tudo bem? A gente conversou há um tempo sobre o atendimento do seu [negócio]. De lá pra cá a MAIA evoluiu bastante — [novidade/caso]. Faz sentido a gente retomar com uma Raio-X rápida pra ver se hoje encaixa pro seu momento?"</p></blockquote>
-    <p><strong>Regra inegociável de todos os scripts:</strong> nenhum número de caso/prova entra sem dado medido e autorizado. Enquanto não houver, usar a versão sem número. LGPD e garantia ficam como <strong>[VALIDAR COM LUCAS]</strong>.</p>
+      <div class="callout warn">
+        <span class="ctag">Travado pelo Chefe · 11/10</span>
+        <p>Não existe low ticket pago. A porta de entrada oficial e única antes do plano é a <strong>Sessão Raio-X gratuita</strong>.</p>
+      </div>
 
-    <hr class="rule">
+      <div class="tbl-wrap">
+        <table>
+          <tbody>
+            <tr><td style="white-space:nowrap"><strong>O que é</strong></td><td>Diagnóstico gratuito, 1-a-1, que mostra ao empresário <strong>onde o negócio dele perde venda hoje e quanto isso custa por mês</strong> — com os números dele, não no chute. É também a reunião de fechamento: o Closer roda o SPIN completo dentro dela.</td></tr>
+            <tr><td><strong>Promessa</strong></td><td>"Descubra, de graça, quanto seu atendimento perde de venda todo mês — e como parar de perder."</td></tr>
+            <tr><td><strong>Pra quem</strong></td><td>O ICP: dono de PME de serviço/comércio local (clínica, loja, drogaria, prestador) que JÁ recebe demanda no WhatsApp/DM mas perde venda por demorar, esquecer de retornar ou não atender fora de horário — e tem porte pra pagar implantação + mensalidade.</td></tr>
+            <tr><td><strong>Como se inscreve</strong></td><td>Por qualquer porta de topo: link de indicação branded, comentário→DM no orgânico, form da landing (tráfego), ou lista do evento. Todos caem no WhatsApp com a origem marcada → SDR assume e agenda.</td></tr>
+            <tr><td><strong>O que entrega</strong></td><td>A conta do prejuízo na frente do cliente (a dor quantificada) + a demonstração do mecanismo (Funcionário Digital Vitalício) + a proposta ajustada ao porte. O cliente sai sabendo o tamanho do problema e com um caminho pra resolver.</td></tr>
+            <tr><td><strong>Como vira venda</strong></td><td>É a própria reunião de venda. A Raio-X emenda direto no fechamento: diagnóstico (dor) → mecanismo (solução) → ancoragem (salário × MAIA) → decisão binária datada. Não há etapa paga entre a Raio-X e o plano.</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-    <h2 id="s7"><span class="n">7.</span> Métricas — o que medir por etapa</h2>
-    <p><strong>Aviso honesto:</strong> a gente NÃO mede nada disso hoje. As faixas abaixo são referência de planejamento B2B consultivo pra montar a conta, NÃO resultado nosso. O primeiro trabalho da máquina é passar a medir e substituir cada faixa pelo número real — <strong>por ORIGEM</strong> (a tag do CRM), porque a média geral esconde que a indicação carrega o tráfego frio.</p>
-    <div class="tw"><table>
-      <thead><tr><th>Etapa</th><th>Métrica</th><th>O que é "sucesso" nessa etapa</th><th>Faixa de referência</th></tr></thead>
-      <tbody>
-        <tr><td>Topo</td><td>Leads gerados/mês por origem</td><td>Fluxo previsível entrando em cada porta</td><td>— (medir primeiro)</td></tr>
-        <tr><td>Lead → MQL</td><td>% que bate no ICP</td><td>Agenda do Closer só com lead de porte</td><td>~30–50% (indicação puxa pra cima)</td></tr>
-        <tr><td>MQL → Raio-X agendada</td><td>taxa de agendamento (SDR)</td><td>SDR converte interesse em data no calendário</td><td>~30–50%</td></tr>
-        <tr><td>Agendada → compareceu</td><td>1 − no-show</td><td>Lembrete anti-no-show funcionando</td><td>~60–80%</td></tr>
-        <tr><td>Raio-X → proposta</td><td>avança pra oferta</td><td>Diagnóstico qualifica e aquece</td><td>~50–70%</td></tr>
-        <tr><td>Proposta → fechado</td><td>conversão do Closer</td><td>Decisão binária datada, sem "vou pensar"</td><td>~20–40%</td></tr>
-        <tr><td>Cliente → recorrência</td><td>retenção R$597/mês</td><td>O LTV — o jogo real</td><td>medir no Master CRM (já dá)</td></tr>
-        <tr><td>—</td><td>CAC por origem</td><td>Quanto custa fechar por canal</td><td>— (destrava decisão de verba)</td></tr>
-      </tbody>
-    </table></div>
-    <p><strong>O meta-cálculo que a previsibilidade destrava:</strong> com as taxas medidas, a conta roda de trás pra frente — "pra fechar N clientes/mês, com conversão c%, preciso de X propostas; com p%, Y Raio-X; … logo M leads no topo". Hoje essa conta é impossível porque nada é medido; é o destravamento central. Sequência correta: liga os funis baratos → mede cada taxa por origem → aí sim projeta meta e decide verba de tráfego com base no valor real de um lead.</p>
+      <div class="callout key">
+        <span class="ctag">Por que a Raio-X carrega sozinha o aquecimento</span>
+        <p>Sem degrau pago intermediário, ela faz o trabalho que antes se pensou em cobrar (Setup Express, cortado). O diagnóstico com o número real do cliente é o que converte — material genérico não mostra "quanto VOCÊ perde". Já existe como ferramenta (raiox.salatielbatista.com.br / Sessão Estratégica), então custo de produção é zero. Falta só a <strong>rotina</strong> que leva o lead até ela.</p>
+      </div>
+    </section>
 
-    <hr class="rule">
+    <!-- ========= SECTION 4 ========= -->
+    <section id="s4">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a3 3 0 0 1 3 3v4.5"/></svg></div>
+        <div><span class="sec-num">Seção 04</span><h2>Meio do funil — a máquina que não existia</h2></div>
+      </div>
 
-    <h2 id="s8"><span class="n">8.</span> As 8 decisões em aberto — com minha recomendação</h2>
-    <p>Cada uma vem com o default que eu proponho. Não deixei nada em aberto; o Chefe confirma ou ajusta.</p>
+      <p>Este é o gargalo que o blueprint de junho reconheceu ("o problema nunca foi o destino, foi o corredor") e que nunca foi construído. Sem isso, TODO funil de topo vaza. Quatro peças operacionais, em ordem de montagem.</p>
 
-    <h4>1. A página <code>funil.agencianobolso.com.br</code> sai do ar público agora?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM, tirar do ar ou pôr atrás de senha imediatamente.</strong> É doc interno com preços em discussão e decisões marcadas expostos na web aberta — risco sem contrapartida, e ainda documenta o modelo morto.</div>
+      <figure>
+        <div class="diagram">
+          <svg viewBox="0 0 760 400" role="img" aria-label="Fluxograma do meio do funil: CRM com tag de origem até agendar a Raio-X, com os ramos de follow-up">
+            <defs><marker id="arrM" markerWidth="11" markerHeight="11" refX="7" refY="3.5" orient="auto"><path d="M0 0 L8 3.5 L0 7 Z" fill="#b4461f"/></marker>
+            <marker id="arrG" markerWidth="11" markerHeight="11" refX="7" refY="3.5" orient="auto"><path d="M0 0 L8 3.5 L0 7 Z" fill="#9c9890"/></marker></defs>
 
-    <h4>2. Confirma o eixo curso+comunidade (R$600 / Comunidade R$997 / Imersão) MORTO e substituído pela escada MAIA?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM, confirmado morto.</strong> Este blueprint inteiro assume isso; o posicionamento de agência (Raquel 15/09) e o corte do low ticket (11/10) já enterraram essa direção pro B2B. Curso fica no B2C (Master Point), fora deste escopo.</div>
+            <!-- 4.1 CRM -->
+            <rect x="40" y="30" width="190" height="78" rx="12" fill="#b4461f"/>
+            <text x="135" y="58" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#fbeadf">4.1 · fundação</text>
+            <text x="135" y="78" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="15" fill="#fff">CRM</text>
+            <text x="135" y="96" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#fbeadf">tag de ORIGEM obrigatória</text>
 
-    <h4>3. Isca de entrada do topo: Raio-X direto, ou material intermediário antes?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: Raio-X DIRETO na indicação e na reativação (lead quente, não precisa de aquecimento); material intermediário leve (mini-diagnóstico/checklist) só no orgânico e tráfego frio.</strong> O lead quente não precisa de degrau extra; o lead frio converte melhor com um passo de baixo atrito antes de pedir 1h de reunião.</div>
+            <path d="M230 69 H288" stroke="#b4461f" stroke-width="2.2" marker-end="url(#arrM)"/>
 
-    <h4>4. Ordem de ativação: Indicação + Orgânico primeiro, tráfego/webinar na 2ª onda?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM.</strong> Custo zero, insumo pronto, destrava caixa sem verba enquanto a gente monta o meio e mede. Tráfego antes de medir é queimar dinheiro no escuro.</div>
+            <!-- 4.2 SDR -->
+            <rect x="290" y="30" width="190" height="78" rx="12" fill="#f0cdb9" stroke="#e0b49f"/>
+            <text x="385" y="58" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#8a5636">4.2 · qualifica</text>
+            <text x="385" y="78" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="15" fill="#1c1b19">Rotina SDR</text>
+            <text x="385" y="96" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#5a4034">ICP + SPIN S+P</text>
 
-    <h4>5. Fazer webinar/aula ao vivo da MAIA como funil? Sim/não e recorrência?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: SIM, mas só na 2ª onda, quando o orgânico tiver tração — começar com 1 evento mensal.</strong> É o funil que melhor mostra a MAIA (demo ao vivo vale mais que mil argumentos), mas exige audiência e cadência que ainda não temos; forçar agora sem público é desgaste.</div>
+            <path d="M480 69 H538" stroke="#b4461f" stroke-width="2.2" marker-end="url(#arrM)"/>
 
-    <h4>6. Programa de indicação: recompensa e pra quem?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: split Asaas de comissão sobre a implantação + desconto na recorrência de quem indica; vale pra cliente E pra parceiro externo (ex: Emerson/GCD).</strong> O split já é capacidade pronta; a dupla recompensa (caixa pro parceiro, desconto pro cliente) cobre os dois perfis sem criar produto novo. % exato o Chefe fecha.</div>
+            <!-- Raio-X agendada -->
+            <rect x="540" y="30" width="180" height="78" rx="12" fill="#d98a5f" stroke="#c9633b"/>
+            <text x="630" y="62" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="15" fill="#fff">Raio-X agendada</text>
+            <text x="630" y="82" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#fbeadf">2 horários fechados</text>
 
-    <h4>7. SDR: humano, MAIA/IA, ou híbrido?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: híbrido — SDR de IA (já existe) faz a abertura e qualificação inicial 24/7, e escala pro humano o lead quente pra agendar e conduzir.</strong> Usa a capacidade que já temos pra cobrir volume sem folha, e reserva o toque humano pro momento que converte. O Closer (Raio-X) permanece humano.</div>
+            <!-- 4.3 follow-up branch down from SDR -->
+            <path d="M385 108 V150" stroke="#9c9890" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrG)"/>
+            <rect x="255" y="152" width="260" height="70" rx="12" fill="#faf3e3" stroke="#e6cf98"/>
+            <text x="385" y="178" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#8a6a16">4.3 · não agendou / não compareceu</text>
+            <text x="385" y="197" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="14" fill="#1c1b19">Nutrição / follow-up</text>
+            <text x="385" y="214" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#6e6b63">máx 2 toques → reativação · fora do ICP descarta</text>
 
-    <h4>8. Verba de tráfego pago: quanto e a partir de quando?</h4>
-    <div class="prop"><strong>[PROPOSTA — confirmar com o Salatiel]: definir SÓ depois de medir a conversão Raio-X→venda no orgânico/indicação.</strong> Sem saber quanto vale um lead, não dá pra definir CPL-teto nem verba — qualquer número agora é chute. Quando houver conversão medida, Josiel (metodologia Denderson) dimensiona com base no valor real do lead.</div>
+            <!-- anti no-show from Raio-X -->
+            <path d="M630 108 V150" stroke="#9c9890" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrG)"/>
+            <rect x="540" y="152" width="180" height="70" rx="12" fill="#eef2e8" stroke="#cdd9c2"/>
+            <text x="630" y="180" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="13.5" fill="#1c1b19">Anti no-show</text>
+            <text x="630" y="200" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#4a6b3a">lembrete D-1 + 1h antes</text>
 
-    <footer class="foot" id="fontes">
-      <div class="src-title">Fontes</div>
+            <!-- 4.4 landing feeding CRM -->
+            <rect x="40" y="152" width="190" height="70" rx="12" fill="#ffffff" stroke="#e3e0d8"/>
+            <text x="135" y="178" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#8a5636">4.4 · depois da isca</text>
+            <text x="135" y="197" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="14" fill="#1c1b19">Página de isca</text>
+            <text x="135" y="214" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#6e6b63">form curto → CRM c/ origem</text>
+            <path d="M135 152 V110" stroke="#9c9890" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrG)"/>
+
+            <!-- sequence label -->
+            <text x="380" y="300" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="700" font-size="14" fill="#1c1b19">Ordem de montagem do meio</text>
+            <g font-family="'JetBrains Mono',monospace" font-size="12" font-weight="600">
+              <rect x="120" y="320" width="120" height="40" rx="8" fill="#b4461f"/><text x="180" y="345" text-anchor="middle" fill="#fff">4.1 CRM</text>
+              <path d="M240 340 H276" stroke="#b4461f" stroke-width="2" marker-end="url(#arrM)"/>
+              <rect x="278" y="320" width="120" height="40" rx="8" fill="#d98a5f"/><text x="338" y="345" text-anchor="middle" fill="#fff">4.2 SDR</text>
+              <path d="M398 340 H434" stroke="#b4461f" stroke-width="2" marker-end="url(#arrM)"/>
+              <rect x="436" y="320" width="130" height="40" rx="8" fill="#e8b89a"/><text x="501" y="345" text-anchor="middle" fill="#5a3422">4.3 follow</text>
+              <path d="M566 340 H602" stroke="#b4461f" stroke-width="2" marker-end="url(#arrM)"/>
+              <rect x="604" y="320" width="130" height="40" rx="8" fill="#f0e3cc"/><text x="669" y="345" text-anchor="middle" fill="#5a4a22">4.4 página</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Fig. 3 — O meio que faltava. CRM é pré-requisito de tudo; a página só depois de decidir a isca.</figcaption>
+      </figure>
+
+      <h3>4.1 — CRM com tag de origem (a fundação)</h3>
+      <p>Sem isso, nada do resto se mede e o lead some no vão.</p>
+      <ol>
+        <li>Centralizar a captura: todo lead de qualquer porta cai num só lugar (sugestão: GoHighLevel, dona Amanda).</li>
+        <li><strong>Tag de ORIGEM obrigatória</strong> em cada lead (indicação / orgânico / tráfego / evento / reativação) — é o que permite medir por funil e descobrir qual canal carrega qual.</li>
+        <li>Campos mínimos de qualificação: segmento, volume de contatos/mês, quem responde hoje, dor admitida.</li>
+        <li>Disparo automático pro SDR quando um lead entra.</li>
+      </ol>
+
+      <h3>4.2 — Rotina de SDR (qualifica e agenda)</h3>
+      <ol>
+        <li>SDR recebe o lead → aplica o ICP (bate no perfil? demanda chegando + porte pra pagar?).</li>
+        <li>Roda <strong>SPIN S+P</strong> (script pronto, peça 03) — qualifica e desperta a dor, NÃO vende.</li>
+        <li>Agenda a Sessão Raio-X oferecendo 2 horários fechados (nunca "quando você pode?").</li>
+        <li>Registra no CRM: origem, dor admitida, horário.</li>
+        <li>Passa pro Closer um resumo de 3 linhas: volume de contatos, quem responde hoje, dor admitida.</li>
+        <li><strong>Anti-no-show:</strong> lembrete 1 dia antes + 1h antes.</li>
+      </ol>
+
+      <h3>4.3 — Nutrição / follow-up (quem não agendou ou não compareceu)</h3>
+      <ol>
+        <li>Lead que não respondeu: máximo 2 follow-ups leves, depois marca pra reativação futura (regra de corte da peça 03).</li>
+        <li>Lead que não compareceu à Raio-X: 1 reagendamento ativo + lembrete reforçado.</li>
+        <li>Lead que fez a Raio-X e não fechou: entra em nutrição (conteúdo + reativação periódica), não é descartado.</li>
+        <li>Lead fora do ICP: descartado educadamente pra não entupir a agenda do Closer.</li>
+      </ol>
+
+      <h3>4.4 — Página de isca (só depois de decidir a isca)</h3>
+      <ol>
+        <li>Landing com UMA promessa só: "descubra quanto seu atendimento perde por mês, de graça".</li>
+        <li>Form de qualificação curto (nome, segmento, volume de contatos/mês, quem responde hoje) → CRM com origem marcada.</li>
+        <li>Construída com skill-pagina-vendas, APÓS a decisão de isca (Raio-X direto vs. material intermediário — ver seção 8).</li>
+      </ol>
+
+      <div class="callout key">
+        <span class="ctag">A sequência de montagem do meio</span>
+        <p>CRM com origem (4.1) → rotina de SDR (4.2) → follow-up (4.3) → página de isca (4.4). O CRM é pré-requisito de tudo; a página só depois de decidir a isca.</p>
+      </div>
+    </section>
+
+    <!-- ========= SECTION 5 ========= -->
+    <section id="s5">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4v-4h4v-4h4v-4h4"/><path d="M4 20V8"/></svg></div>
+        <div><span class="sec-num">Seção 05</span><h2>Fundo — oferta e escada</h2></div>
+      </div>
+
+      <p>A Raio-X emenda direto no fechamento. A escada é o que o Closer recomenda DENTRO da reunião, pelo porte revelado no diagnóstico.</p>
+
+      <figure>
+        <div class="diagram">
+          <svg viewBox="0 0 760 400" role="img" aria-label="Escada de ofertas: da Sessão Raio-X grátis ao Enterprise, com ancoragem salário versus MAIA">
+            <!-- steps rising left to right -->
+            <!-- step 0 porta -->
+            <rect x="30" y="310" width="135" height="60" rx="9" fill="#eef2e8" stroke="#cdd9c2"/>
+            <text x="97" y="335" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="14" fill="#1c1b19">Raio-X</text>
+            <text x="97" y="354" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="600" fill="#4a6b3a">Grátis</text>
+            <!-- step 1 start -->
+            <rect x="175" y="245" width="135" height="125" rx="9" fill="#f9ece4" stroke="#e7c8ba"/>
+            <text x="242" y="270" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="14" fill="#1c1b19">Start</text>
+            <text x="242" y="291" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#6e6b63">R$1.497</text>
+            <text x="242" y="306" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#6e6b63">+ R$597/mês</text>
+            <!-- step 2 pro -->
+            <rect x="320" y="180" width="135" height="190" rx="9" fill="#f0cdb9" stroke="#e0b49f"/>
+            <text x="387" y="205" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="14.5" fill="#1c1b19">Pro</text>
+            <text x="387" y="226" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#5a4034">12x R$583,35</text>
+            <text x="387" y="241" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#5a4034">+ R$597/mês</text>
+            <text x="387" y="262" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" font-weight="600" fill="#b4461f">carro-chefe</text>
+            <!-- step 3 enterprise -->
+            <rect x="465" y="115" width="135" height="255" rx="9" fill="#c05a2d" stroke="#a84e26"/>
+            <text x="532" y="140" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="14.5" fill="#fff">Enterprise</text>
+            <text x="532" y="161" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#fbeadf">12x R$2.410</text>
+            <text x="532" y="176" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#fbeadf">+ R$597/mês</text>
+            <!-- step 4 vitalicio -->
+            <rect x="610" y="50" width="135" height="320" rx="9" fill="#b4461f"/>
+            <text x="677" y="76" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="12.5" fill="#fff">Funcionário</text>
+            <text x="677" y="92" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="12.5" fill="#fff">Digital</text>
+            <text x="677" y="108" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="12.5" fill="#fff">Vitalício</text>
+            <text x="677" y="130" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#fbeadf">LTV · recorrência</text>
+
+            <!-- rising guide arrow -->
+            <path d="M97 300 L242 235 L387 170 L532 105 L677 45" fill="none" stroke="#b8860b" stroke-width="2.2" stroke-dasharray="7 5"/>
+            <text x="300" y="60" text-anchor="start" font-family="'JetBrains Mono',monospace" font-size="11" fill="#b8860b" font-weight="600">↗ ascensão de ticket (ancora: salário × MAIA)</text>
+          </svg>
+        </div>
+        <figcaption>Fig. 4 — A escada de ofertas. Todo lead entra grátis pela Raio-X; o porte revelado define o degrau.</figcaption>
+      </figure>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Degrau</th><th>Oferta</th><th>Quando oferecer</th><th>Preço (âncora)</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Porta</strong></td><td><strong>Sessão Raio-X</strong></td><td>A todo lead qualificado, antes de qualquer plano</td><td><strong>Grátis</strong></td><td><span class="pill wait">falta rotina</span></td></tr>
+            <tr><td><strong>Entrada</strong></td><td><strong>MAIA Start</strong></td><td>Lead de porte menor / primeiro "sim" que já fatura</td><td><strong>R$1.497</strong> + <strong>R$597/mês</strong></td><td><span class="pill ok">confirmado 11/10</span></td></tr>
+            <tr><td><strong>Core</strong></td><td><strong>MAIA Pro</strong></td><td>Ticket principal a empurrar — PME com demanda consistente</td><td><strong>12x R$583,35</strong> + R$597/mês</td><td><span class="pill ok">confirmado</span></td></tr>
+            <tr><td><strong>High end</strong></td><td><strong>MAIA Enterprise</strong></td><td>Operação completa, skills exclusivas, porte maior</td><td><strong>12x R$2.410</strong> + R$597/mês</td><td><span class="pill ok">confirmado</span></td></tr>
+            <tr><td><strong>Expansão</strong></td><td><strong>Serviços de agência</strong></td><td>SÓ pra cliente MAIA já implantado e com resultado</td><td>Faixas a validar (social, tráfego, SDR, página)</td><td><span class="pill draft">rascunho</span></td></tr>
+            <tr><td><strong>LTV</strong></td><td><strong>Renovação + CS + skills</strong></td><td>Continuamente, via CS proativo</td><td><strong>R$597/mês</strong> + skills avulsas</td><td><span class="pill wait">sem rotina comercial</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout key">
+        <span class="ctag">Ancoragem de preço — o argumento</span>
+        <p>A implantação é a "contratação" do Funcionário Digital Vitalício; o R$597/mês é o "salário" de um funcionário que trabalha 24/7, não falta, não esquece e nunca pede demissão — contra um atendente CLT que custa mais, rende 8h e um dia vai embora. O preço vira óbvio quando ancorado em salário, não em "software".</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="ch"><svg viewBox="0 0 24 24" fill="none" stroke="#4a6b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="ct">Upsell</span></div>
+          <p>Serviços de agência só entram DEPOIS que o cliente MAIA está implantado e satisfeito — nunca na porta. A MAIA entra primeiro; o serviço vem em cima.</p>
+        </div>
+        <div class="card">
+          <div class="ch"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14l-4 4 4 4M5 18h11a4 4 0 0 0 4-4V4"/></svg><span class="ct">Downsell</span></div>
+          <p>Se o lead travar no fechamento, o recuo NÃO é desconto nem produto mais barato. É a <strong>própria Raio-X completa</strong> — decidir com o número todo na mesa, nunca o "vou pensar".</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= SECTION 6 ========= -->
+    <section id="s6">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><span class="sec-num">Seção 06</span><h2>Scripts por etapa</h2></div>
+      </div>
+
+      <p>A maior parte já está escrita e amarrada nas peças 02 e 03. Abaixo, o que cada etapa usa e os scripts NOVOS que faltavam.</p>
+
+      <figure>
+        <div class="diagram">
+          <svg viewBox="0 0 760 170" role="img" aria-label="Corredor SDR para Closer para cliente">
+            <defs><marker id="arrC" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto"><path d="M0 0 L9 4 L0 8 Z" fill="#b4461f"/></marker></defs>
+            <!-- lead -->
+            <circle cx="70" cy="85" r="34" fill="#f9ece4" stroke="#e7c8ba"/>
+            <text x="70" y="82" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="13" fill="#1c1b19">Lead</text>
+            <text x="70" y="99" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" fill="#6e6b63">c/ origem</text>
+            <path d="M106 85 H176" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrC)"/>
+            <!-- SDR -->
+            <rect x="180" y="52" width="150" height="66" rx="12" fill="#f0cdb9" stroke="#e0b49f"/>
+            <text x="255" y="80" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="15" fill="#1c1b19">SDR</text>
+            <text x="255" y="99" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#5a4034">ICP + SPIN S+P · agenda</text>
+            <path d="M330 85 H400" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrC)"/>
+            <!-- Closer -->
+            <rect x="404" y="52" width="170" height="66" rx="12" fill="#d98a5f" stroke="#c9633b"/>
+            <text x="489" y="80" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="15" fill="#fff">Closer</text>
+            <text x="489" y="99" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#fbeadf">Raio-X · SPIN S→P→I→N · fecha</text>
+            <path d="M574 85 H644" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrC)"/>
+            <!-- cliente -->
+            <circle cx="690" cy="85" r="34" fill="#b4461f"/>
+            <text x="690" y="88" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="900" font-size="12.5" fill="#fff">Cliente</text>
+            <!-- labels -->
+            <text x="140" y="36" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#9c9890">qualifica</text>
+            <text x="365" y="36" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#9c9890">agenda</text>
+            <text x="609" y="36" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#9c9890">fecha</text>
+          </svg>
+        </div>
+        <figcaption>Fig. 5 — O corredor do fundo: um só caminho, SDR qualifica, Closer fecha na Raio-X.</figcaption>
+      </figure>
+
+      <h3>Já prontos (plugar, não reescrever)</h3>
       <ul>
-        <li><code>workspace/analise-funil-anb-2026-10-16/analise-funil-anb.md</code> (diagnóstico + proposta P0-P5 + as 8 perguntas de direção)</li>
-        <li><code>workspace/estrutura-comercial-maia-2026-10-11/</code> (peças 01-OFERTA-CENTRAL, 02-APRESENTAÇÃO-PADRÃO, 03-SCRIPTS-SDR-CLOSER-SPIN, 05-FUNIS-DE-AQUISIÇÃO, BLUEPRINT)</li>
-        <li><code>workspace/funil-blueprint-2026-06-24/site/index.html</code> (formato nível-a-nível e tese de ARPU reaproveitados; oferta antiga descartada)</li>
+        <li><strong>SDR</strong> — abertura inbound/fria, SPIN S+P, agendamento, contorno de objeção: peça 03, Script 1 (1.1 a 1.5).</li>
+        <li><strong>Closer</strong> — SPIN completo S→P→I→N, mecanismo, ancoragem, 5 objeções, fechamento binário, garantia: peça 03, Script 2 (2.1 a 2.9).</li>
+        <li><strong>Deck visual de apoio do Closer:</strong> peça 02 (Apresentação-Padrão).</li>
       </ul>
-    </footer>
+
+      <h3>Scripts novos (escritos agora, faltavam)</h3>
+
+      <p><strong>6.1 — Abordagem de indicação</strong> (o cliente/parceiro indica sem esforço). Mensagem pronta pro cliente satisfeito encaminhar:</p>
+      <div class="quote"><span class="qlab">Mensagem pro cliente encaminhar</span>"Oi [nome]! Eu uso a MAIA aqui no [meu negócio] — é tipo um funcionário que atende meu WhatsApp 24h, responde na hora e não deixa cliente sem resposta. Mudou meu atendimento. Se você vive perdendo venda por demora pra responder, fala com eles que vale a pena. Manda um oi nesse link: [link branded de indicação]."</div>
+      <div class="quote"><span class="qlab">Gatilho — o CS pede no momento certo (pós-resultado)</span>"[Nome], que bom que a MAIA tá segurando seu atendimento. Posso te pedir uma coisa? Se você conhece algum dono de negócio que também perde venda por não dar conta do WhatsApp, me indica? Eu cuido da pessoa igual cuido de você. Te mando um textinho pronto pra você só encaminhar."</div>
+
+      <p><strong>6.2 — Convite pro Raio-X</strong> (orgânico / DM, quando o lead demonstra interesse):</p>
+      <div class="quote"><span class="qlab">Convite Raio-X · DM</span>"Que bom que isso fez sentido pra você! 😊 Olha, pra eu te mostrar de verdade onde você tá perdendo venda hoje, a gente faz uma <strong>Sessão Raio-X</strong>: são [X minutos], de graça, e eu chego com os números do seu segmento prontos. Não é papo de vendedor — é você vendo quanto seu atendimento deixa escapar por mês. Topa? Tenho [terça 15h] ou [quarta 10h]."</div>
+
+      <p><strong>6.3 — Condução da Sessão Raio-X (o Closer).</strong> É a peça 03, Script 2, integral — a Raio-X É a reunião de fechamento. Fluxo: abertura e contrato ("sim ou não claro no fim") → S (cenário) → P (admitir a dor) → <strong>I (a conta do prejuízo na frente dele + fecha a saída 'contratar mais gente')</strong> → N (ele verbaliza o valor) → mecanismo Funcionário Digital Vitalício + demo → ancoragem salário × MAIA → silêncio → objeção real → fechamento binário datado.</p>
+
+      <p><strong>6.4 — Fechamento (decisão binária).</strong> Peça 03, seção 2.8:</p>
+      <div class="quote"><span class="qlab">Fechamento binário datado</span>"A gente combinou que no fim você me daria um sim ou um não claro. Resolver isso é prioridade [nota] e você mesmo disse que a MAIA resolve. Então: a gente começa? Se <strong>sim</strong>, já marco seu onboarding pra [data]. Se ainda tá com um pé atrás, a gente faz a Raio-X completa primeiro e você decide com o número todo na mesa. O que não vale é 'vou pensar' — enquanto você pensa, o buraco continua aberto. <strong>Começamos pela implantação ou pela Raio-X?</strong>"</div>
+
+      <p><strong>6.5 — Follow-up / reativação (novo).</strong> Pós-reunião sem fechamento:</p>
+      <div class="quote"><span class="qlab">Follow-up pós-reunião</span>"[Nome], pensei no que a gente conversou. Aquele buraco de [R$X/mês] que a gente mediu continua aberto enquanto isso. Separei [uma condição / um horário] pra você decidir sem pressa. Quer que eu te mostre de novo como resolver?"</div>
+      <div class="quote"><span class="qlab">Reativação de base fria</span>"Oi [nome], tudo bem? A gente conversou há um tempo sobre o atendimento do seu [negócio]. De lá pra cá a MAIA evoluiu bastante — [novidade/caso]. Faz sentido a gente retomar com uma Raio-X rápida pra ver se hoje encaixa pro seu momento?"</div>
+
+      <div class="callout warn">
+        <span class="ctag">Regra inegociável de todos os scripts</span>
+        <p>Nenhum número de caso/prova entra sem dado medido e autorizado. Enquanto não houver, usar a versão sem número. LGPD e garantia ficam como <span class="pill prop">VALIDAR COM LUCAS</span>.</p>
+      </div>
+    </section>
+
+    <!-- ========= SECTION 7 ========= -->
+    <section id="s7">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
+        <div><span class="sec-num">Seção 07</span><h2>Métricas — o que medir por etapa</h2></div>
+      </div>
+
+      <div class="callout warn">
+        <span class="ctag">Aviso honesto</span>
+        <p>A gente NÃO mede nada disso hoje. As faixas abaixo são referência de planejamento B2B consultivo pra montar a conta, NÃO resultado nosso. O primeiro trabalho da máquina é passar a medir e substituir cada faixa pelo número real — <strong>por ORIGEM</strong> (a tag do CRM), porque a média geral esconde que a indicação carrega o tráfego frio.</p>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Etapa</th><th>Métrica</th><th>O que é "sucesso"</th><th>Faixa de referência</th></tr></thead>
+          <tbody>
+            <tr><td>Topo</td><td>Leads gerados/mês por origem</td><td>Fluxo previsível entrando em cada porta</td><td><span class="pill draft">medir primeiro</span></td></tr>
+            <tr><td>Lead → MQL</td><td>% que bate no ICP</td><td>Agenda do Closer só com lead de porte</td><td><strong>~30–50%</strong> (indicação puxa pra cima)</td></tr>
+            <tr><td>MQL → Raio-X agendada</td><td>taxa de agendamento (SDR)</td><td>SDR converte interesse em data no calendário</td><td><strong>~30–50%</strong></td></tr>
+            <tr><td>Agendada → compareceu</td><td>1 − no-show</td><td>Lembrete anti-no-show funcionando</td><td><strong>~60–80%</strong></td></tr>
+            <tr><td>Raio-X → proposta</td><td>avança pra oferta</td><td>Diagnóstico qualifica e aquece</td><td><strong>~50–70%</strong></td></tr>
+            <tr><td>Proposta → fechado</td><td>conversão do Closer</td><td>Decisão binária datada, sem "vou pensar"</td><td><strong>~20–40%</strong></td></tr>
+            <tr><td>Cliente → recorrência</td><td>retenção R$597/mês</td><td>O LTV — o jogo real</td><td><span class="pill ok">medir no Master CRM</span></td></tr>
+            <tr><td>—</td><td>CAC por origem</td><td>Quanto custa fechar por canal</td><td><span class="pill draft">destrava verba</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout key">
+        <span class="ctag">O meta-cálculo que a previsibilidade destrava</span>
+        <p>Com as taxas medidas, a conta roda de trás pra frente — "pra fechar N clientes/mês, com conversão c%, preciso de X propostas; com p%, Y Raio-X; … logo M leads no topo". Hoje essa conta é impossível porque nada é medido; é o destravamento central. Sequência correta: liga os funis baratos → mede cada taxa por origem → aí sim projeta meta e decide verba de tráfego com base no valor real de um lead.</p>
+      </div>
+    </section>
+
+    <!-- ========= SECTION 8 ========= -->
+    <section id="s8">
+      <div class="sec-head">
+        <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#b4461f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <div><span class="sec-num">Seção 08</span><h2>As 8 decisões em aberto — com minha recomendação</h2></div>
+      </div>
+
+      <p>Cada uma vem com o default que eu proponho. Não deixei nada em aberto; o Chefe confirma ou ajusta.</p>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th style="width:34px">#</th><th>Decisão</th><th>Minha recomendação</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td>A página <code>funil.agencianobolso.com.br</code> sai do ar público agora?</td><td><strong>SIM</strong> — tirar do ar ou pôr atrás de senha imediatamente. Doc interno com preços em discussão exposto na web; risco sem contrapartida, e ainda documenta o modelo morto.</td><td><span class="pill prop">proposta</span></td></tr>
+            <tr><td><strong>2</strong></td><td>Confirma o eixo curso+comunidade (R$600 / Comunidade R$997 / Imersão) MORTO e substituído pela escada MAIA?</td><td><strong>SIM, confirmado morto.</strong> O blueprint inteiro assume isso; posicionamento de agência (15/09) e corte do low ticket (11/10) já enterraram. Curso fica no B2C (Master Point), fora do escopo.</td><td><span class="pill prop">proposta</span></td></tr>
+            <tr><td><strong>3</strong></td><td>Isca de entrada: Raio-X direto, ou material intermediário antes?</td><td><strong>Raio-X DIRETO na indicação e reativação</strong> (lead quente); material intermediário leve (mini-diagnóstico/checklist) só no orgânico e tráfego frio, pra baixar o atrito antes de pedir 1h.</td><td><span class="pill prop">proposta</span></td></tr>
+            <tr><td><strong>4</strong></td><td>Ordem de ativação: Indicação + Orgânico primeiro, tráfego/webinar na 2ª onda?</td><td><strong>SIM.</strong> Custo zero, insumo pronto, destrava caixa sem verba enquanto monta o meio e mede. Tráfego antes de medir é queimar dinheiro no escuro.</td><td><span class="pill prop">proposta</span></td></tr>
+            <tr><td><strong>5</strong></td><td>Fazer webinar/aula ao vivo da MAIA como funil? Recorrência?</td><td><strong>SIM, mas só na 2ª onda</strong>, quando o orgânico tiver tração — começar com 1 evento mensal. Demo ao vivo vale mais que mil argumentos, mas exige audiência que ainda não temos.</td><td><span class="pill prop">proposta</span></td></tr>
+            <tr><td><strong>6</strong></td><td>Programa de indicação: recompensa e pra quem?</td><td><strong>Split Asaas de comissão sobre a implantação + desconto na recorrência de quem indica</strong>; vale pra cliente E parceiro externo (ex: Emerson/GCD). Split já é capacidade pronta. % exato o Chefe fecha.</td><td><span class="pill prop">proposta</span></td></tr>
+            <tr><td><strong>7</strong></td><td>SDR: humano, MAIA/IA, ou híbrido?</td><td><strong>Híbrido</strong> — SDR de IA (já existe) faz abertura e qualificação 24/7, escala pro humano o lead quente pra agendar e conduzir. Closer (Raio-X) permanece humano.</td><td><span class="pill prop">proposta</span></td></tr>
+            <tr><td><strong>8</strong></td><td>Verba de tráfego pago: quanto e a partir de quando?</td><td><strong>Definir SÓ depois de medir</strong> a conversão Raio-X→venda no orgânico/indicação. Sem saber quanto vale um lead, qualquer número é chute. Com conversão medida, Josiel (Denderson) dimensiona.</td><td><span class="pill prop">proposta</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========= FONTES ========= -->
+    <div class="footer-src" id="src">
+      <h2>Fontes</h2>
+      <ul>
+        <li><code>workspace/analise-funil-anb-2026-10-16/analise-funil-anb.md</code> — diagnóstico + proposta P0-P5 + as 8 perguntas de direção</li>
+        <li><code>workspace/estrutura-comercial-maia-2026-10-11/</code> — peças 01 a 05 + BLUEPRINT</li>
+        <li><code>workspace/funil-blueprint-2026-06-24/site/index.html</code> — formato nível-a-nível e tese de ARPU reaproveitados; oferta antiga descartada</li>
+      </ul>
+    </div>
   </main>
 </div>
+
+<footer class="pagefoot">
+  <div class="pagefoot-inner">
+    <span>Agência no Bolso · Blueprint do Funil MAIA · 16/10/2026</span>
+    <span>Documento interno · não indexado · confidencial</span>
+  </div>
+</footer>
+
 </body>
 </html>
