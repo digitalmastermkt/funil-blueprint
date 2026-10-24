@@ -201,6 +201,32 @@
   .checklist .cl-d{font-size:13.5px;line-height:1.5;color:var(--ink-soft);}
   .checklist .cl-row .pill{margin-top:2px;flex:none;}
   @media(max-width:560px){.checklist .cl-row{flex-wrap:wrap;}}
+
+  /* escada de ticket (degraus de preço MAIA) */
+  .ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 10px;}
+  .rung{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:16px 16px 17px;position:relative;overflow:hidden;}
+  .rung::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent-soft);opacity:.5;}
+  .rung.r1::before{opacity:.35;} .rung.r2::before{opacity:.55;} .rung.r3::before{opacity:.78;} .rung.r4::before{opacity:1;}
+  .rung .rg-step{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;margin-bottom:6px;}
+  .rung .rg-price{font-family:var(--font-display);font-weight:900;font-size:25px;letter-spacing:-.02em;color:var(--accent);line-height:1;margin-bottom:7px;}
+  .rung .rg-for{font-size:12.5px;line-height:1.42;color:var(--ink-soft);}
+
+  /* linha do tempo do processo (5 passos do case) */
+  .process-steps{list-style:none;margin:24px 0 10px;padding:0;position:relative;counter-reset:ps;}
+  .process-steps::before{content:"";position:absolute;left:17px;top:10px;bottom:10px;width:2px;background:var(--line);}
+  .process-steps li{position:relative;padding:0 0 20px 54px;}
+  .process-steps li:last-child{padding-bottom:0;}
+  .process-steps li::before{counter-increment:ps;content:counter(ps);position:absolute;left:0;top:-2px;width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--font-display);font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--bg);}
+  .process-steps li.ps-last::before{background:var(--mustard);}
+  .process-steps .ps-t{font-family:var(--font-display);font-weight:800;font-size:16.5px;color:var(--ink);margin-bottom:3px;}
+  .process-steps .ps-d{font-size:14px;line-height:1.55;color:var(--ink-soft);}
+  .process-steps .ps-d strong{color:var(--ink);}
+
+  /* bloco de resultados (placeholder) */
+  .results-slab{border:1px dashed #d9b7ab;background:var(--accent-wash);border-radius:14px;padding:clamp(20px,4vw,30px);margin:22px 0;text-align:center;}
+  .results-slab .rs-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--accent);margin-bottom:10px;display:block;}
+  .results-slab .rs-head{font-family:var(--font-display);font-weight:900;font-size:clamp(20px,3.2vw,26px);color:var(--ink);margin:0 0 8px;letter-spacing:-.01em;}
+  .results-slab p{margin:0 auto;max-width:560px;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
 </style>
 </head>
 <body>
@@ -408,7 +434,7 @@
             <tr><td style="white-space:nowrap"><strong>O que é</strong></td><td>Diagnóstico pago (R$887, reembolsável em cashback), 1-a-1, que mostra ao empresário <strong>onde o negócio dele perde venda hoje e quanto isso custa por mês</strong> — com os números dele, não no chute. É também a reunião de fechamento: o Closer roda o SPIN completo dentro dela.</td></tr>
             <tr><td><strong>Promessa</strong></td><td>"Descubra, com pele no jogo, quanto seu atendimento perde de venda todo mês — e saia com um plano pra parar de perder (e o valor volta pra você se seguir com a implantação)."</td></tr>
             <tr><td><strong>Pra quem</strong></td><td>O ICP: dono de PME de serviço/comércio local (clínica, loja, drogaria, prestador) que JÁ recebe demanda no WhatsApp/DM mas perde venda por demorar, esquecer de retornar ou não atender fora de horário — e tem porte pra pagar implantação + mensalidade.</td></tr>
-            <tr><td><strong>Como se inscreve</strong></td><td>Pela inscrição no <strong>evento ao vivo</strong> (anúncio Meta, indicação, orgânico). No evento vê a demo e é convidado a aplicar; a <strong>aplicação paga de R$887</strong> (checkout) é o filtro que leva ao Raio-X 1:1. Toda entrada cai no CRM com a origem marcada.</td></tr>
+            <tr><td><strong>Como se inscreve</strong></td><td>Pela inscrição no <strong>evento ao vivo</strong> (anúncio Meta, indicação, orgânico) — que agora é um <strong>ingresso pago por lotes</strong> (ver Seção 09.3.1), primeiro filtro de intenção. No evento vê a demo e é convidado a aplicar; a <strong>aplicação paga de R$887</strong> (checkout) é o filtro que leva ao Raio-X 1:1. Toda entrada cai no CRM com a origem marcada.</td></tr>
             <tr><td><strong>O que entrega</strong></td><td>A conta do prejuízo na frente do cliente (a dor quantificada) + a demonstração do mecanismo (Funcionário Digital Vitalício) + a proposta ajustada ao porte. O cliente sai sabendo o tamanho do problema e com um caminho pra resolver.</td></tr>
             <tr><td><strong>Como vira venda</strong></td><td>É a própria reunião de venda. A Raio-X emenda direto no fechamento: diagnóstico (dor) → mecanismo (solução) → ancoragem (salário × MAIA) → decisão binária datada. A aplicação paga de R$887 antecede o 1:1 e vira cashback na implantação — não há degrau de produto entre o Raio-X 1:1 e o plano.</td></tr>
           </tbody>
@@ -522,7 +548,7 @@
 
       <h3>4.4 — Página de isca (só depois de decidir a isca)</h3>
       <ol>
-        <li>Landing com UMA promessa só: "descubra quanto seu atendimento perde por mês" → inscrição no evento ao vivo, que leva à aplicação paga (R$887, reembolsável em cashback).</li>
+        <li>Landing com UMA promessa só: "descubra quanto seu atendimento perde por mês" → ingresso pago (por lotes) no evento ao vivo, que leva à aplicação paga (R$887, reembolsável em cashback).</li>
         <li>Form de qualificação curto (nome, segmento, volume de contatos/mês, quem responde hoje) → CRM com origem marcada.</li>
         <li>Construída com skill-pagina-vendas, APÓS a decisão de isca (Raio-X direto vs. material intermediário — ver seção 8).</li>
       </ol>
@@ -756,6 +782,22 @@
         <p>O corredor único das seções 01–08 agora ganha uma <strong>porta de topo vertical</strong>. Odontologia é o nicho escolhido pra provar a máquina: dor financeira clara, mercado grande e dono que decide rápido. Esta seção documenta a campanha inteira — do anúncio ao fechamento — e serve de <strong>painel de progresso</strong> rumo ao go-live.</p>
       </div>
 
+      <!-- 9.0 — como o case foi construído -->
+      <h3>9.0 — Como este case foi construído (o processo, na ordem)</h3>
+      <p>A campanha odonto não começou pela arte nem pelo anúncio. Começou pelo <strong>desenho</strong>. A ordem importa — é ela que transforma uma ideia solta numa máquina rastreável. Esta é a sequência exata, do blueprint ao resultado:</p>
+      <ol class="process-steps">
+        <li><div class="ps-t">1 · O funil foi desenhado primeiro</div><div class="ps-d">Antes de qualquer execução, o <strong>funil ponta a ponta</strong> — nicho, tese, etapas, os dois filtros pagos e a escada de fechamento. É o que todas as seções 01–08 sustentam.</div></li>
+        <li><div class="ps-t">2 · Depois, o projeto no ERP</div><div class="ps-d">Com o funil fechado, criamos o <strong>projeto no nosso ERP</strong> — o container onde a campanha vive, com as fases do pipeline e a tag de origem por lead.</div></li>
+        <li><div class="ps-t">3 · Depois, as tarefas</div><div class="ps-d">O projeto foi quebrado em <strong>tarefas rastreáveis</strong>: páginas, checkout, criativos, Pixel/CAPI, configuração do pipeline. Cada uma com responsável e critério de pronto.</div></li>
+        <li><div class="ps-t">4 · Aí a execução, tarefa por tarefa</div><div class="ps-d">O time executa <strong>tarefa por tarefa</strong> até a campanha rodar — é o estado atual (ver o checklist de go-live em 9.9). Nada sobe antes de estar de pé.</div></li>
+        <li class="ps-last"><div class="ps-t">5 · E por fim, os resultados</div><div class="ps-d">Com a campanha no ar, entram os <strong>números reais</strong> — por origem, etapa por etapa. É o que fecha o ciclo e prova (ou corrige) o desenho.</div></li>
+      </ol>
+      <div class="results-slab">
+        <span class="rs-tag"><span class="live-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent-soft);vertical-align:1px;margin-right:6px"></span>Passo 5 · Resultados</span>
+        <h3 class="rs-head" style="border:none;padding:0;margin:0 0 8px">Em breve</h3>
+        <p>Atualizado após a campanha rodar. Aqui entram CPL, taxa de comparecimento, conversão em ingresso e em aplicação paga, no-show do Raio-X, taxa de fechamento por degrau da escada, CAC e ROAS — tudo por origem. Até lá, o case é o <strong>processo</strong>; o resultado vem com o real na mesa.</p>
+      </div>
+
       <!-- 9.1 — por que odonto -->
       <h3>9.1 — Por que odontologia foi o nicho escolhido</h3>
       <p class="lead">O dentista não compra "IA". Compra <strong>cadeira cheia</strong> e a recuperação do faturamento que a falta de paciente drena todo mês. O no-show é uma dor invisível: ninguém mede, mas sangra o caixa. A campanha transforma essa dor invisível em <strong>número visível</strong> — e a MAIA é quem fecha o buraco.</p>
@@ -789,45 +831,57 @@
 
       <!-- 9.2 — funil ponta a ponta -->
       <h3>9.2 — O funil ponta a ponta</h3>
-      <p>Cinco etapas, do clique no anúncio ao time MAIA implantado. O ponto-chave: entre a inscrição no evento ao vivo e o fechamento há uma <strong>aplicação paga de R$887</strong> — filtro de intenção que separa curioso de comprador.</p>
+      <p>Do clique no anúncio ao time MAIA implantado, com <strong>dois filtros de intenção em escada</strong>: primeiro um <strong>ingresso pago por lotes</strong> pra entrar no evento ao vivo (filtra curioso e ajuda a custear o tráfego), depois a <strong>aplicação paga de R$887</strong> (o Raio-X da Agenda) antes do 1:1. Quem chega ao fechamento já pagou duas vezes pra estar ali — é comprador, não espectador.</p>
 
       <figure>
         <div class="diagram">
-          <svg viewBox="0 0 760 470" role="img" aria-label="Funil da campanha odonto: anúncio Meta, inscrição no evento, aplicação paga de R$887, Raio-X da Agenda e fechamento do time MAIA">
+          <svg viewBox="0 0 760 596" role="img" aria-label="Funil da campanha odonto: anúncio Meta, página de vendas do evento, ingresso pago por lotes, evento ao vivo, aplicação paga de R$887, Raio-X da Agenda e fechamento na escada MAIA de R$5 a 25 mil">
             <defs>
               <marker id="arrO" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto"><path d="M0 0 L9 4 L0 8 Z" fill="#b4461f"/></marker>
             </defs>
             <!-- 1 anúncio -->
-            <rect x="60" y="24" width="640" height="62" rx="12" fill="#f9ece4" stroke="#e7c8ba"/>
-            <text x="380" y="50" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#1c1b19">1 · Anúncio Meta (frio + retargeting)</text>
-            <text x="380" y="71" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">3 ângulos: perda por no-show · secretária sobrecarregada · cadeira ociosa</text>
-            <path d="M380 86 V108" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
+            <rect x="60" y="22" width="640" height="58" rx="12" fill="#f9ece4" stroke="#e7c8ba"/>
+            <text x="380" y="46" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#1c1b19">1 · Anúncio Meta (frio + retargeting)</text>
+            <text x="380" y="66" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">3 ângulos: perda por no-show · secretária sobrecarregada · cadeira ociosa</text>
+            <path d="M380 80 V100" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
 
-            <!-- 2 inscrição evento -->
-            <rect x="120" y="110" width="520" height="62" rx="12" fill="#f6ded0" stroke="#e7c8ba"/>
-            <text x="380" y="136" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#1c1b19">2 · Inscrição no EVENTO (webinar ao vivo)</text>
-            <text x="380" y="157" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">demo ao vivo no Google Meet quebra o tabu de IA</text>
-            <path d="M380 172 V194" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
+            <!-- 2 página de vendas do evento -->
+            <rect x="105" y="102" width="550" height="58" rx="12" fill="#f6ded0" stroke="#e7c8ba"/>
+            <text x="380" y="126" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#1c1b19">2 · Página de vendas do EVENTO</text>
+            <text x="380" y="146" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">promete parar de perder dinheiro com agenda furada</text>
+            <path d="M380 160 V180" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
 
-            <!-- 3 aplicação paga -->
-            <rect x="180" y="196" width="400" height="66" rx="12" fill="#d98a5f" stroke="#c9633b"/>
-            <text x="380" y="222" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#fff">3 · APLICAÇÃO PAGA · R$887</text>
-            <text x="380" y="244" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#fbeadf">"Raio-X da Agenda" · checkout Asaas · filtra intenção real</text>
-            <path d="M380 262 V284" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
+            <!-- 3 ingresso pago por lotes -->
+            <rect x="150" y="182" width="460" height="64" rx="12" fill="#e7a579" stroke="#d98a5f"/>
+            <text x="380" y="206" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#1c1b19">3 · INGRESSO PAGO · por lotes</text>
+            <text x="380" y="227" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10" fill="#5a4034">Lote 1 R$27 · Lote 2 R$37* · Lote 3 R$47* &#160;&#160;(*a confirmar)</text>
+            <path d="M380 246 V266" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
 
-            <!-- 4 raio-x 1:1 -->
-            <rect x="220" y="286" width="320" height="66" rx="12" fill="#c05a2d" stroke="#a84e26"/>
-            <text x="380" y="312" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#fff">4 · Raio-X 1:1 da Agenda</text>
-            <text x="380" y="334" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#fbeadf">conduzido por Salatiel + Joel · conta do prejuízo na mesa</text>
-            <path d="M380 352 V374" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
+            <!-- 4 evento ao vivo -->
+            <rect x="150" y="268" width="460" height="58" rx="12" fill="#f6ded0" stroke="#e7c8ba"/>
+            <text x="380" y="292" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#1c1b19">4 · EVENTO AO VIVO (webinar / demo)</text>
+            <text x="380" y="312" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#6e6b63">demo ao vivo no Google Meet quebra o tabu de IA</text>
+            <path d="M380 326 V346" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
 
-            <!-- 5 fechamento -->
-            <rect x="260" y="376" width="240" height="70" rx="12" fill="#b4461f"/>
-            <text x="380" y="404" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="900" font-size="16" fill="#fff">5 · Time MAIA</text>
-            <text x="380" y="426" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#fbeadf">implantação a partir de R$1.497 · até 12x R$2.410 + R$597/mês</text>
+            <!-- 5 aplicação paga -->
+            <rect x="185" y="348" width="390" height="64" rx="12" fill="#c05a2d" stroke="#a84e26"/>
+            <text x="380" y="372" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#fff">5 · APLICAÇÃO PAGA · R$887</text>
+            <text x="380" y="393" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#fbeadf">"Raio-X da Agenda" · checkout Asaas · filtra intenção real</text>
+            <path d="M380 412 V432" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
+
+            <!-- 6 raio-x 1:1 -->
+            <rect x="220" y="434" width="320" height="64" rx="12" fill="#a84e26" stroke="#8f3817"/>
+            <text x="380" y="458" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="800" font-size="16" fill="#fff">6 · Raio-X 1:1 da Agenda</text>
+            <text x="380" y="479" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#fbeadf">conta do prejuízo na mesa · preço revelado aqui, não na página</text>
+            <path d="M380 498 V518" stroke="#b4461f" stroke-width="2.4" marker-end="url(#arrO)"/>
+
+            <!-- 7 fechamento escada -->
+            <rect x="240" y="520" width="280" height="68" rx="12" fill="#8f3817"/>
+            <text x="380" y="548" text-anchor="middle" font-family="'Inter Tight',sans-serif" font-weight="900" font-size="16" fill="#fff">7 · Fechamento — escada MAIA</text>
+            <text x="380" y="570" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#fbeadf">degrau pelo porte da clínica · R$5 mil → R$25 mil</text>
           </svg>
         </div>
-        <figcaption>Fig. 6 — O funil da campanha odonto. O R$887 é o degrau que separa curioso de comprador antes do 1:1.</figcaption>
+        <figcaption>Fig. 6 — O funil da campanha odonto. Dois filtros pagos em escada (ingresso por lotes → aplicação R$887) e um fechamento que roteia cada clínica pro degrau que ela aguenta.</figcaption>
       </figure>
 
       <div class="callout key">
@@ -835,16 +889,43 @@
         <p>A aplicação paga não é receita — é <strong>qualificação por pele no jogo</strong>. Quem paga R$887 está dizendo que o problema é real. E o risco do dentista é zerado por dois caminhos: <strong>se avançar pra implantação, os R$887 viram cashback de 100%</strong> (abatem no valor do time MAIA); <strong>se não avançar, ele fica com a consultoria de 1h</strong> — o Raio-X da Agenda tem valor próprio. Não é reembolso: é garantia de valor nos dois cenários. Ninguém sai no prejuízo, e só chega ao 1:1 quem tem intenção verdadeira.</p>
       </div>
 
+      <!-- 9.3b — ingresso do evento por lotes -->
+      <h3>9.3.1 — O ingresso do evento agora é pago (por lotes)</h3>
+      <p>A inscrição no evento <strong>deixou de ser grátis</strong>. Virou <strong>ingresso pago por lotes</strong> — um primeiro filtro antes mesmo do R$887, com duas funções: separar quem tem interesse real de quem só clica, e <strong>ajudar a custear o tráfego</strong> (a entrada já devolve parte do investimento em anúncio). Lote mais barato pra quem decide cedo; preço sobe conforme enche.</p>
+      <div class="ladder">
+        <div class="rung r1"><div class="rg-step">Lote 1</div><div class="rg-price">R$27</div><div class="rg-for">Primeiro lote, mais barato — recompensa quem decide cedo.</div></div>
+        <div class="rung r2"><div class="rg-step">Lote 2 · a confirmar</div><div class="rg-price">R$37</div><div class="rg-for">Preço sobe conforme o evento enche. Valor a confirmar.</div></div>
+        <div class="rung r3"><div class="rg-step">Lote 3 · a confirmar</div><div class="rg-price">R$47</div><div class="rg-for">Último lote, mais caro — urgência de vaga. Valor a confirmar.</div></div>
+      </div>
+      <div class="callout">
+        <span class="ctag" style="color:var(--mustard)">Por que cobrar pra entrar no evento</span>
+        <p>Ingresso pago, mesmo barato, muda o jogo: a <strong>taxa de comparecimento sobe</strong> (quem paga aparece) e o <strong>CAC cai</strong> (a bilheteria abate o custo do anúncio). Os lotes 2 e 3 estão marcados como <strong>a confirmar</strong> — o Lote 1 a R$27 é o único travado por enquanto.</p>
+      </div>
+
+      <!-- 9.3c — escada de ticket -->
+      <h3>9.3.2 — Não é ticket único: é uma escada de R$5 a 25 mil</h3>
+      <p>O time MAIA pra esse funil <strong>não tem preço único</strong>. É uma <strong>escada</strong>: R$5 mil, R$10 mil, R$20 mil, R$25 mil. A qualificação em camadas — <strong>ingresso do evento → aplicação R$887 → Raio-X 1:1</strong> — é o que roteia cada clínica pro degrau que ela aguenta. O <strong>preço só é revelado no Raio-X 1:1</strong>, com os números da clínica na mesa — nunca na página, nunca no anúncio.</p>
+      <div class="ladder">
+        <div class="rung r1"><div class="rg-step">Degrau 1</div><div class="rg-price">R$5 mil</div><div class="rg-for">Clínica menor dentro do ICP — porte pra começar, 1 unidade.</div></div>
+        <div class="rung r2"><div class="rg-step">Degrau 2</div><div class="rg-price">R$10 mil</div><div class="rg-for">Clínica com movimento firme — mais cadeiras, mais volume de agenda.</div></div>
+        <div class="rung r3"><div class="rg-step">Degrau 3</div><div class="rg-price">R$20 mil</div><div class="rg-for">Operação robusta — múltiplas agendas / unidades, demanda alta.</div></div>
+        <div class="rung r4"><div class="rg-step">Degrau 4</div><div class="rg-price">R$25 mil</div><div class="rg-for">Rede / grande volume — o topo da escada, maior escopo de implantação.</div></div>
+      </div>
+      <div class="callout warn">
+        <span class="ctag">ICP · quem a campanha busca</span>
+        <p>O alvo é a <strong>clínica com movimento e porte</strong> — agenda cheia o bastante pra que o no-show doa no caixa e sobre margem pra pagar o time MAIA. <strong>Não é o consultório solo mais enxuto</strong>: sem volume de agenda, a dor não é grande o suficiente e o ticket não fecha. A escada existe justamente pra que cada clínica dentro do ICP caia no degrau que o porte dela sustenta.</p>
+      </div>
+
       <!-- 9.4 — 7 fases do pipeline -->
       <h3>9.4 — As 7 fases do pipeline (rastreadas no nosso ERP)</h3>
       <p>Cada lead é um card que caminha por fases, com <strong>tag de ORIGEM</strong> (qual criativo/público/parceiro trouxe). O pipeline vive no <strong>nosso ERP</strong>, não em ferramenta externa — controle total do dado e dos eventos offline que voltam pro Meta.</p>
 
       <div class="phase-rail">
-        <div class="phase"><div class="pf-name">lead_evento</div><div class="pf-desc">inscreveu-se no webinar</div></div>
+        <div class="phase"><div class="pf-name">ingresso_pago</div><div class="pf-desc">comprou o ingresso (lote) do evento</div></div>
         <div class="phase"><div class="pf-name">compareceu</div><div class="pf-desc">assistiu à demo ao vivo</div></div>
         <div class="phase"><div class="pf-name">aplicou_pago</div><div class="pf-desc">pagou os R$887</div></div>
-        <div class="phase"><div class="pf-name">raiox_agendado</div><div class="pf-desc">1:1 marcado na agenda</div></div>
-        <div class="phase"><div class="pf-name">proposta_enviada</div><div class="pf-desc">oferta do time MAIA na mesa</div></div>
+        <div class="phase"><div class="pf-name">raiox_1a1</div><div class="pf-desc">1:1 feito · preço revelado</div></div>
+        <div class="phase"><div class="pf-name">proposta_enviada</div><div class="pf-desc">degrau da escada na mesa</div></div>
         <div class="phase"><div class="pf-name">cliente_fechado</div><div class="pf-desc">implantação contratada</div></div>
         <div class="phase lost"><div class="pf-name">perdido / recuperação</div><div class="pf-desc">volta pra nutrição, não some</div></div>
       </div>
@@ -856,9 +937,9 @@
           <thead><tr><th>Camada</th><th>O que faz</th><th>Eventos</th></tr></thead>
           <tbody>
             <tr><td><strong>Pixel</strong></td><td>Rastreio no navegador do visitante das páginas</td><td>PageView · Lead · InitiateCheckout</td></tr>
-            <tr><td><strong>CAPI</strong></td><td>Eventos server-side, mais fiéis e à prova de bloqueador</td><td>Purchase (R$887) · eventos offline do CRM</td></tr>
+            <tr><td><strong>CAPI</strong></td><td>Eventos server-side, mais fiéis e à prova de bloqueador</td><td>Purchase do ingresso (lote) · Purchase do R$887 · eventos offline do CRM</td></tr>
             <tr><td><strong>UTMs padronizados</strong></td><td>Toda origem marcada (campanha / público / criativo / parceiro)</td><td>casam o lead do CRM com o anúncio que o trouxe</td></tr>
-            <tr><td><strong>Checkout</strong></td><td>Cobrança da aplicação paga</td><td>Asaas · dispara o Purchase de volta pro Meta</td></tr>
+            <tr><td><strong>Checkout</strong></td><td>Dois checkouts: ingresso do evento (lote) e aplicação R$887</td><td>Asaas · cada compra dispara seu Purchase de volta pro Meta</td></tr>
             <tr><td><strong>Eventos offline</strong></td><td>Fechamento do 1:1 volta pro Meta otimizar público</td><td>cliente_fechado alimenta o lookalike de quem converte</td></tr>
           </tbody>
         </table>
@@ -867,10 +948,10 @@
       <!-- 9.6 — estrutura de campanha meta -->
       <h3>9.6 — Estrutura da campanha no Meta</h3>
       <div class="cards">
-        <div class="card"><div class="ch"><span class="ct">Campanha fria</span></div><p>Objetivo inscrição no evento. Públicos de odontologia (interesses + cargo/segmento). É o topo que abastece o funil.</p></div>
-        <div class="card"><div class="ch"><span class="ct">Retargeting visitante</span></div><p>Quem viu a página mas não se inscreveu. Reforço do ângulo que mais engajou.</p></div>
-        <div class="card"><div class="ch"><span class="ct">Retargeting inscrito</span></div><p>Inscreveu mas não pagou os R$887. Empurra a aplicação com prova e urgência.</p></div>
-        <div class="card"><div class="ch"><span class="ct">Lookalike de pagante</span></div><p>Semelhantes a quem pagou os R$887 — o sinal mais forte de intenção, via evento offline/CAPI.</p></div>
+        <div class="card"><div class="ch"><span class="ct">Campanha fria</span></div><p>Objetivo: compra do ingresso do evento. Públicos de odontologia (interesses + cargo/segmento). É o topo que abastece o funil.</p></div>
+        <div class="card"><div class="ch"><span class="ct">Retargeting visitante</span></div><p>Quem viu a página mas não comprou o ingresso. Reforço do ângulo que mais engajou + urgência de lote.</p></div>
+        <div class="card"><div class="ch"><span class="ct">Retargeting pagante do ingresso</span></div><p>Comprou o ingresso mas não pagou os R$887. Empurra a aplicação com prova e urgência.</p></div>
+        <div class="card"><div class="ch"><span class="ct">Lookalike de pagante</span></div><p>Semelhantes a quem pagou o ingresso e, melhor ainda, os R$887 — os sinais mais fortes de intenção, via evento offline/CAPI.</p></div>
       </div>
       <p><strong>Os 3 ângulos de criativo:</strong> <strong>(1)</strong> perda / no-show — "quanto a agenda furada tira do seu mês"; <strong>(2)</strong> secretária sobrecarregada — "sua recepção não dá conta de confirmar tudo"; <strong>(3)</strong> cadeira ociosa — "cada buraco na agenda é dinheiro parado".</p>
 
@@ -891,9 +972,10 @@
         <table>
           <thead><tr><th>Etapa</th><th>Métrica</th><th>O que diz</th></tr></thead>
           <tbody>
-            <tr><td>Anúncio → inscrição</td><td><strong>CPL</strong></td><td>Custo por inscrito no evento, por criativo/público</td></tr>
-            <tr><td>Inscrito → evento</td><td><strong>Taxa de comparecimento</strong></td><td>Quantos do total realmente assistem à demo</td></tr>
-            <tr><td>Evento → R$887</td><td><strong>Conversão em aplicação paga</strong></td><td>O filtro de intenção funcionando</td></tr>
+            <tr><td>Anúncio → página</td><td><strong>CPC / CTR</strong></td><td>Custo e taxa de clique por criativo/público</td></tr>
+            <tr><td>Página → ingresso pago</td><td><strong>Custo por ingresso</strong></td><td>Conversão no 1º filtro pago, por lote e por origem</td></tr>
+            <tr><td>Ingresso → evento</td><td><strong>Taxa de comparecimento</strong></td><td>Quantos dos pagantes realmente assistem à demo</td></tr>
+            <tr><td>Evento → R$887</td><td><strong>Conversão em aplicação paga</strong></td><td>O 2º filtro de intenção funcionando</td></tr>
             <tr><td>R$887 → 1:1</td><td><strong>No-show do Raio-X</strong></td><td>Quem pagou e não aparece no 1:1</td></tr>
             <tr><td>1:1 → cliente</td><td><strong>Taxa de fechamento</strong></td><td>Conversão do Raio-X em implantação</td></tr>
             <tr><td>Campanha</td><td><strong>CAC</strong></td><td>Custo total pra fechar um cliente odonto</td></tr>
@@ -918,7 +1000,7 @@
         </div>
         <div class="cl-row">
           <div class="cl-ic wip"><svg viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-          <div class="cl-body"><div class="cl-t">Páginas (inscrição + aplicação + co-branded)</div><div class="cl-d">Em construção — página do evento, checkout R$887 e template de parceiro.</div></div>
+          <div class="cl-body"><div class="cl-t">Páginas e checkouts (evento + ingresso + R$887 + co-branded)</div><div class="cl-d">Em construção — página de vendas do evento, checkout do ingresso por lotes, checkout da aplicação R$887 e template de parceiro.</div></div>
           <span class="pill wait">em construção</span>
         </div>
         <div class="cl-row">
@@ -963,7 +1045,7 @@
 
 <footer class="pagefoot">
   <div class="pagefoot-inner">
-    <span>Agência no Bolso · Blueprint do Funil MAIA · 16/10/2026</span>
+    <span>Agência no Bolso · Blueprint do Funil MAIA · atualizado 24/10/2026</span>
     <span>Documento interno · não indexado · confidencial</span>
   </div>
 </footer>
